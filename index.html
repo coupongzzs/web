@@ -77,16 +77,16 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-white">
 
-  <!-- Top Admin Notification Bar -->
+  <!-- Top Admin Bar -->
   <div id="topAdminBar" class="bg-brand-navyDark text-white text-xs py-2 px-4 border-b border-white/10 hidden transition-all duration-300">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Authenticated as <strong id="topAdminUsername">admin</strong> (Administrator)</span>
+        <span>Authenticated as <strong id="topAdminUsername">adminnisssss</strong> (Administrator)</span>
       </div>
       <div class="flex items-center gap-4">
-        <button onclick="switchView('admin')" class="hover:text-amber-300 font-semibold flex items-center gap-1.5 transition cursor-pointer">
-          <i class="fa-solid fa-gauge-high"></i> <span>Admin Dashboard</span>
+        <button onclick="switchView('admin'); switchAdminTab('writer');" class="hover:text-amber-300 font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-pen-nib"></i> <span>Write Article (AI Writer)</span>
         </button>
         <button onclick="handleAdminLogout()" class="hover:text-red-400 font-semibold flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
@@ -95,17 +95,17 @@
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header: Đã bỏ hoàn toàn chữ Sign Up -->
   <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo: rõ ràng, không đổi màu chữ khi hover -->
+      <!-- Brand Logo Chuẩn chữ hoa thường: CouponsHere -->
       <a href="javascript:void(0)" onclick="switchView('frontend'); setCategoryFilter('all');" class="flex items-center gap-2.5">
         <div class="w-9 h-9 rounded-xl bg-brand-accent flex items-center justify-center text-white font-black text-lg shadow-sm">
           %
         </div>
         <span id="navBrandName" class="text-xl font-black tracking-tight text-slate-900 select-none">
-          coupons<span class="text-brand-navy font-black">here</span>
+          Coupons<span class="text-brand-navy font-black">Here</span>
         </span>
       </a>
 
@@ -138,24 +138,21 @@
         <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('reviewSection');" class="hover:text-brand-accent transition">Blog</a>
       </nav>
 
-      <!-- Right Action Items -->
+      <!-- Right Action Items (Đã bỏ Sign Up) -->
       <div class="flex items-center space-x-3">
         <button 
           id="navAdminPortalBtn"
           onclick="handleNavPortalClick()" 
-          class="flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 transition shadow-2xs cursor-pointer"
+          class="flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border border-brand-navy/15 text-white bg-brand-navy hover:bg-brand-navyDark transition shadow-xs cursor-pointer"
         >
-          <i class="fa-solid fa-user-shield text-brand-navy"></i>
+          <i class="fa-solid fa-user-shield text-amber-300"></i>
           <span id="navAdminPortalText">Admin Sign In</span>
         </button>
-
-        <a href="javascript:void(0)" onclick="showToast('Customer Sign In feature is in preview mode.', 'info')" class="text-xs font-medium text-slate-600 hover:text-slate-900 hidden sm:inline-block">Sign In</a>
-        <button onclick="showToast('Welcome to Coupons Here! Member registration opening soon.', 'info')" class="text-xs font-semibold text-brand-accent hover:underline hidden sm:inline-block cursor-pointer">Sign Up</button>
       </div>
     </div>
   </header>
 
-  <!-- Public Frontend View -->
+  <!-- Frontend Container -->
   <div id="frontendContainer" class="flex-grow flex flex-col">
     
     <!-- HERO BANNER -->
@@ -164,9 +161,9 @@
       <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="max-w-4xl mx-auto text-center relative z-10">
-        <!-- Hero Title rõ ràng, đồng màu trắng tuyệt đối, không bị chìm -->
+        <!-- Hero Title Chuẩn hóa: Coupons Here rõ ràng tuyệt đối -->
         <h1 id="heroTitleDisplay" class="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white select-none">
-          couponshere
+          Coupons Here
         </h1>
         <p id="heroSloganDisplay" class="text-xs md:text-sm font-semibold text-blue-100 tracking-wide mb-1">
           Find Better. Buy Smarter.
@@ -192,7 +189,7 @@
           </button>
         </div>
 
-        <!-- 3 Metrics Counters: Tự động đếm theo dữ liệu bài viết -->
+        <!-- 3 Metrics Counters (Tự động đếm theo bài viết) -->
         <div class="grid grid-cols-3 gap-3.5 max-w-lg mx-auto">
           <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
             <div id="statOffers" class="text-xl md:text-2xl font-black text-white">0</div>
@@ -210,16 +207,14 @@
       </div>
     </section>
 
-    <!-- Main Content Area -->
+    <!-- Review Articles Section -->
     <main id="reviewSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
       
-      <!-- Section Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-200/80 pb-3">
         <div class="flex items-center gap-3">
           <h2 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight">
             Review
           </h2>
-          <!-- Filter indicator pill if active -->
           <div id="activeFilterPill" class="hidden items-center gap-1.5 bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium border border-blue-200">
             <span id="activeFilterName">Category</span>
             <button onclick="setCategoryFilter('all')" class="hover:text-red-500 font-bold ml-1 cursor-pointer">✕</button>
@@ -236,11 +231,9 @@
       </div>
 
       <!-- Articles Grid -->
-      <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Dynamically rendered via JavaScript -->
-      </div>
+      <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-      <!-- Empty state when no matches found -->
+      <!-- Empty State -->
       <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 p-8 my-6">
         <i class="fa-solid fa-file-circle-question text-4xl text-slate-400 mb-3"></i>
         <h3 class="text-base font-bold text-slate-700">No matching articles found</h3>
@@ -250,16 +243,17 @@
         </button>
       </div>
 
-      <!-- Popular Stores: Logo rõ nét, không bị đổi màu chữ -->
+      <!-- Popular Stores: Logo chuẩn hóa, tự động nhận Store từ bài viết -->
       <section id="popularStoresSection" class="mt-16 pt-8 border-t border-slate-200">
         <div class="flex items-center justify-between mb-5">
-          <h3 class="text-lg md:text-xl font-bold text-slate-800">Popular Stores</h3>
+          <div>
+            <h3 class="text-lg md:text-xl font-bold text-slate-800">Popular Stores</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Tự động cập nhật và phân loại thương hiệu theo bài viết</p>
+          </div>
           <span class="text-xs text-slate-400">Verified affiliate partners</span>
         </div>
 
-        <div id="popularStoresContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          <!-- Populated by JavaScript -->
-        </div>
+        <div id="popularStoresContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3"></div>
 
         <div class="flex items-center justify-center space-x-1.5 mt-4">
           <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
@@ -275,50 +269,58 @@
       <section id="categoriesSection" class="mt-16 pt-8 border-t border-slate-200">
         <div class="text-center md:text-left mb-6">
           <h3 class="text-lg md:text-xl font-bold text-slate-800">Categories</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Click any category below to immediately filter and sort all review articles in the middle section</p>
+          <p class="text-xs text-slate-500 mt-0.5">Click any category below to immediately filter all reviews</p>
         </div>
 
-        <div id="categoriesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          <!-- Populated dynamically with 18 categories -->
-        </div>
+        <div id="categoriesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"></div>
       </section>
 
     </main>
   </div>
 
-  <!-- Admin Login View -->
-  <div id="adminLoginContainer" class="hidden flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-100">
-    <div class="max-w-md w-full bg-white rounded-3xl p-8 shadow-xl border border-slate-200 relative">
-      <div class="text-center mb-6">
-        <div class="w-14 h-14 rounded-2xl bg-brand-navy text-white flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
-          <i class="fa-solid fa-lock"></i>
+  <!-- =========================================================================
+       BẢNG ĐĂNG NHẬP ADMIN (THIẾT KẾ MỚI HIỆN ĐẠI & TINH TẾ)
+       Tài khoản: adminnisssss | Mật khẩu: amixnxxxxxxxx
+       ========================================================================= -->
+  <div id="adminLoginContainer" class="hidden flex-grow flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8 bg-slate-900/95 relative overflow-hidden">
+    <!-- Background glow decorative effects -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-navyLight/40 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-100 relative z-10">
+      
+      <!-- Top Brand Badge -->
+      <div class="text-center mb-7">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-navy to-brand-navyLight text-white shadow-lg shadow-brand-navy/30 mb-3.5">
+          <i class="fa-solid fa-shield-halved text-2xl text-amber-300"></i>
         </div>
-        <h2 class="text-2xl font-black text-slate-900">Admin Sign In</h2>
-        <p class="text-xs text-slate-500 mt-1">Authenticate to access AI Affiliate SEO Writer & Homepage Customizer</p>
+        <h2 class="text-2xl font-black text-slate-900 tracking-tight">Admin Sign In</h2>
+        <p class="text-xs text-slate-500 mt-1">Đăng nhập tài khoản quản trị để vào viết bài & cấu hình hệ thống</p>
       </div>
 
+      <!-- Form Đăng nhập -->
       <form onsubmit="handleAdminLoginSubmit(event)" class="space-y-4 text-xs">
         <div>
-          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username</label>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tài Khoản (Username)</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-              <i class="fa-solid fa-user"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+              <i class="fa-solid fa-user-gear"></i>
             </span>
             <input 
               type="text" 
               id="loginUsernameInput" 
               required 
               autocomplete="username"
-              placeholder="Enter your admin username" 
-              class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              placeholder="Nhập: adminnisssss" 
+              class="w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy transition"
             >
           </div>
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Password</label>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Mật Khẩu (Password)</label>
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
               <i class="fa-solid fa-key"></i>
             </span>
             <input 
@@ -326,46 +328,58 @@
               id="loginPasswordInput" 
               required 
               autocomplete="current-password"
-              placeholder="Enter your admin password" 
-              class="w-full pl-9 pr-10 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              placeholder="Nhập: amixnxxxxxxxx" 
+              class="w-full pl-10 pr-10 py-3 border border-slate-200 rounded-xl font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy transition"
             >
             <button 
               type="button" 
               onclick="toggleLoginPasswordVisibility()" 
               class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition cursor-pointer"
-              title="Toggle password visibility"
+              title="Xem mật khẩu"
             >
               <i id="loginPasswordEyeIcon" class="fa-regular fa-eye"></i>
             </button>
           </div>
         </div>
 
-        <div id="loginErrorMessage" class="hidden text-xs text-rose-600 font-bold bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
-          <i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid username or password! Please check your credentials and try again.
+        <!-- Báo lỗi khi sai thông tin -->
+        <div id="loginErrorMessage" class="hidden text-xs text-rose-600 font-bold bg-rose-50 border border-rose-200 p-3 rounded-xl flex items-center gap-2">
+          <i class="fa-solid fa-circle-exclamation text-base"></i>
+          <span>Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại.</span>
         </div>
+
+        <!-- Nút tiện ích: Điền nhanh tài khoản chính xác -->
+        <button 
+          type="button"
+          onclick="fillDefaultAdminCredentials()"
+          class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5 cursor-pointer"
+        >
+          <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
+          <span>Điền nhanh thông tin Admin (adminnisssss / amixnxxxxxxxx)</span>
+        </button>
 
         <button 
           type="submit" 
-          class="w-full py-3 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+          class="w-full py-3.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-lg shadow-brand-navy/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 text-sm"
         >
-          <span>Sign In to Dashboard</span>
+          <span>Vào Bảng Điều Khiển Viết Bài</span>
           <i class="fa-solid fa-arrow-right"></i>
         </button>
 
-        <div class="text-center pt-2">
-          <button type="button" onclick="switchView('frontend')" class="text-xs text-slate-500 hover:text-slate-800 font-medium cursor-pointer">
-            &larr; Back to public website
+        <div class="text-center pt-3 border-t border-slate-100">
+          <button type="button" onclick="switchView('frontend')" class="text-xs text-slate-500 hover:text-slate-800 font-semibold cursor-pointer">
+            &larr; Quay về trang chủ
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Admin Dashboard Container -->
+  <!-- Admin Command Center Container -->
   <div id="adminContainer" class="hidden flex-grow bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
       
-      <!-- Admin Top Banner -->
+      <!-- Top Bar -->
       <div class="bg-white rounded-3xl p-6 shadow-xs border border-slate-200 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
@@ -376,13 +390,13 @@
             </span>
           </div>
           <h2 class="text-2xl font-black text-slate-800 mt-1">Admin Command Center</h2>
-          <p class="text-xs text-slate-500">Generate SEO articles from affiliate links, customize prompts, edit homepage content, and manage inventory.</p>
+          <p class="text-xs text-slate-500">Viết bài SEO từ link tiếp thị liên kết, AI tự phân loại vào danh sách và store.</p>
         </div>
 
         <div class="flex items-center gap-2.5">
           <button onclick="switchView('frontend')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-desktop"></i>
-            <span>View Live Website</span>
+            <span>Xem Trang Chủ</span>
           </button>
           <button onclick="handleAdminLogout()" class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -395,33 +409,33 @@
       <div class="flex border-b border-slate-200 mb-6 space-x-2 overflow-x-auto pb-1">
         <button id="adminTab1Btn" onclick="switchAdminTab('writer')" class="px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
-          <span>AI Affiliate Writer (Gemini)</span>
+          <span>AI Affiliate Writer (Viết Bài Tự Động)</span>
         </button>
-        <button id="adminTab2Btn" onclick="switchAdminTab('customizer')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
-          <i class="fa-solid fa-sliders text-blue-500"></i>
-          <span>Homepage Customizer</span>
-        </button>
-        <button id="adminTab3Btn" onclick="switchAdminTab('manage')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+        <button id="adminTab2Btn" onclick="switchAdminTab('manage')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <i class="fa-solid fa-newspaper text-indigo-500"></i>
-          <span>Manage Articles (<span id="adminArticleCount">0</span>)</span>
+          <span>Quản Lý Bài Viết (<span id="adminArticleCount">0</span>)</span>
+        </button>
+        <button id="adminTab3Btn" onclick="switchAdminTab('customizer')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-sliders text-blue-500"></i>
+          <span>Tùy Biến Trang Chủ</span>
         </button>
         <button id="adminTab4Btn" onclick="switchAdminTab('security')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <i class="fa-solid fa-shield-halved text-emerald-500"></i>
-          <span>Account Security</span>
+          <span>Tài Khoản & Bảo Mật</span>
         </button>
       </div>
 
       <!-- TAB 1: AI WRITER -->
       <div id="adminTabWriter" class="space-y-6">
         
-        <!-- Gemini API Key card -->
+        <!-- API Key Box -->
         <div class="bg-gradient-to-r from-slate-900 to-brand-navy rounded-2xl p-5 text-white shadow-xs border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
               <i class="fa-solid fa-key"></i>
               <span>Google Gemini API Key</span>
             </div>
-            <p class="text-xs text-slate-300 mt-1">Required to generate real-time AI articles with <code class="bg-white/10 px-1.5 py-0.5 rounded text-amber-200">gemini-2.5-flash</code>. Saved locally in browser storage.</p>
+            <p class="text-xs text-slate-300 mt-1">Sử dụng mô hình <code class="bg-white/10 px-1.5 py-0.5 rounded text-amber-200">gemini-2.5-flash</code>. Nếu chưa nhập API Key, hệ thống sẽ kích hoạt bộ viết thông minh tự động dự phòng.</p>
           </div>
           <div class="flex items-center gap-2 w-full md:w-auto">
             <input 
@@ -431,7 +445,7 @@
               class="px-3.5 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400/50 w-full md:w-64 font-mono"
             >
             <button onclick="saveAdminApiKey()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition whitespace-nowrap cursor-pointer">
-              Save Key
+              Lưu Key
             </button>
           </div>
         </div>
@@ -443,9 +457,9 @@
             <div class="border-b border-slate-100 pb-3">
               <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-link text-brand-accent"></i>
-                <span>Import Affiliate Link & Product Details</span>
+                <span>Thông Tin Sản Phẩm & Link Tiếp Thị</span>
               </h3>
-              <p class="text-[11px] text-slate-400 mt-0.5">Input your target deal info. Gemini will parse and generate a rich review.</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Nhập link hoặc thông số deal. AI sẽ tự động phân loại Store và danh mục.</p>
             </div>
 
             <div>
@@ -453,16 +467,15 @@
               <input 
                 type="url" 
                 id="aiAffiliateUrl" 
-                placeholder="https://amazon.com/dp/... or https://shope.ee/..." 
+                placeholder="https://amazon.com/dp/... hoặc https://shope.ee/..." 
                 value="https://example.com/deal/carplaymmb-2026-adapter"
                 class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
               >
-              <p class="text-[10px] text-slate-400 mt-1">This link is embedded in the "Get Deal / Buy Now" CTA button.</p>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Product Name <span class="text-red-500">*</span></label>
+                <label class="block font-bold text-slate-700 mb-1">Tên Sản Phẩm <span class="text-red-500">*</span></label>
                 <input 
                   type="text" 
                   id="aiProductName" 
@@ -472,7 +485,7 @@
                 >
               </div>
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Brand / Store</label>
+                <label class="block font-bold text-slate-700 mb-1">Thương Hiệu / Cửa Hàng (Store)</label>
                 <input 
                   type="text" 
                   id="aiStoreBrand" 
@@ -485,7 +498,7 @@
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Deal Price</label>
+                <label class="block font-bold text-slate-700 mb-1">Giá Khuyến Mãi</label>
                 <input 
                   type="text" 
                   id="aiProductPrice" 
@@ -495,7 +508,7 @@
                 >
               </div>
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Coupon Promo Code</label>
+                <label class="block font-bold text-slate-700 mb-1">Mã Giảm Giá (Coupon)</label>
                 <input 
                   type="text" 
                   id="aiCouponCode" 
@@ -508,13 +521,12 @@
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Target Category</label>
+                <label class="block font-bold text-slate-700 mb-1">Ngành Hàng (Category)</label>
                 <select id="aiCategorySelect" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
-                  <!-- Populated by JS -->
                 </select>
               </div>
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Image URL (Optional)</label>
+                <label class="block font-bold text-slate-700 mb-1">Ảnh Sản Phẩm (Tùy chọn URL)</label>
                 <input 
                   type="url" 
                   id="aiImageUrl" 
@@ -525,11 +537,11 @@
             </div>
 
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Additional Selling Points / Notes</label>
+              <label class="block font-bold text-slate-700 mb-1">Điểm Nhấn Đánh Giá / Selling Points</label>
               <textarea 
                 id="aiCustomNotes" 
                 rows="2" 
-                placeholder="Highlight 5-second automatic pairing, 5.8GHz dual-band wifi, zero lag, 12-month replacement warranty..."
+                placeholder="Kết nối nhanh trong 5 giây, Wi-Fi băng tần kép 5.8GHz, không trễ hình, bảo hành đổi mới 12 tháng..."
                 class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
               ></textarea>
             </div>
@@ -539,18 +551,15 @@
               <div class="flex items-center justify-between mb-1.5">
                 <label class="font-bold text-slate-800 flex items-center gap-1.5">
                   <i class="fa-solid fa-code text-indigo-500"></i>
-                  <span>Custom AI System Prompt (Editable)</span>
+                  <span>Prompt AI Hướng Dẫn (Có thể tùy biến)</span>
                 </label>
                 <button type="button" onclick="resetPromptToDefault()" class="text-[10px] text-brand-accent hover:underline font-bold cursor-pointer">
-                  Reset Prompt to Default
+                  Khôi phục Prompt mặc định
                 </button>
               </div>
-              <p class="text-[10px] text-slate-400 mb-1.5">
-                Available placeholders: <code class="text-indigo-600 font-mono">{product_name}</code>, <code class="text-indigo-600 font-mono">{category}</code>, <code class="text-indigo-600 font-mono">{price}</code>, <code class="text-indigo-600 font-mono">{coupon}</code>, <code class="text-indigo-600 font-mono">{affiliate_url}</code>, <code class="text-indigo-600 font-mono">{custom_notes}</code>
-              </p>
               <textarea 
                 id="adminCustomPromptEditor" 
-                rows="6" 
+                rows="5" 
                 class="w-full px-3 py-2 border border-indigo-100 bg-indigo-50/30 rounded-xl text-[11px] font-mono text-slate-800 custom-scrollbar focus:outline-none focus:ring-2 focus:ring-indigo-400/20"
               ></textarea>
             </div>
@@ -561,7 +570,7 @@
               class="w-full py-3 bg-gradient-to-r from-brand-accent to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <i class="fa-solid fa-wand-magic-sparkles text-amber-200 group-hover:rotate-12 transition-transform"></i>
-              <span id="generateBtnText">Generate SEO Review with Gemini</span>
+              <span id="generateBtnText">Tạo Bài Viết Chuẩn SEO Bằng Gemini AI</span>
             </button>
           </div>
 
@@ -570,9 +579,9 @@
             <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
               <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-file-circle-check text-emerald-600"></i>
-                <span>Generated Content Review & Edit</span>
+                <span>Xem Trước & Chỉnh Sửa Bài Viết</span>
               </h3>
-              <span id="aiStatusBadge" class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">Ready</span>
+              <span id="aiStatusBadge" class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">Sẵn sàng</span>
             </div>
 
             <!-- Empty State -->
@@ -580,29 +589,29 @@
               <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
                 <i class="fa-solid fa-robot"></i>
               </div>
-              <p class="font-bold text-slate-600">No article drafted yet</p>
-              <p class="text-[11px] text-slate-400 max-w-xs mx-auto mt-1">Configure your product link and prompt, then click "Generate SEO Review with Gemini".</p>
+              <p class="font-bold text-slate-600">Chưa có bản nháp bài viết</p>
+              <p class="text-[11px] text-slate-400 max-w-xs mx-auto mt-1">Điền thông tin và bấm nút "Tạo Bài Viết Chuẩn SEO Bằng Gemini AI".</p>
             </div>
 
             <!-- Filled Form -->
             <div id="aiPreviewFilled" class="hidden flex-col space-y-3 flex-grow">
               <div>
-                <label class="block font-bold text-slate-700 mb-1">SEO Title</label>
+                <label class="block font-bold text-slate-700 mb-1">Tiêu Đề SEO (Title)</label>
                 <input type="text" id="editAiTitle" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:border-blue-500">
               </div>
 
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Excerpt (Card display)</label>
+                <label class="block font-bold text-slate-700 mb-1">Mô Tả Ngắn (Excerpt)</label>
                 <textarea id="editAiExcerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-blue-500"></textarea>
               </div>
 
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="block font-bold text-slate-700 mb-1">Category</label>
+                  <label class="block font-bold text-slate-700 mb-1">Danh Mục</label>
                   <select id="editAiCategory" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white"></select>
                 </div>
                 <div>
-                  <label class="block font-bold text-slate-700 mb-1">Read Time & Rating</label>
+                  <label class="block font-bold text-slate-700 mb-1">Thời Gian Đọc & Đánh Giá</label>
                   <div class="grid grid-cols-2 gap-2">
                     <input type="text" id="editAiReadTime" value="4 min read" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
                     <input type="number" id="editAiRating" step="0.1" min="1" max="5" value="4.9" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
@@ -611,29 +620,29 @@
               </div>
 
               <div>
-                <label class="block font-bold text-slate-700 mb-1">Full Detailed Review (HTML)</label>
+                <label class="block font-bold text-slate-700 mb-1">Nội Dung Bài Đánh Giá Chi Tiết (HTML)</label>
                 <textarea id="editAiContent" rows="5" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-800 font-mono text-[11px] custom-scrollbar focus:outline-none focus:border-blue-500"></textarea>
               </div>
 
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="block font-bold text-emerald-700 mb-1"><i class="fa-solid fa-thumbs-up"></i> Pros (One per line)</label>
+                  <label class="block font-bold text-emerald-700 mb-1"><i class="fa-solid fa-thumbs-up"></i> Ưu Điểm (Mỗi dòng 1 ý)</label>
                   <textarea id="editAiPros" rows="3" class="w-full px-2.5 py-1.5 border border-emerald-200 rounded-xl bg-emerald-50/40 text-[11px]"></textarea>
                 </div>
                 <div>
-                  <label class="block font-bold text-rose-700 mb-1"><i class="fa-solid fa-thumbs-down"></i> Cons (One per line)</label>
+                  <label class="block font-bold text-rose-700 mb-1"><i class="fa-solid fa-thumbs-down"></i> Nhược Điểm (Mỗi dòng 1 ý)</label>
                   <textarea id="editAiCons" rows="3" class="w-full px-2.5 py-1.5 border border-rose-200 rounded-xl bg-rose-50/40 text-[11px]"></textarea>
                 </div>
               </div>
 
               <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
-                <span class="text-[11px] text-slate-500">Will be featured on middle review grid</span>
+                <span class="text-[11px] text-slate-500">Tự động sắp xếp vào Store & danh mục tương ứng</span>
                 <button 
                   onclick="publishAiArticle()" 
                   class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5 cursor-pointer"
                 >
                   <i class="fa-solid fa-cloud-arrow-up"></i>
-                  <span>Publish to Homepage</span>
+                  <span>Xuất Bản Lên Trang Chủ</span>
                 </button>
               </div>
             </div>
@@ -643,92 +652,16 @@
         </div>
       </div>
 
-      <!-- TAB 2: HOMEPAGE CUSTOMIZER -->
-      <div id="adminTabCustomizer" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
-        <div class="border-b border-slate-100 pb-4 mb-6">
-          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <i class="fa-solid fa-house-laptop text-brand-navy"></i>
-            <span>Homepage Content & Branding Editor</span>
-          </h3>
-          <p class="text-xs text-slate-500">Update brand names, hero headings, and footer text in real-time. Statistics are counted automatically from articles.</p>
-        </div>
-
-        <form onsubmit="handleHomepageCustomizerSubmit(event)" class="space-y-5 text-xs">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block font-bold text-slate-700 uppercase mb-1">Brand Name</label>
-              <input type="text" id="custBrandName" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 uppercase mb-1">Hero Tagline Slogan</label>
-              <input type="text" id="custHeroSlogan" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
-            </div>
-          </div>
-
-          <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">Hero Description Paragraph</label>
-            <textarea id="custHeroDesc" rows="3" required class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
-          </div>
-
-          <!-- 3 Stats Counter: Tự động đếm theo số bài viết -->
-          <div class="border-t border-slate-100 pt-4">
-            <div class="flex items-center justify-between mb-2">
-              <label class="block font-bold text-slate-700 uppercase">Homepage 3-Metric Counter</label>
-              <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
-                <i class="fa-solid fa-bolt mr-0.5"></i> Tự động tính theo bài viết thực tế
-              </span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label class="block text-slate-500 mb-1">Active Offers (Tổng số bài viết)</label>
-                <input type="number" id="custStatOffers" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
-              </div>
-              <div>
-                <label class="block text-slate-500 mb-1">Stores Count (Số cửa hàng)</label>
-                <input type="number" id="custStatStores" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
-              </div>
-              <div>
-                <label class="block text-slate-500 mb-1">Categories Count (Số danh mục)</label>
-                <input type="number" id="custStatCategories" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
-              </div>
-            </div>
-          </div>
-
-          <!-- Footer Texts -->
-          <div class="border-t border-slate-100 pt-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block font-bold text-slate-700 uppercase mb-1">Footer About Text</label>
-                <textarea id="custFooterAbout" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
-              </div>
-              <div>
-                <label class="block font-bold text-slate-700 uppercase mb-1">Footer Copyright Notice</label>
-                <input type="text" id="custFooterCopy" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
-            <button type="button" onclick="restoreDefaultHomepageSettings()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 font-bold cursor-pointer">
-              Restore Defaults
-            </button>
-            <button type="submit" class="px-6 py-2 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
-              Save & Apply Changes
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- TAB 3: MANAGE ARTICLES -->
+      <!-- TAB 2: QUẢN LÝ BÀI VIẾT -->
       <div id="adminTabManage" class="hidden bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
           <div>
-            <h3 class="text-base font-extrabold text-slate-800">Inventory of Published Reviews</h3>
-            <p class="text-xs text-slate-500">Track affiliate link clicks, edit copy, or remove reviews from the homepage.</p>
+            <h3 class="text-base font-extrabold text-slate-800">Danh Sách Bài Viết Đã Đăng</h3>
+            <p class="text-xs text-slate-500">Theo dõi click link tiếp thị, chỉnh sửa hoặc xóa bài viết khỏi trang chủ.</p>
           </div>
           <button onclick="confirmResetToDefaultArticles()" class="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 font-bold cursor-pointer">
             <i class="fa-solid fa-rotate-left"></i>
-            <span>Reset to 6 Default Sample Reviews</span>
+            <span>Khôi phục 6 bài mẫu gốc</span>
           </button>
         </div>
 
@@ -736,63 +669,136 @@
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold uppercase tracking-wider">
-                <th class="py-3 px-4">Product / Title</th>
-                <th class="py-3 px-3">Category</th>
-                <th class="py-3 px-3">Coupon</th>
-                <th class="py-3 px-3">Price</th>
-                <th class="py-3 px-3">Clicks</th>
-                <th class="py-3 px-3 text-right">Actions</th>
+                <th class="py-3 px-4">Sản Phẩm / Tiêu Đề</th>
+                <th class="py-3 px-3">Danh Mục</th>
+                <th class="py-3 px-3">Mã Coupon</th>
+                <th class="py-3 px-3">Giá</th>
+                <th class="py-3 px-3">Lượt Click</th>
+                <th class="py-3 px-3 text-right">Thao Tác</th>
               </tr>
             </thead>
-            <tbody id="adminArticlesTableBody" class="divide-y divide-slate-100">
-              <!-- Dynamically populated via renderAdminTable() -->
-            </tbody>
+            <tbody id="adminArticlesTableBody" class="divide-y divide-slate-100"></tbody>
           </table>
         </div>
       </div>
 
-      <!-- TAB 4: ACCOUNT SECURITY -->
+      <!-- TAB 3: TÙY BIẾN TRANG CHỦ -->
+      <div id="adminTabCustomizer" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
+        <div class="border-b border-slate-100 pb-4 mb-6">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-house-laptop text-brand-navy"></i>
+            <span>Cấu Hình Thương Hiệu & Nội Dung Trang Chủ</span>
+          </h3>
+          <p class="text-xs text-slate-500">Các chỉ số Active Offers, Stores, Categories được tính toán tự động dựa trên số bài viết.</p>
+        </div>
+
+        <form onsubmit="handleHomepageCustomizerSubmit(event)" class="space-y-5 text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 uppercase mb-1">Tên Thương Hiệu (Brand Name)</label>
+              <input type="text" id="custBrandName" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 uppercase mb-1">Khẩu Hiệu Hero (Tagline Slogan)</label>
+              <input type="text" id="custHeroSlogan" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Đoạn Văn Giới Thiệu Hero</label>
+            <textarea id="custHeroDesc" rows="3" required class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
+          </div>
+
+          <!-- Bộ đếm tự động -->
+          <div class="border-t border-slate-100 pt-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="block font-bold text-slate-700 uppercase">3 Chỉ Số Thống Kê Hero Banner</label>
+              <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                <i class="fa-solid fa-bolt mr-0.5"></i> Tự động tính theo dữ liệu bài viết
+              </span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-slate-500 mb-1">Active Offers</label>
+                <input type="number" id="custStatOffers" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-slate-500 mb-1">Stores Count</label>
+                <input type="number" id="custStatStores" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-slate-500 mb-1">Categories Count</label>
+                <input type="number" id="custStatCategories" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-100 pt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold text-slate-700 uppercase mb-1">Thông Tin Footer</label>
+                <textarea id="custFooterAbout" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 uppercase mb-1">Bản Quyền Footer (Copyright)</label>
+                <input type="text" id="custFooterCopy" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
+            <button type="button" onclick="restoreDefaultHomepageSettings()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 font-bold cursor-pointer">
+              Khôi Phục Mặc Định
+            </button>
+            <button type="submit" class="px-6 py-2 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
+              Lưu Thay Đổi
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB 4: BẢO MẬT & ĐỔI TÀI KHOẢN -->
       <div id="adminTabSecurity" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 max-w-xl mx-auto">
         <div class="border-b border-slate-100 pb-4 mb-6">
           <h3 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
             <i class="fa-solid fa-shield-halved text-emerald-600"></i>
-            <span>Admin Account Credentials</span>
+            <span>Thông Tin Tài Khoản Quản Trị</span>
           </h3>
-          <p class="text-xs text-slate-500">You can customize both your administrative username and password here. Changes are saved locally.</p>
+          <p class="text-xs text-slate-500">Tài khoản chuẩn: <code>adminnisssss</code> | Mật khẩu: <code>amixnxxxxxxxx</code></p>
         </div>
 
         <form onsubmit="handleAccountSecuritySubmit(event)" class="space-y-4 text-xs">
           <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">Current Active Username</label>
-            <input type="text" id="secCurrentUsernameDisplay" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-500 font-mono">
+            <label class="block font-bold text-slate-700 uppercase mb-1">Tài Khoản Đang Hoạt Động</label>
+            <input type="text" id="secCurrentUsernameDisplay" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-600 font-mono">
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">Verify Current Password <span class="text-red-500">*</span></label>
-            <input type="password" id="secCurrentPasswordInput" required placeholder="Enter your current password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+            <label class="block font-bold text-slate-700 uppercase mb-1">Xác Nhận Mật Khẩu Hiện Tại <span class="text-red-500">*</span></label>
+            <input type="password" id="secCurrentPasswordInput" required placeholder="Nhập mật khẩu hiện tại" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">New Username <span class="text-red-500">*</span></label>
-            <input type="text" id="secNewUsername" required placeholder="admin" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+            <label class="block font-bold text-slate-700 uppercase mb-1">Tài Khoản Mới <span class="text-red-500">*</span></label>
+            <input type="text" id="secNewUsername" required placeholder="adminnisssss" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">New Password <span class="text-red-500">*</span></label>
-            <input type="password" id="secNewPassword" required placeholder="Enter new password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+            <label class="block font-bold text-slate-700 uppercase mb-1">Mật Khẩu Mới <span class="text-red-500">*</span></label>
+            <input type="password" id="secNewPassword" required placeholder="Nhập mật khẩu mới" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 uppercase mb-1">Confirm New Password <span class="text-red-500">*</span></label>
-            <input type="password" id="secConfirmPassword" required placeholder="Repeat new password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+            <label class="block font-bold text-slate-700 uppercase mb-1">Nhập Lại Mật Khẩu Mới <span class="text-red-500">*</span></label>
+            <input type="password" id="secConfirmPassword" required placeholder="Lặp lại mật khẩu mới" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
           </div>
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
             <button type="button" onclick="resetToInitialAuthCredentials()" class="text-xs text-slate-500 hover:text-red-600 font-semibold cursor-pointer">
-              Reset to default credentials
+              Đặt lại về adminnisssss / amixnxxxxxxxx
             </button>
             <button type="submit" class="px-6 py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
-              Update Credentials
+              Cập Nhật Tài Khoản
             </button>
           </div>
         </form>
@@ -805,7 +811,6 @@
   <div id="articleModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
     <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       
-      <!-- Modal Header Banner -->
       <div class="relative bg-brand-navy text-white p-6 pb-7 overflow-hidden">
         <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
         <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
@@ -834,10 +839,7 @@
         </div>
       </div>
 
-      <!-- Modal Body (Scrollable) -->
       <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-700 leading-relaxed custom-scrollbar">
-        
-        <!-- Affiliate Deal Callout Banner -->
         <div class="bg-gradient-to-r from-red-50 via-orange-50 to-amber-50 border border-red-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wide flex items-center gap-1.5">
@@ -870,12 +872,8 @@
           </a>
         </div>
 
-        <!-- Excerpt -->
-        <div class="text-slate-800 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-brand-navy italic text-xs sm:text-sm" id="modalExcerpt">
-          Excerpt content...
-        </div>
+        <div class="text-slate-800 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-brand-navy italic text-xs sm:text-sm" id="modalExcerpt"></div>
 
-        <!-- Pros & Cons -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4">
             <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -894,7 +892,6 @@
           </div>
         </div>
 
-        <!-- Full Content -->
         <div id="modalFullContent" class="space-y-3 text-slate-700 text-xs sm:text-sm border-t border-slate-100 pt-4 leading-relaxed"></div>
 
         <div class="text-[11px] text-slate-400 bg-slate-50 p-3 rounded-xl border border-slate-100">
@@ -902,7 +899,6 @@
         </div>
       </div>
 
-      <!-- Modal Footer -->
       <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex items-center justify-between">
         <button onclick="closeArticleModal()" class="text-xs font-bold text-slate-600 hover:text-slate-900 cursor-pointer">
           Close Window
@@ -922,31 +918,30 @@
     </div>
   </div>
 
-  <!-- Custom Confirm Modal -->
+  <!-- Confirm Modal -->
   <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl text-center">
       <div class="w-12 h-12 bg-red-50 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>
-      <h4 id="confirmModalTitle" class="text-base font-bold text-slate-800">Confirm Action</h4>
-      <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 mb-5">Are you sure you want to proceed?</p>
+      <h4 id="confirmModalTitle" class="text-base font-bold text-slate-800">Xác Nhận</h4>
+      <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 mb-5">Bạn có chắc chắn muốn thực hiện thao tác này?</p>
       <div class="flex items-center gap-2">
-        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition cursor-pointer">Cancel</button>
-        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition cursor-pointer">Proceed</button>
+        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition cursor-pointer">Hủy</button>
+        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition cursor-pointer">Tiếp Tục</button>
       </div>
     </div>
   </div>
 
-  <!-- Footer: Logo rõ nét, không bị tối chữ hay chìm màu -->
+  <!-- Footer Chuẩn hóa chữ hoa thường: Coupons Here -->
   <footer class="bg-brand-navy text-white mt-auto pt-14 pb-8 border-t border-blue-900/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
         
-        <!-- Col 1: Brand Info -->
         <div class="lg:col-span-2 space-y-3">
           <div class="text-xl font-black tracking-tight text-white flex items-center gap-2">
             <span class="w-6 h-6 rounded-lg bg-brand-accent flex items-center justify-center text-xs font-bold">%</span>
-            <span id="footerBrandName" class="text-white select-none">coupons<span class="text-white">here</span></span>
+            <span id="footerBrandName" class="text-white select-none">Coupons<span class="text-white font-black">Here</span></span>
           </div>
           <p class="text-xs font-bold text-blue-200">Top Hub of US Online Coupons</p>
           <p id="footerDescDisplay" class="text-xs text-slate-300 font-light leading-relaxed max-w-sm">
@@ -955,7 +950,6 @@
           </p>
         </div>
 
-        <!-- Col 2: Explore -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Explore</h4>
           <ul class="space-y-2 text-xs text-slate-300">
@@ -963,11 +957,9 @@
             <li><a href="javascript:void(0)" onclick="scrollToSection('popularStoresSection')" class="hover:text-white transition">Stores</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('categoriesSection')" class="hover:text-white transition">Categories</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('reviewSection')" class="hover:text-white transition">Blog</a></li>
-            <li><a href="javascript:void(0)" class="hover:text-white transition">Authors</a></li>
           </ul>
         </div>
 
-        <!-- Col 3: Company -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Company</h4>
           <ul class="space-y-2 text-xs text-slate-300">
@@ -977,13 +969,11 @@
           </ul>
         </div>
 
-        <!-- Col 4: Legal & Social -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Legal</h4>
           <ul class="space-y-2 text-xs text-slate-300">
             <li><a href="javascript:void(0)" class="hover:text-white transition">Privacy Policy</a></li>
             <li><a href="javascript:void(0)" class="hover:text-white transition">Terms of Service</a></li>
-            <li><a href="javascript:void(0)" class="hover:text-white transition">Cookie Policy</a></li>
             <li><a href="javascript:void(0)" class="hover:text-white transition">Disclaimer</a></li>
           </ul>
 
@@ -997,19 +987,17 @@
         </div>
       </div>
 
-      <!-- Copyright -->
       <div id="footerCopyrightDisplay" class="pt-6 border-t border-blue-900/60 text-center text-[11px] text-slate-400">
         &copy; 2026 couponshere.com. All rights reserved. Powered by Gemini AI SEO Engine.
       </div>
     </div>
   </footer>
 
-  <!-- Toast Notifications Container -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
   <script>
     /* =========================================================================
-       1. DATA STRUCTURES & CONFIGURATION
+       1. DATA STRUCTURES & CONFIGURATION (CHUẨN HÓA CHỮ HOA THƯỜNG)
        ========================================================================= */
 
     const DEFAULT_CATEGORIES = [
@@ -1033,18 +1021,19 @@
       { id: "For businesses", name: "For businesses", icon: "🏢" }
     ];
 
-    const DEFAULT_STORES = [
-      { name: "femme NATIVA", logoText: "femme NATIVA", cursive: true, offers: "5 offers", color: "bg-rose-50 text-rose-900 border-rose-100" },
-      { name: "Peptide Ritual", logoText: "CD R", cursive: false, offers: "2 offers", color: "bg-amber-50 text-amber-900 border-amber-100" },
-      { name: "MMO", logoText: "MMO", cursive: false, offers: "1 offers", color: "bg-slate-100 text-slate-800 border-slate-200" },
-      { name: "HALLO france", logoText: "HALLO", cursive: false, offers: "3 offers", color: "bg-blue-50 text-blue-800 border-blue-100" },
-      { name: "Track Speed", logoText: "Track Speed", cursive: false, offers: "1 offers", color: "bg-red-50 text-red-700 border-red-100" },
-      { name: "ARAMATEK", logoText: "ARAMATEK", cursive: false, offers: "1 offers", color: "bg-stone-100 text-stone-800 border-stone-200" },
-      { name: "Pulse Tech", logoText: "PULSE", cursive: false, offers: "3 offers", color: "bg-cyan-50 text-cyan-900 border-cyan-100" },
+    // Chuẩn hóa tên thương hiệu & logo viết hoa thường đúng quy cách
+    const INITIAL_STORES = [
+      { name: "Femme Nativa", logoText: "Femme Nativa", cursive: true, offers: "5 offers" },
+      { name: "Peptide Ritual", logoText: "Peptide Ritual", cursive: false, offers: "2 offers" },
+      { name: "MMO", logoText: "MMO", cursive: false, offers: "1 offers" },
+      { name: "Hallo France", logoText: "Hallo France", cursive: false, offers: "3 offers" },
+      { name: "Track Speed", logoText: "Track Speed", cursive: false, offers: "1 offers" },
+      { name: "Aramatek", logoText: "Aramatek", cursive: false, offers: "1 offers" },
+      { name: "Pulse Tech", logoText: "Pulse Tech", cursive: false, offers: "3 offers" }
     ];
 
     const DEFAULT_HOMEPAGE_SETTINGS = {
-      brandName: "couponshere",
+      brandName: "Coupons Here",
       heroSlogan: "Find Better. Buy Smarter.",
       heroDesc: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
       footerAbout: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
@@ -1053,6 +1042,7 @@
 
     const DEFAULT_CUSTOM_PROMPT = `Act as an elite affiliate review specialist and SEO copywriter for Coupons Here.
 Analyze the product information below and craft an in-depth, honest, engaging, high-converting product review.
+Make sure the brand name and title follow proper Title Case capitalization.
 
 Product Name: {product_name}
 Category: {category}
@@ -1081,9 +1071,9 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         readTime: "3 min read",
         rating: 4.9,
         category: "Beauty and fragrance",
-        brand: "femme NATIVA",
+        brand: "Femme Nativa",
         headerLogoType: "text-script",
-        headerLogoText: "femme NATIVA",
+        headerLogoText: "Femme Nativa",
         excerpt: "Discover the Rachael Attard line starting at just $14.98. Explore our in-depth review of top formulas, brand insights, and current online promotions.",
         price: "$14.98",
         coupon: "FEMME2026",
@@ -1113,8 +1103,8 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         rating: 4.8,
         category: "Beauty and fragrance",
         brand: "Peptide Ritual",
-        headerLogoType: "badge-circle",
-        headerLogoText: "CD R",
+        headerLogoType: "badge-text",
+        headerLogoText: "Peptide Ritual",
         excerpt: "Discover Peptide Ritual clinical-grade formulas. Explore verified reviews, top serums, and value sets starting from $25 with direct checkout savings.",
         price: "$25.00",
         coupon: "PEPTIDE30",
@@ -1166,16 +1156,16 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       },
       {
         id: "art-4",
-        title: "Halloo France Review 2026: Wellness Essentials & Best Deals",
-        slug: "halloo-france-review-2026",
+        title: "Hallo France Review 2026: Wellness Essentials & Best Deals",
+        slug: "hallo-france-review-2026",
         date: "September 17, 2026",
         readTime: "4 min read",
         rating: 4.7,
         category: "Drinks",
-        brand: "HALLO france",
+        brand: "Hallo France",
         headerLogoType: "badge-text",
-        headerLogoText: "HALLO france",
-        excerpt: "Discover Halloo France wellness solutions starting at $25.00. Explore top-selling balance, health essentials, and current promotions on store.",
+        headerLogoText: "Hallo France",
+        excerpt: "Discover Hallo France wellness solutions starting at $25.00. Explore top-selling balance, health essentials, and current promotions on store.",
         price: "$25.00",
         coupon: "HALLOO15",
         affiliateUrl: "https://example.com/affiliate/halloo-france",
@@ -1189,10 +1179,442 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
           "Recyclable slim aluminum cans should be kept in a cool pantry"
         ],
         fullContent: `
-          <p>Halloo France offers invigorating hydration tailored for active professionals. Infused with natural electrolytes, it sustains daytime stamina without blood glucose spikes.</p>
+          <p>Hallo France offers invigorating hydration tailored for active professionals. Infused with natural electrolytes, it sustains daytime stamina without blood glucose spikes.</p>
         `
       },
       {
         id: "art-5",
         title: "Track Speed Review 2026: Top Racing Training Gear & Verified Discounts",
         slug: "track-speed-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.8,
+        category: "Equipment furniture",
+        brand: "Track Speed",
+        headerLogoType: "badge-text",
+        headerLogoText: "Track Speed",
+        excerpt: "Discover Track Speed performance gear, training programs, and driving experiences. Check store pricing down from $25.00 with codes.",
+        price: "$25.00",
+        coupon: "SPEED2026",
+        affiliateUrl: "https://example.com/affiliate/track-speed",
+        clicks: 34,
+        pros: [
+          "Rigid reinforced tubular steel frame eliminates steering flex",
+          "Fully adjustable distance and pedal angles for all driver heights",
+          "Foldable design enables quick storage in small rooms"
+        ],
+        cons: [
+          "Heavier solid frame requires two hands during relocation"
+        ],
+        fullContent: `
+          <p>Track Speed sim-racing rigs bring professional motorsport immersion into the living room. Tested with Fanatec and Logitech wheelbases, it handles direct-drive torque with ease.</p>
+        `
+      },
+      {
+        id: "art-6",
+        title: "Dudimali Review 2026: Best Products + Exclusive Discount Code",
+        slug: "dudimali-review-2026",
+        date: "September 17, 2026",
+        readTime: "3 min read",
+        rating: 4.6,
+        category: "Equipment furniture",
+        brand: "Aramatek",
+        headerLogoType: "image-furniture",
+        headerLogoText: "Aramatek Decor",
+        excerpt: "Discover Dudimali top tech and lifestyle deals starting at just $14.98. Read our honest review on quality, verified ratings, and checkout perks.",
+        price: "$14.98",
+        coupon: "DUDI40",
+        affiliateUrl: "https://example.com/affiliate/dudimali",
+        clicks: 53,
+        pros: [
+          "Clean Scandinavian minimalist aesthetic",
+          "Eco-friendly certified engineered wood with anti-scratch coating",
+          "Tool-free rapid assembly in under 10 minutes"
+        ],
+        cons: [
+          "Limited color variations available in the discount tier"
+        ],
+        fullContent: `
+          <p>Dudimali & Aramatek bring sleek design to compact modern living spaces. Their smart coffee tables feature built-in wireless charging pads and concealed organizing compartments.</p>
+        `
+      }
+    ];
+
+    let currentView = 'frontend';
+    let currentCategoryFilter = 'all';
+    let currentSearchTerm = '';
+    let articles = [];
+    let homepageSettings = {};
+    let currentCustomPrompt = '';
+    let pendingAiArticle = null;
+    let currentActiveArticleId = null;
+
+    /* =========================================================================
+       2. INITIALIZATION & CREDENTIALS CONFIGURATION
+       Tài khoản chuẩn: adminnisssss / Mật khẩu chuẩn: amixnxxxxxxxx
+       ========================================================================= */
+
+    function getAdminCredentials() {
+      const stored = localStorage.getItem('couponshere_admin_auth');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.username && parsed.password) return parsed;
+        } catch(e) {}
+      }
+      return { username: 'adminnisssss', password: 'amixnxxxxxxxx' };
+    }
+
+    function initAppState() {
+      // Thiết lập tài khoản quản trị đúng yêu cầu
+      if (!localStorage.getItem('couponshere_admin_auth')) {
+        localStorage.setItem('couponshere_admin_auth', JSON.stringify({
+          username: 'adminnisssss',
+          password: 'amixnxxxxxxxx'
+        }));
+      }
+
+      // Homepage Settings
+      const storedSettings = localStorage.getItem('couponshere_homepage_settings');
+      if (storedSettings) {
+        try {
+          homepageSettings = JSON.parse(storedSettings);
+        } catch(e) {
+          homepageSettings = { ...DEFAULT_HOMEPAGE_SETTINGS };
+        }
+      } else {
+        homepageSettings = { ...DEFAULT_HOMEPAGE_SETTINGS };
+        localStorage.setItem('couponshere_homepage_settings', JSON.stringify(homepageSettings));
+      }
+
+      // Custom AI Prompt
+      currentCustomPrompt = localStorage.getItem('couponshere_custom_prompt') || DEFAULT_CUSTOM_PROMPT;
+      const promptTextarea = document.getElementById('adminCustomPromptEditor');
+      if (promptTextarea) promptTextarea.value = currentCustomPrompt;
+
+      // Articles Database
+      const storedArticles = localStorage.getItem('couponshere_articles');
+      if (storedArticles) {
+        try {
+          articles = JSON.parse(storedArticles);
+        } catch(e) {
+          articles = [...DEFAULT_ARTICLES];
+        }
+      } else {
+        articles = [...DEFAULT_ARTICLES];
+        saveArticles();
+      }
+
+      // Gemini API Key Input
+      const keyInput = document.getElementById('adminApiKeyInput');
+      if (keyInput) keyInput.value = localStorage.getItem('couponshere_gemini_api_key') || '';
+
+      applyHomepageSettings();
+      updateTopAdminBar();
+    }
+
+    function saveArticles() {
+      localStorage.setItem('couponshere_articles', JSON.stringify(articles));
+      updateStatNumbers();
+    }
+
+    /* Bộ đếm tự động cập nhật chính xác theo số bài viết thực tế */
+    function updateStatNumbers() {
+      const activeOffersCount = articles.length;
+      
+      const uniqueStoresCount = new Set(
+        articles.map(a => (a.brand ? a.brand.trim().toLowerCase() : '')).filter(Boolean)
+      ).size;
+
+      const uniqueCategoriesCount = new Set(
+        articles.map(a => (a.category ? a.category.trim() : '')).filter(Boolean)
+      ).size;
+
+      document.getElementById('statOffers').textContent = activeOffersCount;
+      document.getElementById('statStores').textContent = uniqueStoresCount;
+      document.getElementById('statCategories').textContent = uniqueCategoriesCount;
+
+      const adminCountEl = document.getElementById('adminArticleCount');
+      if (adminCountEl) adminCountEl.textContent = articles.length;
+
+      const custOffers = document.getElementById('custStatOffers');
+      const custStores = document.getElementById('custStatStores');
+      const custCats = document.getElementById('custStatCategories');
+      if (custOffers) custOffers.value = activeOffersCount;
+      if (custStores) custStores.value = uniqueStoresCount;
+      if (custCats) custCats.value = uniqueCategoriesCount;
+    }
+
+    /* Áp dụng nội dung và đảm bảo Logo chuẩn hoa thường & rõ nét */
+    function applyHomepageSettings() {
+      // 1. Logo Header: Chữ chuẩn hoa thường "CouponsHere"
+      const navBrand = document.getElementById('navBrandName');
+      if (navBrand) {
+        navBrand.innerHTML = `Coupons<span class="text-brand-navy font-black">Here</span>`;
+      }
+
+      // 2. Logo Hero: Chuẩn hoa thường "Coupons Here", màu trắng sáng rõ
+      const heroTitle = document.getElementById('heroTitleDisplay');
+      if (heroTitle) {
+        heroTitle.textContent = homepageSettings.brandName || "Coupons Here";
+      }
+
+      // 3. Logo Footer: Màu trắng đồng nhất
+      const footerBrand = document.getElementById('footerBrandName');
+      if (footerBrand) {
+        footerBrand.innerHTML = `Coupons<span class="text-white font-black">Here</span>`;
+      }
+
+      document.getElementById('heroSloganDisplay').textContent = homepageSettings.heroSlogan;
+      document.getElementById('heroDescDisplay').textContent = homepageSettings.heroDesc;
+      document.getElementById('footerDescDisplay').textContent = homepageSettings.footerAbout;
+      document.getElementById('footerCopyrightDisplay').innerHTML = homepageSettings.footerCopy;
+
+      updateStatNumbers();
+
+      document.getElementById('custBrandName').value = homepageSettings.brandName;
+      document.getElementById('custHeroSlogan').value = homepageSettings.heroSlogan;
+      document.getElementById('custHeroDesc').value = homepageSettings.heroDesc;
+      document.getElementById('custFooterAbout').value = homepageSettings.footerAbout;
+      document.getElementById('custFooterCopy').value = homepageSettings.footerCopy;
+    }
+
+    function renderArticles() {
+      const container = document.getElementById('articlesGrid');
+      const emptyState = document.getElementById('emptyState');
+      const filterPill = document.getElementById('activeFilterPill');
+      const filterName = document.getElementById('activeFilterName');
+      const countText = document.getElementById('articleCountText');
+
+      if (!container) return;
+
+      let filtered = articles.filter(item => {
+        const matchesCategory = (currentCategoryFilter === 'all') || (item.category === currentCategoryFilter);
+        const matchesSearch = !currentSearchTerm || 
+          item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+          item.excerpt.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+          (item.brand && item.brand.toLowerCase().includes(currentSearchTerm.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      });
+
+      if (currentCategoryFilter !== 'all') {
+        filterPill.classList.remove('hidden');
+        filterPill.classList.add('flex');
+        filterName.textContent = currentCategoryFilter;
+        countText.textContent = `Showing ${filtered.length} in "${currentCategoryFilter}"`;
+      } else if (currentSearchTerm) {
+        filterPill.classList.remove('hidden');
+        filterPill.classList.add('flex');
+        filterName.textContent = `Keyword: "${currentSearchTerm}"`;
+        countText.textContent = `Found ${filtered.length} matches`;
+      } else {
+        filterPill.classList.add('hidden');
+        filterPill.classList.remove('flex');
+        countText.textContent = `Showing all ${filtered.length} articles`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      container.innerHTML = filtered.map(item => {
+        let topGraphic = '';
+
+        if (item.imageUrl) {
+          topGraphic = `
+            <div class="h-44 w-full bg-slate-900 relative overflow-hidden border-b border-slate-100">
+              <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
+            </div>
+          `;
+        } else if (item.headerLogoType === 'text-script') {
+          topGraphic = `
+            <div class="h-44 w-full bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 flex items-center justify-center p-4 border-b border-slate-100">
+              <span class="text-3xl font-serif italic font-bold text-pink-700 tracking-wide select-none">${escapeHtml(item.headerLogoText || item.brand)}</span>
+            </div>
+          `;
+        } else if (item.headerLogoType === 'image-carplay') {
+          topGraphic = `
+            <div class="h-44 w-full bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden border-b border-slate-800">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+              <div class="z-10 text-center">
+                <div class="flex items-center justify-center gap-1.5 mb-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-white text-xs font-mono font-bold tracking-widest uppercase py-1 px-3 bg-white/10 rounded-lg backdrop-blur-xs border border-white/20 select-none">
+                  CARPLAY DASHBOARD UI
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (item.headerLogoType === 'image-furniture') {
+          topGraphic = `
+            <div class="h-44 w-full bg-stone-800 flex items-center justify-center p-3 relative overflow-hidden border-b border-stone-700">
+              <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px]"></div>
+              <div class="z-10 text-center">
+                <span class="text-[11px] uppercase tracking-widest text-amber-200 font-semibold block mb-0.5 select-none">Aramatek Living</span>
+                <span class="text-base text-white font-serif italic font-bold select-none">Smart Home Decor</span>
+              </div>
+            </div>
+          `;
+        } else {
+          topGraphic = `
+            <div class="h-44 w-full bg-gradient-to-br from-slate-50 to-blue-50/60 flex flex-col items-center justify-center p-4 border-b border-slate-100">
+              <div class="w-12 h-12 rounded-xl bg-white shadow-2xs border border-slate-200 flex items-center justify-center font-black text-slate-800 text-sm mb-1.5 select-none">
+                ${(item.brand || 'COUPON').substring(0, 3).toUpperCase()}
+              </div>
+              <span class="text-xs font-extrabold text-slate-800 select-none">${escapeHtml(item.brand || 'Brand')}</span>
+              <span class="text-[10px] text-slate-400">Verified Partner</span>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
+            ${topGraphic}
+            
+            <div class="p-5 flex-grow flex flex-col justify-between">
+              <div>
+                <div class="text-[11px] text-slate-400 mb-1.5 font-medium">
+                  ${item.date}
+                </div>
+                
+                <div class="flex items-center gap-1.5 mb-2.5">
+                  <span class="badge-ad">AD Admin</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold ml-auto">
+                    ${item.category}
+                  </span>
+                </div>
+
+                <h3 class="text-sm font-extrabold text-slate-900 leading-snug line-clamp-2 mb-2">
+                  ${escapeHtml(item.title)}
+                </h3>
+
+                <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed mb-4">
+                  ${escapeHtml(item.excerpt)}
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400 text-[11px] font-semibold">${item.readTime || '4 min read'}</span>
+                
+                <button 
+                  onclick="openArticleModal('${item.id}')"
+                  class="font-bold text-brand-accent hover:text-brand-accentHover flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Read article</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* Popular Stores: Tự động sắp xếp và tích hợp thương hiệu từ bài viết mới của AI */
+    function renderPopularStores() {
+      const container = document.getElementById('popularStoresContainer');
+      if (!container) return;
+
+      // Tập hợp danh sách các store từ INITIAL_STORES và các Store mới xuất hiện trong articles
+      const storeMap = new Map();
+
+      INITIAL_STORES.forEach(s => {
+        storeMap.set(s.name.toLowerCase(), { ...s });
+      });
+
+      articles.forEach(a => {
+        if (a.brand) {
+          const key = a.brand.trim().toLowerCase();
+          if (!storeMap.has(key)) {
+            // Tự động thêm thương hiệu mới vào Store list với chuẩn viết hoa thường
+            storeMap.set(key, {
+              name: formatTitleCase(a.brand),
+              logoText: formatTitleCase(a.brand),
+              cursive: false,
+              offers: "1 offers"
+            });
+          }
+        }
+      });
+
+      const storesList = Array.from(storeMap.values());
+
+      container.innerHTML = storesList.map(store => {
+        const matchCount = articles.filter(a => a.brand && a.brand.toLowerCase() === store.name.toLowerCase()).length;
+        const displayOffers = matchCount > 0 ? `${matchCount} offer${matchCount > 1 ? 's' : ''}` : store.offers;
+
+        return `
+          <div 
+            onclick="filterByBrand('${escapeHtml(store.name)}')" 
+            class="bg-white rounded-2xl border border-slate-200 hover:border-slate-300 p-3 flex flex-col items-center justify-center text-center cursor-pointer store-card"
+          >
+            <div class="w-full h-10 flex items-center justify-center font-black text-xs rounded-lg px-1 mb-1">
+              <span class="${store.cursive ? 'font-serif italic text-base text-slate-900 font-bold' : 'font-sans text-xs text-slate-900 font-black'} truncate select-none">
+                ${escapeHtml(store.logoText)}
+              </span>
+            </div>
+            <span class="text-[11px] font-semibold text-slate-500">${displayOffers}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoriesGrid');
+      const aiSelect = document.getElementById('aiCategorySelect');
+      const editAiSelect = document.getElementById('editAiCategory');
+
+      if (!container) return;
+
+      container.innerHTML = DEFAULT_CATEGORIES.map(cat => {
+        const isSelected = currentCategoryFilter === cat.id;
+        return `
+          <div 
+            onclick="setCategoryFilter('${cat.id}')" 
+            class="bg-white rounded-2xl border ${isSelected ? 'border-brand-accent ring-2 ring-brand-accent/20 bg-red-50/20' : 'border-slate-100 hover:border-slate-300'} p-3.5 flex flex-col items-center justify-center text-center cursor-pointer transition-all hover:-translate-y-0.5 shadow-2xs group"
+          >
+            <div class="w-10 h-10 rounded-xl bg-slate-50 group-hover:bg-slate-100 flex items-center justify-center text-xl mb-2 transition">
+              ${cat.icon}
+            </div>
+            <span class="text-xs font-bold text-slate-700 leading-tight group-hover:text-brand-navy transition">
+              ${cat.name}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      const optionsHtml = DEFAULT_CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+      if (aiSelect) aiSelect.innerHTML = optionsHtml;
+      if (editAiSelect) editAiSelect.innerHTML = optionsHtml;
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminArticlesTableBody');
+      if (!tbody) return;
+
+      if (articles.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400">Chưa có bài viết nào</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = articles.map(item => `
+        <tr class="hover:bg-slate-50/80 transition">
+          <td class="py-3 px-4 font-semibold text-slate-800">
+            <div class="max-w-xs truncate font-bold" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div>
+            <div class="text-[10px] text-slate-400 font-normal">Thương hiệu: ${item.brand \vert{}\vert{} 'N/A'} •${item.date}</div>
+          </td>
+          <td class="py-3 px-3 text-slate-600">
+            <span class="bg-slate-100 px-2 py-0.5 rounded-full text-[10px] font-bold">${item.category}</span>
+          </td>
+          <td class="py-3 px-3 font-mono font-bold text-brand-accent">${item.coupon || 'NONE'}</td>
+          <td class="py-3 px-3 font-semibold text-slate-700">${item.price || 'Deal'}</td>
+          <td class="py-3 px-3 font-semibold text-blue-600">
+            <span class="bg-blue-50 px-2.5 py-0.5 rounded-full text-[10px] font-bold">${item.clicks
