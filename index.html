@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CouponsHere - Find Better. Buy Smarter | Deal Reviews</title>
+  <title>Coupons Here - Find Better. Buy Smarter | Deal & Affiliate Reviews</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome 6 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -99,7 +99,7 @@
         <div class="w-9 h-9 rounded-xl bg-brand-accent flex items-center justify-center text-white font-black text-lg shadow-sm group-hover:scale-105 transition-transform">
           %
         </div>
-        <span id="navBrandName" class="text-xl font-black tracking-tight text-slate-800">coupon<span class="text-brand-navy">review</span></span>
+        <span id="navBrandName" class="text-xl font-black tracking-tight text-slate-800">coupons<span class="text-brand-navy">here</span></span>
       </a>
 
       <!-- Header Search Input -->
@@ -133,38 +133,37 @@
 
       <!-- Right Action Items -->
       <div class="flex items-center space-x-3">
-        <!-- Admin Portal Trigger Button -->
         <button 
           id="navAdminPortalBtn"
           onclick="handleNavPortalClick()" 
           class="flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 transition shadow-2xs"
         >
           <i class="fa-solid fa-user-shield text-brand-navy"></i>
-          <span id="navAdminPortalText">Admin Portal</span>
+          <span id="navAdminPortalText">Admin Sign In</span>
         </button>
 
         <a href="javascript:void(0)" onclick="showToast('Customer Sign In feature is in preview mode.', 'info')" class="text-xs font-medium text-slate-600 hover:text-slate-900 hidden sm:inline-block">Sign In</a>
-        <button onclick="showToast('Welcome to CouponsHere!', 'info')" class="text-xs font-semibold text-brand-accent hover:underline hidden sm:inline-block">Sign Up</button>
+        <button onclick="showToast('Welcome to Coupons Here! Member registration opening soon.', 'info')" class="text-xs font-semibold text-brand-accent hover:underline hidden sm:inline-block">Sign Up</button>
       </div>
     </div>
   </header>
 
   <div id="frontendContainer" class="flex-grow flex flex-col">
     
-    <!-- HERO BANNER (Matches CouponsHere design) -->
+    <!-- HERO BANNER -->
     <section class="hero-gradient text-white py-12 md:py-16 px-4 relative overflow-hidden">
       <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="max-w-4xl mx-auto text-center relative z-10">
         <h1 id="heroTitleDisplay" class="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">
-          CouponsHere
+          couponshere
         </h1>
         <p id="heroSloganDisplay" class="text-xs md:text-sm font-semibold text-blue-100 tracking-wide mb-1">
           Find Better. Buy Smarter.
         </p>
         <p id="heroDescDisplay" class="text-xs md:text-sm text-slate-200/90 max-w-2xl mx-auto font-light leading-relaxed mb-6">
-          CouponsHere is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
+          Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
         </p>
 
         <!-- Big Search Bar -->
@@ -281,24 +280,11 @@
         <div class="w-14 h-14 rounded-2xl bg-brand-navy text-white flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
           <i class="fa-solid fa-lock"></i>
         </div>
-        <h2 class="text-2xl font-black text-slate-900">Admin Portal Sign In</h2>
-        <p class="text-xs text-slate-500 mt-1">Authenticate to access AI SEO Article Writer & Homepage Customizer</p>
+        <h2 class="text-2xl font-black text-slate-900">Admin Sign In</h2>
+        <p class="text-xs text-slate-500 mt-1">Authenticate to access AI Affiliate SEO Writer & Homepage Customizer</p>
       </div>
 
-      <!-- Initial credentials alert card -->
-      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 mb-5 text-xs text-blue-900 leading-relaxed">
-        <div class="font-bold flex items-center gap-1.5 mb-1 text-brand-navy">
-          <i class="fa-solid fa-circle-info"></i>
-          <span>Default Credentials:</span>
-        </div>
-        <div class="space-y-0.5 font-mono text-[11px]">
-          <div>Username: <strong class="bg-white/80 px-1.5 py-0.5 rounded border border-blue-200">admin</strong></div>
-          <div>Password: <strong class="bg-white/80 px-1.5 py-0.5 rounded border border-blue-200">couponsherexxxx</strong></div>
-        </div>
-        <div class="text-[10px] text-blue-700/80 mt-1.5 italic">*You can change your username & password inside the Account Security tab.</div>
-      </div>
-
-      <!-- Login Form -->
+      <!-- Clean Sign-in Form without pre-filled values or exposed credentials -->
       <form onsubmit="handleAdminLoginSubmit(event)" class="space-y-4 text-xs">
         <div>
           <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username</label>
@@ -310,7 +296,8 @@
               type="text" 
               id="loginUsernameInput" 
               required 
-              placeholder="Enter admin username" 
+              autocomplete="username"
+              placeholder="Enter your admin username" 
               class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             >
           </div>
@@ -326,19 +313,29 @@
               type="password" 
               id="loginPasswordInput" 
               required 
-              placeholder="Enter password" 
-              class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              autocomplete="current-password"
+              placeholder="Enter your admin password" 
+              class="w-full pl-9 pr-10 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             >
+            <button 
+              type="button" 
+              onclick="toggleLoginPasswordVisibility()" 
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition"
+              title="Toggle password visibility"
+            >
+              <i id="loginPasswordEyeIcon" class="fa-regular fa-eye"></i>
+            </button>
           </div>
         </div>
 
+        <!-- Dynamic error message shown only on invalid login -->
         <div id="loginErrorMessage" class="hidden text-xs text-rose-600 font-bold bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
-          <i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid username or password! Please check and try again.
+          <i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid username or password! Please check your credentials and try again.
         </div>
 
         <button 
           type="submit" 
-          class="w-full py-3 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+          class="w-full py-3 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
         >
           <span>Sign In to Dashboard</span>
           <i class="fa-solid fa-arrow-right"></i>
@@ -346,7 +343,7 @@
 
         <div class="text-center pt-2">
           <button type="button" onclick="switchView('frontend')" class="text-xs text-slate-500 hover:text-slate-800 font-medium">
-            &larr; Back to public homepage
+            &larr; Back to public website
           </button>
         </div>
       </form>
@@ -360,7 +357,7 @@
       <div class="bg-white rounded-3xl p-6 shadow-xs border border-slate-200 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-brand-accent/10 text-brand-accent uppercase tracking-wider">CouponsHere Engine</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-brand-accent/10 text-brand-accent uppercase tracking-wider">Coupons Here Engine</span>
             <span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full font-bold">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               Gemini 2.5 Flash Connected
@@ -420,7 +417,7 @@
               placeholder="AIzaSy..." 
               class="px-3.5 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400/50 w-full md:w-64 font-mono"
             >
-            <button onclick="saveAdminApiKey()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition whitespace-nowrap">
+            <button onclick="saveAdminApiKey()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition whitespace-nowrap cursor-pointer">
               Save Key
             </button>
           </div>
@@ -524,6 +521,7 @@
               ></textarea>
             </div>
 
+            <!-- Custom AI Prompt Template Editor -->
             <div class="pt-3 border-t border-slate-100">
               <div class="flex items-center justify-between mb-1.5">
                 <label class="font-bold text-slate-800 flex items-center gap-1.5">
@@ -619,7 +617,7 @@
                 <span class="text-[11px] text-slate-500">Will be featured on middle review grid</span>
                 <button 
                   onclick="publishAiArticle()" 
-                  class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5"
+                  class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5 cursor-pointer"
                 >
                   <i class="fa-solid fa-cloud-arrow-up"></i>
                   <span>Publish to Homepage</span>
@@ -692,10 +690,10 @@
           </div>
 
           <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
-            <button type="button" onclick="restoreDefaultHomepageSettings()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 font-bold">
+            <button type="button" onclick="restoreDefaultHomepageSettings()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 font-bold cursor-pointer">
               Restore Defaults
             </button>
-            <button type="submit" class="px-6 py-2 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition">
+            <button type="submit" class="px-6 py-2 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
               Save & Apply Changes
             </button>
           </div>
@@ -708,7 +706,7 @@
             <h3 class="text-base font-extrabold text-slate-800">Inventory of Published Reviews</h3>
             <p class="text-xs text-slate-500">Track affiliate link clicks, edit copy, or remove reviews from the homepage.</p>
           </div>
-          <button onclick="confirmResetToDefaultArticles()" class="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 font-bold">
+          <button onclick="confirmResetToDefaultArticles()" class="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 font-bold cursor-pointer">
             <i class="fa-solid fa-rotate-left"></i>
             <span>Reset to 6 Default Sample Reviews</span>
           </button>
@@ -749,6 +747,11 @@
           </div>
 
           <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Verify Current Password <span class="text-red-500">*</span></label>
+            <input type="password" id="secCurrentPasswordInput" required placeholder="Enter your current password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+          </div>
+
+          <div>
             <label class="block font-bold text-slate-700 uppercase mb-1">New Username <span class="text-red-500">*</span></label>
             <input type="text" id="secNewUsername" required placeholder="admin" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
           </div>
@@ -764,10 +767,10 @@
           </div>
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-            <button type="button" onclick="resetToInitialAuthCredentials()" class="text-xs text-slate-500 hover:text-red-600 font-semibold">
-              Reset to default (admin / couponsherexxxx)
+            <button type="button" onclick="resetToInitialAuthCredentials()" class="text-xs text-slate-500 hover:text-red-600 font-semibold cursor-pointer">
+              Reset to default credentials
             </button>
-            <button type="submit" class="px-6 py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition">
+            <button type="submit" class="px-6 py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
               Update Credentials
             </button>
           </div>
@@ -783,7 +786,7 @@
       <!-- Modal Header Banner -->
       <div class="relative bg-brand-navy text-white p-6 pb-7 overflow-hidden">
         <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
-        <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+        <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
           <i class="fa-solid fa-xmark"></i>
         </button>
 
@@ -826,7 +829,7 @@
             <div id="modalCouponBox" class="text-xs text-slate-600 mt-1 flex items-center gap-2">
               <span>Coupon Code:</span>
               <span id="modalCouponCode" class="font-mono font-bold bg-white px-2 py-0.5 rounded border border-red-300 text-brand-accent">COUPON2026</span>
-              <button onclick="copyModalCoupon()" class="text-slate-500 hover:text-brand-accent text-[11px] font-semibold underline flex items-center gap-1">
+              <button onclick="copyModalCoupon()" class="text-slate-500 hover:text-brand-accent text-[11px] font-semibold underline flex items-center gap-1 cursor-pointer">
                 <i class="fa-regular fa-copy"></i>
                 <span>Copy</span>
               </button>
@@ -874,13 +877,13 @@
         <div id="modalFullContent" class="space-y-3 text-slate-700 text-xs sm:text-sm border-t border-slate-100 pt-4 leading-relaxed"></div>
 
         <div class="text-[11px] text-slate-400 bg-slate-50 p-3 rounded-xl border border-slate-100">
-          <strong>Affiliate Disclosure:</strong> CouponsHere participates in affiliate programs. We may earn a commission from qualifying purchases through our links at no additional cost to you.
+          <strong>Affiliate Disclosure:</strong> Coupons Here participates in affiliate programs. We may earn a commission from qualifying purchases through our links at no additional cost to you.
         </div>
       </div>
 
       <!-- Modal Footer -->
       <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex items-center justify-between">
-        <button onclick="closeArticleModal()" class="text-xs font-bold text-slate-600 hover:text-slate-900">
+        <button onclick="closeArticleModal()" class="text-xs font-bold text-slate-600 hover:text-slate-900 cursor-pointer">
           Close Window
         </button>
         <a 
@@ -906,8 +909,8 @@
       <h4 id="confirmModalTitle" class="text-base font-bold text-slate-800">Confirm Action</h4>
       <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 mb-5">Are you sure you want to proceed?</p>
       <div class="flex items-center gap-2">
-        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition">Cancel</button>
-        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition">Proceed</button>
+        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition cursor-pointer">Cancel</button>
+        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition cursor-pointer">Proceed</button>
       </div>
     </div>
   </div>
@@ -920,11 +923,11 @@
         <div class="lg:col-span-2 space-y-3">
           <div class="text-xl font-black tracking-tight text-white flex items-center gap-2">
             <span class="w-6 h-6 rounded-lg bg-brand-accent flex items-center justify-center text-xs font-bold">%</span>
-            <span id="footerBrandName">CouponsHere</span>
+            <span id="footerBrandName">Coupons Here</span>
           </div>
           <p class="text-xs font-bold text-blue-200">Top Hub of US Online Coupons</p>
           <p id="footerDescDisplay" class="text-xs text-slate-300 font-light leading-relaxed max-w-sm">
-            CouponsHere – Find Better. Buy Smarter.<br>
+            Coupons Here – Find Better. Buy Smarter.<br>
             A trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers compare their options and save more when shopping online.
           </p>
         </div>
@@ -973,7 +976,7 @@
 
       <!-- Copyright -->
       <div id="footerCopyrightDisplay" class="pt-6 border-t border-blue-900/60 text-center text-[11px] text-slate-400">
-        &copy; 2026. All rights reserved.
+        &copy; 2026 couponshere.com. All rights reserved. Powered by Gemini AI SEO Engine.
       </div>
     </div>
   </footer>
@@ -986,7 +989,7 @@
        1. DATA STRUCTURES & CONFIGURATION
        ========================================================================= */
 
-    // 18 Screenshot categories
+    // 18 Categories exactly matching the screenshot
     const DEFAULT_CATEGORIES = [
       { id: "Adult 18 and over", name: "Adult 18 and over", icon: "🔞" },
       { id: "Arts & crafts", name: "Arts & crafts", icon: "🎨" },
@@ -1008,6 +1011,7 @@
       { id: "For businesses", name: "For businesses", icon: "🏢" }
     ];
 
+    // Popular Stores from image
     const DEFAULT_STORES = [
       { name: "femme NATIVA", logoText: "femme NATIVA", cursive: true, offers: "5 offers", color: "bg-rose-50 text-rose-900 border-rose-100" },
       { name: "Peptide Ritual", logoText: "CD R", cursive: false, offers: "2 offers", color: "bg-amber-50 text-amber-900 border-amber-100" },
@@ -1021,15 +1025,15 @@
     const DEFAULT_HOMEPAGE_SETTINGS = {
       brandName: "couponshere",
       heroSlogan: "Find Better. Buy Smarter.",
-      heroDesc: "CouponsHere is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
+      heroDesc: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
       statOffers: 304,
       statStores: 110,
       statCategories: 34,
-      footerAbout: "CouponsHere is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
-      footerCopy: "© 2026 CouponsHere.com. All rights reserved. Powered by Gemini AI SEO Engine."
+      footerAbout: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
+      footerCopy: "© 2026 couponshere.com. All rights reserved. Powered by Gemini AI SEO Engine."
     };
 
-    const DEFAULT_CUSTOM_PROMPT = `Act as an elite affiliate review specialist and SEO copywriter for CouponsHere.
+    const DEFAULT_CUSTOM_PROMPT = `Act as an elite affiliate review specialist and SEO copywriter for Coupons Here.
 Analyze the product information below and craft an in-depth, honest, engaging, high-converting product review.
 
 Product Name: {product_name}
@@ -1050,6 +1054,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
   "fullContent": "<p>Opening paragraph highlighting why this product is popular in 2026...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Performance & Lab Testing</h4><p>Detailed evaluation paragraph...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Special Deal Insights</h4><p>Why readers should use this exclusive discount code today...</p>"
 }`;
 
+    // 6 Initial review articles matching the screenshot
     const DEFAULT_ARTICLES = [
       {
         id: "art-1",
@@ -1078,7 +1083,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         ],
         fullContent: `
           <p>The beauty and wellness collection by Femme Nativa and Rachael Attard has emerged as one of the best-reviewed skincare ranges of 2026. Formulated with botanical extracts and antioxidant-rich oils, it gently revitalizes the dermal barrier without clogging pores.</p>
-          <h4 class="font-bold text-slate-800 text-sm mt-3">Why Shop Through This Coupons Deal?</h4>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Why Shop Through This Coupons Here Deal?</h4>
           <p>Shoppers ordering through our exclusive link receive guaranteed pricing of $14.98 along with a free complimentary digital skincare guide.</p>
         `
       },
@@ -1108,7 +1113,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         ],
         fullContent: `
           <p>Peptide Ritual combines pharmaceutical-grade biomimetic peptides with deep soothing hydration. It absorbs swiftly into dermal layers, conferring a dewy, revitalized texture.</p>
-          <h4 class="font-bold text-slate-800 text-sm mt-3">Exclusive Savings on CouponsHere</h4>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Exclusive Savings on Coupons Here</h4>
           <p>Redeem code PEPTIDE30 at checkout to unlock an instant 30% reduction with free tracked shipping.</p>
         `
       },
@@ -1242,18 +1247,17 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
        ========================================================================= */
 
     function initAppState() {
-      // 1. Auth Credentials
-      const storedAuth = localStorage.getItem('CouponsHere_admin_auth');
+      // 1. Auth Credentials: initialized securely without exposing in UI
+      const storedAuth = localStorage.getItem('couponshere_admin_auth');
       if (!storedAuth) {
-        // Set default credentials as requested: admin / couponsherexxxx
-        localStorage.setItem('CouponsHere_admin_auth', JSON.stringify({
+        localStorage.setItem('couponshere_admin_auth', JSON.stringify({
           username: 'admin',
           password: 'couponsherexxxx'
         }));
       }
 
       // 2. Homepage Settings
-      const storedSettings = localStorage.getItem('CouponsHere_homepage_settings');
+      const storedSettings = localStorage.getItem('couponshere_homepage_settings');
       if (storedSettings) {
         try {
           homepageSettings = JSON.parse(storedSettings);
@@ -1262,16 +1266,16 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         }
       } else {
         homepageSettings = { ...DEFAULT_HOMEPAGE_SETTINGS };
-        localStorage.setItem('CouponsHere_homepage_settings', JSON.stringify(homepageSettings));
+        localStorage.setItem('couponshere_homepage_settings', JSON.stringify(homepageSettings));
       }
 
-      // 3. Custom Prompt
-      currentCustomPrompt = localStorage.getItem('CouponsHere_custom_prompt') || DEFAULT_CUSTOM_PROMPT;
+      // 3. Custom AI Prompt
+      currentCustomPrompt = localStorage.getItem('couponshere_custom_prompt') || DEFAULT_CUSTOM_PROMPT;
       const promptTextarea = document.getElementById('adminCustomPromptEditor');
       if (promptTextarea) promptTextarea.value = currentCustomPrompt;
 
-      // 4. Articles
-      const storedArticles = localStorage.getItem('CouponsHere_articles');
+      // 4. Articles Database
+      const storedArticles = localStorage.getItem('couponshere_articles');
       if (storedArticles) {
         try {
           articles = JSON.parse(storedArticles);
@@ -1283,25 +1287,25 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         saveArticles();
       }
 
-      // 5. API Key Input
+      // 5. Gemini API Key Input
       const keyInput = document.getElementById('adminApiKeyInput');
-      if (keyInput) keyInput.value = localStorage.getItem('CouponsHere_gemini_api_key') || '';
+      if (keyInput) keyInput.value = localStorage.getItem('couponshere_gemini_api_key') || '';
 
       applyHomepageSettings();
       updateTopAdminBar();
     }
 
     function saveArticles() {
-      localStorage.setItem('CouponsHere_articles', JSON.stringify(articles));
+      localStorage.setItem('couponshere_articles', JSON.stringify(articles));
       updateStatNumbers();
     }
 
     function applyHomepageSettings() {
-      // Branding
+      // Branding update
       const brandDisplays = ['navBrandName', 'heroTitleDisplay', 'footerBrandName'];
       brandDisplays.forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.innerHTML = `coupon<span class="text-brand-navy">review</span>`;
+        if (el) el.innerHTML = `coupons<span class="text-brand-navy">here</span>`;
       });
 
       document.getElementById('heroSloganDisplay').textContent = homepageSettings.heroSlogan;
@@ -1338,7 +1342,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
 
       if (!container) return;
 
-      // Filter articles
+      // Filter articles by category & search query
       let filtered = articles.filter(item => {
         const matchesCategory = (currentCategoryFilter === 'all') || (item.category === currentCategoryFilter);
         const matchesSearch = !currentSearchTerm || 
@@ -1459,7 +1463,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
                 
                 <button 
                   onclick="openArticleModal('${item.id}')"
-                  class="font-bold text-brand-accent hover:text-brand-accentHover flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  class="font-bold text-brand-accent hover:text-brand-accentHover flex items-center gap-1 group-hover:translate-x-0.5 transition-transform cursor-pointer"
                 >
                   <span>Read article</span>
                   <span>&rarr;</span>
@@ -1512,7 +1516,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         `;
       }).join('');
 
-      // Populate Select elements
+      // Populate Category select elements
       const optionsHtml = DEFAULT_CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
       if (aiSelect) aiSelect.innerHTML = optionsHtml;
       if (editAiSelect) editAiSelect.innerHTML = optionsHtml;
@@ -1542,13 +1546,13 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
             <span class="bg-blue-50 px-2.5 py-0.5 rounded-full text-[10px] font-bold">${item.clicks || 0} clicks</span>
           </td>
           <td class="py-3 px-3 text-right space-x-2">
-            <button onclick="openArticleModal('${item.id}')" class="p-1 hover:text-brand-navy transition" title="Preview Article">
+            <button onclick="openArticleModal('${item.id}')" class="p-1 hover:text-brand-navy transition cursor-pointer" title="Preview Article">
               <i class="fa-solid fa-eye"></i>
             </button>
-            <button onclick="editExistingArticle('${item.id}')" class="p-1 hover:text-amber-600 transition" title="Edit in AI Writer">
+            <button onclick="editExistingArticle('${item.id}')" class="p-1 hover:text-amber-600 transition cursor-pointer" title="Edit in AI Writer">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button onclick="deleteArticle('${item.id}')" class="p-1 hover:text-red-600 transition" title="Delete">
+            <button onclick="deleteArticle('${item.id}')" class="p-1 hover:text-red-600 transition cursor-pointer" title="Delete">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -1564,17 +1568,17 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       const input = document.getElementById('adminApiKeyInput');
       const val = input.value.trim();
       if (val) {
-        localStorage.setItem('CouponsHere_gemini_api_key', val);
+        localStorage.setItem('couponshere_gemini_api_key', val);
         showToast("Gemini API Key successfully saved!", "success");
       } else {
-        localStorage.removeItem('CouponsHere_gemini_api_key');
+        localStorage.removeItem('couponshere_gemini_api_key');
         showToast("Gemini API Key removed. Smart simulation fallback enabled.", "info");
       }
     }
 
     function resetPromptToDefault() {
       currentCustomPrompt = DEFAULT_CUSTOM_PROMPT;
-      localStorage.setItem('CouponsHere_custom_prompt', DEFAULT_CUSTOM_PROMPT);
+      localStorage.setItem('couponshere_custom_prompt', DEFAULT_CUSTOM_PROMPT);
       document.getElementById('adminCustomPromptEditor').value = DEFAULT_CUSTOM_PROMPT;
       showToast("AI prompt template reset to default.", "info");
     }
@@ -1600,8 +1604,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       const customNotes = notesInput.value.trim();
       const promptTemplate = promptEditor.value.trim() || DEFAULT_CUSTOM_PROMPT;
 
-      // Save user prompt updates
-      localStorage.setItem('CouponsHere_custom_prompt', promptTemplate);
+      localStorage.setItem('couponshere_custom_prompt', promptTemplate);
 
       if (!productName) {
         showToast("Please enter a product name to generate a review!", "warning");
@@ -1619,7 +1622,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       statusBadge.textContent = "AI Processing...";
       statusBadge.className = "text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-bold animate-pulse";
 
-      // Replace dynamic variables in prompt template
+      // Replace dynamic prompt variables
       const formattedPrompt = promptTemplate
         .replace(/{product_name}/g, productName)
         .replace(/{category}/g, category)
@@ -1628,7 +1631,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         .replace(/{affiliate_url}/g, affiliateUrl)
         .replace(/{custom_notes}/g, customNotes || "None provided");
 
-      const apiKey = localStorage.getItem('CouponsHere_gemini_api_key') || "";
+      const apiKey = localStorage.getItem('couponshere_gemini_api_key') || "";
       let aiResult = null;
 
       try {
@@ -1656,10 +1659,10 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
           }
         }
       } catch (err) {
-        console.warn("Gemini API call failed or encountered error, activating smart simulated fallback:", err);
+        console.warn("Gemini API call failed or encountered error, activating smart fallback:", err);
       }
 
-      // Fallback simulation mode
+      // Fallback simulation mode if API key is not present or failed
       if (!aiResult) {
         await new Promise(r => setTimeout(r, 1000));
         aiResult = {
@@ -1670,7 +1673,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
           pros: [
             `Exceptional performance and durability exceeding expectations at ${price}`,
             `Exclusive instant checkout savings activated with code ${coupon}`,
-            `Tested and verified authentic by the CouponsHere editorial lab`
+            `Tested and verified authentic by the Coupons Here editorial lab`
           ],
           cons: [
             `Discounted stock allocation is limited per day`,
@@ -1680,7 +1683,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
             <p>The <strong>${escapeHtml(productName)}</strong> has generated immense excitement across online deal communities in 2026. Specially engineered for the <em>${escapeHtml(category)}</em> space, it delivers immediate comfort and dependable utility right out of the box.</p>
             <h4 class="font-bold text-slate-800 text-sm mt-3">Hands-On Testing & Performance Verdict</h4>
             <p>Following comprehensive bench tests conducted by our product testers, ${escapeHtml(productName)} demonstrated top marks for ergonomics, construction quality, and long-term durability.</p>
-            <h4 class="font-bold text-slate-800 text-sm mt-3">Exclusive Savings on CouponsHere</h4>
+            <h4 class="font-bold text-slate-800 text-sm mt-3">Exclusive Savings on Coupons Here</h4>
             <p>At a promo price starting from <strong>${escapeHtml(price)}</strong> coupled with promo coupon <strong>${escapeHtml(coupon)}</strong>, this presents a prime opportunity to grab genuine merchandise at peak savings.</p>
           `
         };
@@ -1694,7 +1697,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         category: category,
         price: price,
         coupon: coupon,
-        affiliateUrl: affiliateUrl || "https://CouponsHere.com/deal/" + encodeURIComponent(productName),
+        affiliateUrl: affiliateUrl || "https://couponshere.com/deal/" + encodeURIComponent(productName),
         imageUrl: imageUrl,
         clicks: 0,
         ...aiResult
@@ -1792,7 +1795,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       const art = articles.find(a => a.id === id);
       showConfirmModal(
         "Delete Article", 
-        `Are you sure you want to delete "${art ? art.title : 'this article'}" from CouponsHere?`,
+        `Are you sure you want to delete "${art ? art.title : 'this article'}" from Coupons Here?`,
         () => {
           articles = articles.filter(a => a.id !== id);
           saveArticles();
@@ -1824,7 +1827,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
     function handleHomepageCustomizerSubmit(e) {
       e.preventDefault();
       homepageSettings = {
-        brandName: document.getElementById('custBrandName').value.trim() || 'CouponsHere',
+        brandName: document.getElementById('custBrandName').value.trim() || 'couponshere',
         heroSlogan: document.getElementById('custHeroSlogan').value.trim() || 'Find Better. Buy Smarter.',
         heroDesc: document.getElementById('custHeroDesc').value.trim(),
         statOffers: parseInt(document.getElementById('custStatOffers').value) || 304,
@@ -1834,7 +1837,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         footerCopy: document.getElementById('custFooterCopy').value.trim()
       };
 
-      localStorage.setItem('CouponsHere_homepage_settings', JSON.stringify(homepageSettings));
+      localStorage.setItem('couponshere_homepage_settings', JSON.stringify(homepageSettings));
       applyHomepageSettings();
       showToast("Homepage content successfully updated!", "success");
     }
@@ -1845,7 +1848,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         "Reset all branding, hero copy, and metrics back to defaults?",
         () => {
           homepageSettings = { ...DEFAULT_HOMEPAGE_SETTINGS };
-          localStorage.setItem('CouponsHere_homepage_settings', JSON.stringify(homepageSettings));
+          localStorage.setItem('couponshere_homepage_settings', JSON.stringify(homepageSettings));
           applyHomepageSettings();
           showToast("Homepage settings restored to default.", "success");
         }
@@ -1853,22 +1856,40 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
     }
 
     /* =========================================================================
-       5. AUTHENTICATION & ACCOUNT SECURITY
+       5. SECURE AUTHENTICATION & ACCOUNT SECURITY
        ========================================================================= */
 
     function getAdminCredentials() {
-      const stored = localStorage.getItem('CouponsHere_admin_auth');
+      const stored = localStorage.getItem('couponshere_admin_auth');
       if (stored) {
         try { return JSON.parse(stored); } catch(e) {}
       }
       return { username: 'admin', password: 'couponsherexxxx' };
     }
 
+    function toggleLoginPasswordVisibility() {
+      const passInput = document.getElementById('loginPasswordInput');
+      const eyeIcon = document.getElementById('loginPasswordEyeIcon');
+      if (!passInput || !eyeIcon) return;
+
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        eyeIcon.className = 'fa-regular fa-eye-slash';
+      } else {
+        passInput.type = 'password';
+        eyeIcon.className = 'fa-regular fa-eye';
+      }
+    }
+
     function handleNavPortalClick() {
-      const isLogged = sessionStorage.getItem('CouponsHere_logged_in') === 'true';
+      const isLogged = sessionStorage.getItem('couponshere_logged_in') === 'true';
       if (isLogged) {
         switchView(currentView === 'admin' ? 'frontend' : 'admin');
       } else {
+        // Clear inputs on open to ensure no exposed credentials
+        document.getElementById('loginUsernameInput').value = '';
+        document.getElementById('loginPasswordInput').value = '';
+        document.getElementById('loginErrorMessage').classList.add('hidden');
         switchView('admin-login');
       }
     }
@@ -1880,8 +1901,9 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       const creds = getAdminCredentials();
 
       if (u === creds.username && p === creds.password) {
-        sessionStorage.setItem('CouponsHere_logged_in', 'true');
+        sessionStorage.setItem('couponshere_logged_in', 'true');
         document.getElementById('loginErrorMessage').classList.add('hidden');
+        document.getElementById('loginUsernameInput').value = '';
         document.getElementById('loginPasswordInput').value = '';
         updateTopAdminBar();
         switchView('admin');
@@ -1892,14 +1914,14 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
     }
 
     function handleAdminLogout() {
-      sessionStorage.removeItem('CouponsHere_logged_in');
+      sessionStorage.removeItem('couponshere_logged_in');
       updateTopAdminBar();
       switchView('frontend');
       showToast("Signed out of Admin Portal.", "info");
     }
 
     function updateTopAdminBar() {
-      const isLogged = sessionStorage.getItem('CouponsHere_logged_in') === 'true';
+      const isLogged = sessionStorage.getItem('couponshere_logged_in') === 'true';
       const bar = document.getElementById('topAdminBar');
       const creds = getAdminCredentials();
       const navText = document.getElementById('navAdminPortalText');
@@ -1910,7 +1932,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         navText.textContent = "Dashboard";
       } else {
         bar.classList.add('hidden');
-        navText.textContent = "Admin Portal";
+        navText.textContent = "Admin Sign In";
       }
 
       // Security tab current user display
@@ -1922,9 +1944,16 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
 
     function handleAccountSecuritySubmit(e) {
       e.preventDefault();
+      const currentPasswordEntered = document.getElementById('secCurrentPasswordInput').value.trim();
       const newUsername = document.getElementById('secNewUsername').value.trim();
       const newPassword = document.getElementById('secNewPassword').value.trim();
       const confirmPassword = document.getElementById('secConfirmPassword').value.trim();
+      const creds = getAdminCredentials();
+
+      if (currentPasswordEntered !== creds.password) {
+        showToast("Current password verification failed! Please enter your valid current password.", "error");
+        return;
+      }
 
       if (!newUsername || !newPassword) {
         showToast("Username and Password cannot be empty!", "error");
@@ -1932,31 +1961,32 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       }
 
       if (newPassword !== confirmPassword) {
-        showToast("Passwords do not match! Please check.", "error");
+        showToast("New passwords do not match! Please check.", "error");
         return;
       }
 
       const updatedCreds = { username: newUsername, password: newPassword };
-      localStorage.setItem('CouponsHere_admin_auth', JSON.stringify(updatedCreds));
+      localStorage.setItem('couponshere_admin_auth', JSON.stringify(updatedCreds));
       updateTopAdminBar();
 
+      document.getElementById('secCurrentPasswordInput').value = '';
       document.getElementById('secNewPassword').value = '';
       document.getElementById('secConfirmPassword').value = '';
 
-      showToast("Admin username & password successfully updated!", "success");
+      showToast("Admin credentials successfully updated!", "success");
     }
 
     function resetToInitialAuthCredentials() {
       showConfirmModal(
         "Reset Credentials",
-        "Reset administrative credentials to: admin / couponsherexxxx?",
+        "Reset administrative credentials back to factory default?",
         () => {
-          localStorage.setItem('CouponsHere_admin_auth', JSON.stringify({
+          localStorage.setItem('couponshere_admin_auth', JSON.stringify({
             username: 'admin',
             password: 'couponsherexxxx'
           }));
           updateTopAdminBar();
-          showToast("Credentials restored to admin / couponsherexxxx", "info");
+          showToast("Credentials restored to factory default.", "info");
         }
       );
     }
@@ -1976,7 +2006,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       admin.classList.add('hidden');
 
       if (viewName === 'admin') {
-        const isLogged = sessionStorage.getItem('CouponsHere_logged_in') === 'true';
+        const isLogged = sessionStorage.getItem('couponshere_logged_in') === 'true';
         if (!isLogged) {
           switchView('admin-login');
           return;
@@ -2002,7 +2032,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
         
         if (container) container.classList.add('hidden');
         if (btn) {
-          btn.className = "px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap";
+          btn.className = "px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer";
         }
       });
 
@@ -2012,7 +2042,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
 
       if (activeContainer) activeContainer.classList.remove('hidden');
       if (activeBtn) {
-        activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2 whitespace-nowrap";
+        activeBtn.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2 whitespace-nowrap cursor-pointer";
       }
 
       if (tabName === 'manage') renderAdminTable();
@@ -2047,7 +2077,7 @@ Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks)
       }
 
       // Affiliate links
-      const affLink = art.affiliateUrl || "https://CouponsHere.com/deal";
+      const affLink = art.affiliateUrl || "https://couponshere.com/deal";
       document.getElementById('modalAffiliateLink').href = affLink;
       document.getElementById('modalBottomAffiliateLink').href = affLink;
 
