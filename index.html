@@ -66,3 +66,1133 @@
               navyDark: '#0a1a33',
               navyLight: '#1b427b',
               accent: '#e63946',
+              accentHover: '#d62828',
+              accentLight: '#ff4d5a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-white">
+
+  <!-- Top Admin Notification Bar -->
+  <div id="topAdminBar" class="bg-brand-navyDark text-white text-xs py-2 px-4 border-b border-white/10 hidden transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Authenticated as <strong id="topAdminUsername">admin</strong> (Administrator)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button onclick="switchView('admin')" class="hover:text-amber-300 font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-gauge-high"></i> <span>Admin Dashboard</span>
+        </button>
+        <button onclick="handleAdminLogout()" class="hover:text-red-400 font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo: rõ ràng, không đổi màu chữ khi hover -->
+      <a href="javascript:void(0)" onclick="switchView('frontend'); setCategoryFilter('all');" class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-brand-accent flex items-center justify-center text-white font-black text-lg shadow-sm">
+          %
+        </div>
+        <span id="navBrandName" class="text-xl font-black tracking-tight text-slate-900 select-none">
+          coupons<span class="text-brand-navy font-black">here</span>
+        </span>
+      </a>
+
+      <!-- Header Search Input -->
+      <div class="hidden md:flex flex-1 max-w-md mx-4">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="navSearchInput" 
+            onkeyup="handleHeaderSearch(event)"
+            placeholder="Search codes, stores, articles..." 
+            class="w-full pl-9 pr-20 py-1.5 text-xs rounded-full border border-slate-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent/30 transition"
+          >
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-2.5 text-xs"></i>
+          <button 
+            onclick="triggerHeaderSearch()" 
+            class="absolute right-1 top-1 bottom-1 px-4 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold rounded-full transition shadow-xs cursor-pointer"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold text-slate-600">
+        <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('reviewSection');" class="hover:text-brand-accent transition">Coupons</a>
+        <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('reviewSection');" class="hover:text-brand-accent transition">Deals</a>
+        <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('popularStoresSection');" class="hover:text-brand-accent transition">Stores</a>
+        <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('categoriesSection');" class="hover:text-brand-accent transition">Categories</a>
+        <a href="javascript:void(0)" onclick="switchView('frontend'); scrollToSection('reviewSection');" class="hover:text-brand-accent transition">Blog</a>
+      </nav>
+
+      <!-- Right Action Items -->
+      <div class="flex items-center space-x-3">
+        <button 
+          id="navAdminPortalBtn"
+          onclick="handleNavPortalClick()" 
+          class="flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 transition shadow-2xs cursor-pointer"
+        >
+          <i class="fa-solid fa-user-shield text-brand-navy"></i>
+          <span id="navAdminPortalText">Admin Sign In</span>
+        </button>
+
+        <a href="javascript:void(0)" onclick="showToast('Customer Sign In feature is in preview mode.', 'info')" class="text-xs font-medium text-slate-600 hover:text-slate-900 hidden sm:inline-block">Sign In</a>
+        <button onclick="showToast('Welcome to Coupons Here! Member registration opening soon.', 'info')" class="text-xs font-semibold text-brand-accent hover:underline hidden sm:inline-block cursor-pointer">Sign Up</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Public Frontend View -->
+  <div id="frontendContainer" class="flex-grow flex flex-col">
+    
+    <!-- HERO BANNER -->
+    <section class="hero-gradient text-white py-12 md:py-16 px-4 relative overflow-hidden">
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <!-- Hero Title rõ ràng, đồng màu trắng tuyệt đối, không bị chìm -->
+        <h1 id="heroTitleDisplay" class="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white select-none">
+          couponshere
+        </h1>
+        <p id="heroSloganDisplay" class="text-xs md:text-sm font-semibold text-blue-100 tracking-wide mb-1">
+          Find Better. Buy Smarter.
+        </p>
+        <p id="heroDescDisplay" class="text-xs md:text-sm text-slate-200/90 max-w-2xl mx-auto font-light leading-relaxed mb-6">
+          Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
+        </p>
+
+        <!-- Big Search Bar -->
+        <div class="relative max-w-xl mx-auto mb-10 shadow-lg">
+          <input 
+            type="text" 
+            id="heroSearchInput" 
+            placeholder="Search coupons, stores, articles..." 
+            onkeyup="handleHeroSearch(event)"
+            class="w-full py-3.5 pl-6 pr-32 rounded-full text-slate-800 text-sm focus:outline-none focus:ring-4 focus:ring-blue-400/30 shadow-inner"
+          >
+          <button 
+            onclick="triggerHeroSearch()" 
+            class="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold rounded-full transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <span>Search</span>
+          </button>
+        </div>
+
+        <!-- 3 Metrics Counters: Tự động đếm theo dữ liệu bài viết -->
+        <div class="grid grid-cols-3 gap-3.5 max-w-lg mx-auto">
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statOffers" class="text-xl md:text-2xl font-black text-white">0</div>
+            <div class="text-[11px] text-blue-200 font-medium">Active Offers</div>
+          </div>
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statStores" class="text-xl md:text-2xl font-black text-white">0</div>
+            <div class="text-[11px] text-blue-200 font-medium">Stores</div>
+          </div>
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statCategories" class="text-xl md:text-2xl font-black text-white">0</div>
+            <div class="text-[11px] text-blue-200 font-medium">Categories</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="reviewSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-200/80 pb-3">
+        <div class="flex items-center gap-3">
+          <h2 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight">
+            Review
+          </h2>
+          <!-- Filter indicator pill if active -->
+          <div id="activeFilterPill" class="hidden items-center gap-1.5 bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium border border-blue-200">
+            <span id="activeFilterName">Category</span>
+            <button onclick="setCategoryFilter('all')" class="hover:text-red-500 font-bold ml-1 cursor-pointer">✕</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs">
+          <span class="text-slate-500" id="articleCountText">Showing all articles</span>
+          <button onclick="setCategoryFilter('all')" class="text-brand-accent hover:text-brand-accentHover font-semibold flex items-center gap-1 cursor-pointer">
+            <span>All articles</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically rendered via JavaScript -->
+      </div>
+
+      <!-- Empty state when no matches found -->
+      <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 p-8 my-6">
+        <i class="fa-solid fa-file-circle-question text-4xl text-slate-400 mb-3"></i>
+        <h3 class="text-base font-bold text-slate-700">No matching articles found</h3>
+        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Try searching for other keywords or click below to view all product reviews.</p>
+        <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-navy text-white text-xs font-semibold rounded-lg hover:bg-brand-navyDark transition cursor-pointer">
+          Clear Filters & Show All
+        </button>
+      </div>
+
+      <!-- Popular Stores: Logo rõ nét, không bị đổi màu chữ -->
+      <section id="popularStoresSection" class="mt-16 pt-8 border-t border-slate-200">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="text-lg md:text-xl font-bold text-slate-800">Popular Stores</h3>
+          <span class="text-xs text-slate-400">Verified affiliate partners</span>
+        </div>
+
+        <div id="popularStoresContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="flex items-center justify-center space-x-1.5 mt-4">
+          <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section id="categoriesSection" class="mt-16 pt-8 border-t border-slate-200">
+        <div class="text-center md:text-left mb-6">
+          <h3 class="text-lg md:text-xl font-bold text-slate-800">Categories</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Click any category below to immediately filter and sort all review articles in the middle section</p>
+        </div>
+
+        <div id="categoriesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <!-- Populated dynamically with 18 categories -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Admin Login View -->
+  <div id="adminLoginContainer" class="hidden flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-100">
+    <div class="max-w-md w-full bg-white rounded-3xl p-8 shadow-xl border border-slate-200 relative">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-brand-navy text-white flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 class="text-2xl font-black text-slate-900">Admin Sign In</h2>
+        <p class="text-xs text-slate-500 mt-1">Authenticate to access AI Affiliate SEO Writer & Homepage Customizer</p>
+      </div>
+
+      <form onsubmit="handleAdminLoginSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <input 
+              type="text" 
+              id="loginUsernameInput" 
+              required 
+              autocomplete="username"
+              placeholder="Enter your admin username" 
+              class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            >
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase tracking-wider mb-1.5">Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+              <i class="fa-solid fa-key"></i>
+            </span>
+            <input 
+              type="password" 
+              id="loginPasswordInput" 
+              required 
+              autocomplete="current-password"
+              placeholder="Enter your admin password" 
+              class="w-full pl-9 pr-10 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            >
+            <button 
+              type="button" 
+              onclick="toggleLoginPasswordVisibility()" 
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition cursor-pointer"
+              title="Toggle password visibility"
+            >
+              <i id="loginPasswordEyeIcon" class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="loginErrorMessage" class="hidden text-xs text-rose-600 font-bold bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
+          <i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid username or password! Please check your credentials and try again.
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-3 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>Sign In to Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="text-center pt-2">
+          <button type="button" onclick="switchView('frontend')" class="text-xs text-slate-500 hover:text-slate-800 font-medium cursor-pointer">
+            &larr; Back to public website
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Container -->
+  <div id="adminContainer" class="hidden flex-grow bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Admin Top Banner -->
+      <div class="bg-white rounded-3xl p-6 shadow-xs border border-slate-200 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-brand-accent/10 text-brand-accent uppercase tracking-wider">Coupons Here Engine</span>
+            <span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Gemini 2.5 Flash Connected
+            </span>
+          </div>
+          <h2 class="text-2xl font-black text-slate-800 mt-1">Admin Command Center</h2>
+          <p class="text-xs text-slate-500">Generate SEO articles from affiliate links, customize prompts, edit homepage content, and manage inventory.</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="switchView('frontend')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-desktop"></i>
+            <span>View Live Website</span>
+          </button>
+          <button onclick="handleAdminLogout()" class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Tabs Navigation -->
+      <div class="flex border-b border-slate-200 mb-6 space-x-2 overflow-x-auto pb-1">
+        <button id="adminTab1Btn" onclick="switchAdminTab('writer')" class="px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
+          <span>AI Affiliate Writer (Gemini)</span>
+        </button>
+        <button id="adminTab2Btn" onclick="switchAdminTab('customizer')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-sliders text-blue-500"></i>
+          <span>Homepage Customizer</span>
+        </button>
+        <button id="adminTab3Btn" onclick="switchAdminTab('manage')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-newspaper text-indigo-500"></i>
+          <span>Manage Articles (<span id="adminArticleCount">0</span>)</span>
+        </button>
+        <button id="adminTab4Btn" onclick="switchAdminTab('security')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+          <span>Account Security</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: AI WRITER -->
+      <div id="adminTabWriter" class="space-y-6">
+        
+        <!-- Gemini API Key card -->
+        <div class="bg-gradient-to-r from-slate-900 to-brand-navy rounded-2xl p-5 text-white shadow-xs border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+              <i class="fa-solid fa-key"></i>
+              <span>Google Gemini API Key</span>
+            </div>
+            <p class="text-xs text-slate-300 mt-1">Required to generate real-time AI articles with <code class="bg-white/10 px-1.5 py-0.5 rounded text-amber-200">gemini-2.5-flash</code>. Saved locally in browser storage.</p>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <input 
+              type="password" 
+              id="adminApiKeyInput" 
+              placeholder="AIzaSy..." 
+              class="px-3.5 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400/50 w-full md:w-64 font-mono"
+            >
+            <button onclick="saveAdminApiKey()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition whitespace-nowrap cursor-pointer">
+              Save Key
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Generator Input Column -->
+          <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 space-y-4 text-xs">
+            <div class="border-b border-slate-100 pb-3">
+              <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-link text-brand-accent"></i>
+                <span>Import Affiliate Link & Product Details</span>
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-0.5">Input your target deal info. Gemini will parse and generate a rich review.</p>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Affiliate Destination URL <span class="text-red-500">*</span></label>
+              <input 
+                type="url" 
+                id="aiAffiliateUrl" 
+                placeholder="https://amazon.com/dp/... or https://shope.ee/..." 
+                value="https://example.com/deal/carplaymmb-2026-adapter"
+                class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              >
+              <p class="text-[10px] text-slate-400 mt-1">This link is embedded in the "Get Deal / Buy Now" CTA button.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Product Name <span class="text-red-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="aiProductName" 
+                  placeholder="e.g. Carplaymmb Pro Wireless Adapter"
+                  value="Carplaymmb Pro 2026 Wireless Adapter"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Brand / Store</label>
+                <input 
+                  type="text" 
+                  id="aiStoreBrand" 
+                  placeholder="e.g. Carplaymmb"
+                  value="Carplaymmb"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Deal Price</label>
+                <input 
+                  type="text" 
+                  id="aiProductPrice" 
+                  placeholder="$14.98 or $29.99"
+                  value="$14.98"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Coupon Promo Code</label>
+                <input 
+                  type="text" 
+                  id="aiCouponCode" 
+                  placeholder="SAVE20"
+                  value="COUPON2026"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl uppercase font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Target Category</label>
+                <select id="aiCategorySelect" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Image URL (Optional)</label>
+                <input 
+                  type="url" 
+                  id="aiImageUrl" 
+                  placeholder="https://images.unsplash.com/..." 
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Additional Selling Points / Notes</label>
+              <textarea 
+                id="aiCustomNotes" 
+                rows="2" 
+                placeholder="Highlight 5-second automatic pairing, 5.8GHz dual-band wifi, zero lag, 12-month replacement warranty..."
+                class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              ></textarea>
+            </div>
+
+            <!-- Custom AI Prompt Template Editor -->
+            <div class="pt-3 border-t border-slate-100">
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="font-bold text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-code text-indigo-500"></i>
+                  <span>Custom AI System Prompt (Editable)</span>
+                </label>
+                <button type="button" onclick="resetPromptToDefault()" class="text-[10px] text-brand-accent hover:underline font-bold cursor-pointer">
+                  Reset Prompt to Default
+                </button>
+              </div>
+              <p class="text-[10px] text-slate-400 mb-1.5">
+                Available placeholders: <code class="text-indigo-600 font-mono">{product_name}</code>, <code class="text-indigo-600 font-mono">{category}</code>, <code class="text-indigo-600 font-mono">{price}</code>, <code class="text-indigo-600 font-mono">{coupon}</code>, <code class="text-indigo-600 font-mono">{affiliate_url}</code>, <code class="text-indigo-600 font-mono">{custom_notes}</code>
+              </p>
+              <textarea 
+                id="adminCustomPromptEditor" 
+                rows="6" 
+                class="w-full px-3 py-2 border border-indigo-100 bg-indigo-50/30 rounded-xl text-[11px] font-mono text-slate-800 custom-scrollbar focus:outline-none focus:ring-2 focus:ring-indigo-400/20"
+              ></textarea>
+            </div>
+
+            <button 
+              id="generateWithAiBtn" 
+              onclick="generateReviewWithGemini()" 
+              class="w-full py-3 bg-gradient-to-r from-brand-accent to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 group cursor-pointer"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-200 group-hover:rotate-12 transition-transform"></i>
+              <span id="generateBtnText">Generate SEO Review with Gemini</span>
+            </button>
+          </div>
+
+          <!-- Live Preview & Editor Column -->
+          <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col text-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+              <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-file-circle-check text-emerald-600"></i>
+                <span>Generated Content Review & Edit</span>
+              </h3>
+              <span id="aiStatusBadge" class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">Ready</span>
+            </div>
+
+            <!-- Empty State -->
+            <div id="aiPreviewEmpty" class="my-auto py-12 text-center text-slate-400">
+              <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <p class="font-bold text-slate-600">No article drafted yet</p>
+              <p class="text-[11px] text-slate-400 max-w-xs mx-auto mt-1">Configure your product link and prompt, then click "Generate SEO Review with Gemini".</p>
+            </div>
+
+            <!-- Filled Form -->
+            <div id="aiPreviewFilled" class="hidden flex-col space-y-3 flex-grow">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">SEO Title</label>
+                <input type="text" id="editAiTitle" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:border-blue-500">
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Excerpt (Card display)</label>
+                <textarea id="editAiExcerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-blue-500"></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Category</label>
+                  <select id="editAiCategory" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white"></select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Read Time & Rating</label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" id="editAiReadTime" value="4 min read" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                    <input type="number" id="editAiRating" step="0.1" min="1" max="5" value="4.9" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Full Detailed Review (HTML)</label>
+                <textarea id="editAiContent" rows="5" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-800 font-mono text-[11px] custom-scrollbar focus:outline-none focus:border-blue-500"></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-emerald-700 mb-1"><i class="fa-solid fa-thumbs-up"></i> Pros (One per line)</label>
+                  <textarea id="editAiPros" rows="3" class="w-full px-2.5 py-1.5 border border-emerald-200 rounded-xl bg-emerald-50/40 text-[11px]"></textarea>
+                </div>
+                <div>
+                  <label class="block font-bold text-rose-700 mb-1"><i class="fa-solid fa-thumbs-down"></i> Cons (One per line)</label>
+                  <textarea id="editAiCons" rows="3" class="w-full px-2.5 py-1.5 border border-rose-200 rounded-xl bg-rose-50/40 text-[11px]"></textarea>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                <span class="text-[11px] text-slate-500">Will be featured on middle review grid</span>
+                <button 
+                  onclick="publishAiArticle()" 
+                  class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+                >
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <span>Publish to Homepage</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 2: HOMEPAGE CUSTOMIZER -->
+      <div id="adminTabCustomizer" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
+        <div class="border-b border-slate-100 pb-4 mb-6">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-house-laptop text-brand-navy"></i>
+            <span>Homepage Content & Branding Editor</span>
+          </h3>
+          <p class="text-xs text-slate-500">Update brand names, hero headings, and footer text in real-time. Statistics are counted automatically from articles.</p>
+        </div>
+
+        <form onsubmit="handleHomepageCustomizerSubmit(event)" class="space-y-5 text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 uppercase mb-1">Brand Name</label>
+              <input type="text" id="custBrandName" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 uppercase mb-1">Hero Tagline Slogan</label>
+              <input type="text" id="custHeroSlogan" required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Hero Description Paragraph</label>
+            <textarea id="custHeroDesc" rows="3" required class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
+          </div>
+
+          <!-- 3 Stats Counter: Tự động đếm theo số bài viết -->
+          <div class="border-t border-slate-100 pt-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="block font-bold text-slate-700 uppercase">Homepage 3-Metric Counter</label>
+              <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                <i class="fa-solid fa-bolt mr-0.5"></i> Tự động tính theo bài viết thực tế
+              </span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-slate-500 mb-1">Active Offers (Tổng số bài viết)</label>
+                <input type="number" id="custStatOffers" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-slate-500 mb-1">Stores Count (Số cửa hàng)</label>
+                <input type="number" id="custStatStores" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+              <div>
+                <label class="block text-slate-500 mb-1">Categories Count (Số danh mục)</label>
+                <input type="number" id="custStatCategories" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 cursor-not-allowed">
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Texts -->
+          <div class="border-t border-slate-100 pt-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold text-slate-700 uppercase mb-1">Footer About Text</label>
+                <textarea id="custFooterAbout" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 uppercase mb-1">Footer Copyright Notice</label>
+                <input type="text" id="custFooterCopy" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
+            <button type="button" onclick="restoreDefaultHomepageSettings()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 font-bold cursor-pointer">
+              Restore Defaults
+            </button>
+            <button type="submit" class="px-6 py-2 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
+              Save & Apply Changes
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB 3: MANAGE ARTICLES -->
+      <div id="adminTabManage" class="hidden bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-800">Inventory of Published Reviews</h3>
+            <p class="text-xs text-slate-500">Track affiliate link clicks, edit copy, or remove reviews from the homepage.</p>
+          </div>
+          <button onclick="confirmResetToDefaultArticles()" class="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 font-bold cursor-pointer">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Reset to 6 Default Sample Reviews</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold uppercase tracking-wider">
+                <th class="py-3 px-4">Product / Title</th>
+                <th class="py-3 px-3">Category</th>
+                <th class="py-3 px-3">Coupon</th>
+                <th class="py-3 px-3">Price</th>
+                <th class="py-3 px-3">Clicks</th>
+                <th class="py-3 px-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminArticlesTableBody" class="divide-y divide-slate-100">
+              <!-- Dynamically populated via renderAdminTable() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 4: ACCOUNT SECURITY -->
+      <div id="adminTabSecurity" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 max-w-xl mx-auto">
+        <div class="border-b border-slate-100 pb-4 mb-6">
+          <h3 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+            <span>Admin Account Credentials</span>
+          </h3>
+          <p class="text-xs text-slate-500">You can customize both your administrative username and password here. Changes are saved locally.</p>
+        </div>
+
+        <form onsubmit="handleAccountSecuritySubmit(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Current Active Username</label>
+            <input type="text" id="secCurrentUsernameDisplay" disabled class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-500 font-mono">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Verify Current Password <span class="text-red-500">*</span></label>
+            <input type="password" id="secCurrentPasswordInput" required placeholder="Enter your current password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">New Username <span class="text-red-500">*</span></label>
+            <input type="text" id="secNewUsername" required placeholder="admin" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">New Password <span class="text-red-500">*</span></label>
+            <input type="password" id="secNewPassword" required placeholder="Enter new password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 uppercase mb-1">Confirm New Password <span class="text-red-500">*</span></label>
+            <input type="password" id="secConfirmPassword" required placeholder="Repeat new password" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <button type="button" onclick="resetToInitialAuthCredentials()" class="text-xs text-slate-500 hover:text-red-600 font-semibold cursor-pointer">
+              Reset to default credentials
+            </button>
+            <button type="submit" class="px-6 py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-sm transition cursor-pointer">
+              Update Credentials
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Article Detail Modal -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header Banner -->
+      <div class="relative bg-brand-navy text-white p-6 pb-7 overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
+        <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="flex items-center gap-2 text-xs text-blue-200 font-medium mb-2">
+          <span id="modalCategory" class="px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 font-bold">Category</span>
+          <span>•</span>
+          <span id="modalDate">September 17, 2026</span>
+          <span>•</span>
+          <span id="modalReadTime">4 min read</span>
+        </div>
+
+        <h2 id="modalTitle" class="text-xl sm:text-2xl font-black leading-tight text-white mb-3">
+          Title of Article
+        </h2>
+
+        <div class="flex items-center gap-2">
+          <span class="badge-ad">AD</span>
+          <span class="text-xs text-slate-200 font-semibold">Admin • Verified Editorial Test</span>
+          <div class="ml-auto flex items-center gap-1 text-amber-400 text-xs font-bold">
+            <i class="fa-solid fa-star"></i>
+            <span id="modalRating">4.9 / 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-700 leading-relaxed custom-scrollbar">
+        
+        <!-- Affiliate Deal Callout Banner -->
+        <div class="bg-gradient-to-r from-red-50 via-orange-50 to-amber-50 border border-red-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wide flex items-center gap-1.5">
+              <i class="fa-solid fa-tag"></i>
+              <span>Exclusive Verified Affiliate Deal</span>
+            </div>
+            <div class="text-base font-extrabold text-slate-900 mt-0.5">
+              Deal Price: <span id="modalPrice" class="text-brand-accent font-black">$14.98</span>
+            </div>
+            <div id="modalCouponBox" class="text-xs text-slate-600 mt-1 flex items-center gap-2">
+              <span>Coupon Code:</span>
+              <span id="modalCouponCode" class="font-mono font-bold bg-white px-2 py-0.5 rounded border border-red-300 text-brand-accent">COUPON2026</span>
+              <button onclick="copyModalCoupon()" class="text-slate-500 hover:text-brand-accent text-[11px] font-semibold underline flex items-center gap-1 cursor-pointer">
+                <i class="fa-regular fa-copy"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <a 
+            id="modalAffiliateLink" 
+            href="#" 
+            target="_blank" 
+            rel="noopener noreferrer nofollow"
+            onclick="trackAffiliateClick()"
+            class="px-5 py-2.5 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-1.5 shrink-0 text-center"
+          >
+            <span>Get Deal / Buy Now</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="text-slate-800 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-brand-navy italic text-xs sm:text-sm" id="modalExcerpt">
+          Excerpt content...
+        </div>
+
+        <!-- Pros & Cons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i>
+              <span>Verified Advantages (Pros)</span>
+            </h4>
+            <ul id="modalPros" class="space-y-1.5 text-xs text-slate-700"></ul>
+          </div>
+
+          <div class="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-xmark text-rose-600"></i>
+              <span>Points to Consider (Cons)</span>
+            </h4>
+            <ul id="modalCons" class="space-y-1.5 text-xs text-slate-700"></ul>
+          </div>
+        </div>
+
+        <!-- Full Content -->
+        <div id="modalFullContent" class="space-y-3 text-slate-700 text-xs sm:text-sm border-t border-slate-100 pt-4 leading-relaxed"></div>
+
+        <div class="text-[11px] text-slate-400 bg-slate-50 p-3 rounded-xl border border-slate-100">
+          <strong>Affiliate Disclosure:</strong> Coupons Here participates in affiliate programs. We may earn a commission from qualifying purchases through our links at no additional cost to you.
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="closeArticleModal()" class="text-xs font-bold text-slate-600 hover:text-slate-900 cursor-pointer">
+          Close Window
+        </button>
+        <a 
+          id="modalBottomAffiliateLink" 
+          href="#" 
+          target="_blank" 
+          rel="noopener noreferrer nofollow"
+          onclick="trackAffiliateClick()"
+          class="px-5 py-2 bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5"
+        >
+          <span>Visit Store Page &rarr;</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom Confirm Modal -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl text-center">
+      <div class="w-12 h-12 bg-red-50 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h4 id="confirmModalTitle" class="text-base font-bold text-slate-800">Confirm Action</h4>
+      <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 mb-5">Are you sure you want to proceed?</p>
+      <div class="flex items-center gap-2">
+        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition cursor-pointer">Cancel</button>
+        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition cursor-pointer">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer: Logo rõ nét, không bị tối chữ hay chìm màu -->
+  <footer class="bg-brand-navy text-white mt-auto pt-14 pb-8 border-t border-blue-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="lg:col-span-2 space-y-3">
+          <div class="text-xl font-black tracking-tight text-white flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-brand-accent flex items-center justify-center text-xs font-bold">%</span>
+            <span id="footerBrandName" class="text-white select-none">coupons<span class="text-white">here</span></span>
+          </div>
+          <p class="text-xs font-bold text-blue-200">Top Hub of US Online Coupons</p>
+          <p id="footerDescDisplay" class="text-xs text-slate-300 font-light leading-relaxed max-w-sm">
+            Coupons Here – Find Better. Buy Smarter.<br>
+            A trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers compare their options and save more when shopping online.
+          </p>
+        </div>
+
+        <!-- Col 2: Explore -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Explore</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="javascript:void(0)" onclick="setCategoryFilter('all'); scrollToSection('reviewSection');" class="hover:text-white transition">All Coupons</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('popularStoresSection')" class="hover:text-white transition">Stores</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('categoriesSection')" class="hover:text-white transition">Categories</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('reviewSection')" class="hover:text-white transition">Blog</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Authors</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Company</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="javascript:void(0)" class="hover:text-white transition">About Us</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Contact Us</a></li>
+            <li><a href="javascript:void(0)" onclick="handleNavPortalClick()" class="hover:text-amber-300 font-bold transition">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Legal & Social -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Legal</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Cookie Policy</a></li>
+            <li><a href="javascript:void(0)" class="hover:text-white transition">Disclaimer</a></li>
+          </ul>
+
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mt-5 mb-2">Follow Us</h4>
+          <div class="flex items-center space-x-2 text-slate-300">
+            <a href="javascript:void(0)" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="javascript:void(0)" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i class="fa-brands fa-youtube"></i></a>
+            <a href="javascript:void(0)" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="javascript:void(0)" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div id="footerCopyrightDisplay" class="pt-6 border-t border-blue-900/60 text-center text-[11px] text-slate-400">
+        &copy; 2026 couponshere.com. All rights reserved. Powered by Gemini AI SEO Engine.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notifications Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <script>
+    /* =========================================================================
+       1. DATA STRUCTURES & CONFIGURATION
+       ========================================================================= */
+
+    const DEFAULT_CATEGORIES = [
+      { id: "Adult 18 and over", name: "Adult 18 and over", icon: "🔞" },
+      { id: "Arts & crafts", name: "Arts & crafts", icon: "🎨" },
+      { id: "Babies and kids", name: "Babies and kids", icon: "👶" },
+      { id: "Beauty and fragrance", name: "Beauty and fragrance", icon: "💄" },
+      { id: "Bedding", name: "Bedding", icon: "🛏️" },
+      { id: "Books", name: "Books", icon: "📚" },
+      { id: "Clothing accessories", name: "Clothing accessories", icon: "👒" },
+      { id: "Computers and accessories", name: "Computers and accessories", icon: "💻" },
+      { id: "Decorations", name: "Decorations", icon: "🎄" },
+      { id: "Drinks", name: "Drinks", icon: "🍹" },
+      { id: "Education and Training", name: "Education and Training", icon: "🎓" },
+      { id: "Electronics and Technology", name: "Electronics and Technology", icon: "📱" },
+      { id: "Entertainment and media", name: "Entertainment and media", icon: "🎬" },
+      { id: "Equipment furniture", name: "Equipment furniture", icon: "🪑" },
+      { id: "Fashion jewelry", name: "Fashion jewelry", icon: "💍" },
+      { id: "Financial services and products", name: "Financial services and products", icon: "💳" },
+      { id: "Food", name: "Food", icon: "🍔" },
+      { id: "For businesses", name: "For businesses", icon: "🏢" }
+    ];
+
+    const DEFAULT_STORES = [
+      { name: "femme NATIVA", logoText: "femme NATIVA", cursive: true, offers: "5 offers", color: "bg-rose-50 text-rose-900 border-rose-100" },
+      { name: "Peptide Ritual", logoText: "CD R", cursive: false, offers: "2 offers", color: "bg-amber-50 text-amber-900 border-amber-100" },
+      { name: "MMO", logoText: "MMO", cursive: false, offers: "1 offers", color: "bg-slate-100 text-slate-800 border-slate-200" },
+      { name: "HALLO france", logoText: "HALLO", cursive: false, offers: "3 offers", color: "bg-blue-50 text-blue-800 border-blue-100" },
+      { name: "Track Speed", logoText: "Track Speed", cursive: false, offers: "1 offers", color: "bg-red-50 text-red-700 border-red-100" },
+      { name: "ARAMATEK", logoText: "ARAMATEK", cursive: false, offers: "1 offers", color: "bg-stone-100 text-stone-800 border-stone-200" },
+      { name: "Pulse Tech", logoText: "PULSE", cursive: false, offers: "3 offers", color: "bg-cyan-50 text-cyan-900 border-cyan-100" },
+    ];
+
+    const DEFAULT_HOMEPAGE_SETTINGS = {
+      brandName: "couponshere",
+      heroSlogan: "Find Better. Buy Smarter.",
+      heroDesc: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
+      footerAbout: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
+      footerCopy: "© 2026 couponshere.com. All rights reserved. Powered by Gemini AI SEO Engine."
+    };
+
+    const DEFAULT_CUSTOM_PROMPT = `Act as an elite affiliate review specialist and SEO copywriter for Coupons Here.
+Analyze the product information below and craft an in-depth, honest, engaging, high-converting product review.
+
+Product Name: {product_name}
+Category: {category}
+Affiliate URL: {affiliate_url}
+Deal Price: {price}
+Coupon Code: {coupon}
+Additional Selling Notes: {custom_notes}
+
+Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks):
+{
+  "title": "[Product Name] Review 2026: [Compelling Hook + Tested Deals]",
+  "excerpt": "A concise 2-sentence SEO summary highlighting price, code, and key benefits.",
+  "readTime": "4 min read",
+  "rating": 4.8,
+  "pros": ["Key Advantage 1", "Key Advantage 2", "Key Advantage 3"],
+  "cons": ["Potential drawback or limitation 1", "Potential drawback 2"],
+  "fullContent": "<p>Opening paragraph highlighting why this product is popular in 2026...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Performance & Lab Testing</h4><p>Detailed evaluation paragraph...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Special Deal Insights</h4><p>Why readers should use this exclusive discount code today...</p>"
+}`;
+
+    const DEFAULT_ARTICLES = [
+      {
+        id: "art-1",
+        title: "Rachael Attard Review 2026: Best Products + Exclusive Discount Deal",
+        slug: "rachael-attard-review-2026",
+        date: "September 17, 2026",
+        readTime: "3 min read",
+        rating: 4.9,
+        category: "Beauty and fragrance",
+        brand: "femme NATIVA",
+        headerLogoType: "text-script",
+        headerLogoText: "femme NATIVA",
+        excerpt: "Discover the Rachael Attard line starting at just $14.98. Explore our in-depth review of top formulas, brand insights, and current online promotions.",
+        price: "$14.98",
+        coupon: "FEMME2026",
+        affiliateUrl: "https://example.com/affiliate/femme-nativa",
+        clicks: 42,
+        pros: [
+          "100% organic, non-toxic certified ingredients suitable for sensitive skin",
+          "Special introductory deal starting at just $14.98 with our coupon",
+          "Clinically proven hydration and restorative barrier benefits"
+        ],
+        cons: [
+          "Promotional coupon quota capped at 50 purchases per day",
+          "Natural herbal scent dissipates after several hours"
+        ],
+        fullContent: `
+          <p>The beauty and wellness collection by Femme Nativa and Rachael Attard has emerged as one of the best-reviewed skincare ranges of 2026. Formulated with botanical extracts and antioxidant-rich oils, it gently revitalizes the dermal barrier without clogging pores.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Why Shop Through This Coupons Here Deal?</h4>
+          <p>Shoppers ordering through our exclusive link receive guaranteed pricing of $14.98 along with a free complimentary digital skincare guide.</p>
+        `
+      },
+      {
+        id: "art-2",
+        title: "Peptide Ritual Review 2026: Clinical Skincare & Top Deals Tested",
+        slug: "peptide-ritual-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.8,
+        category: "Beauty and fragrance",
+        brand: "Peptide Ritual",
+        headerLogoType: "badge-circle",
+        headerLogoText: "CD R",
+        excerpt: "Discover Peptide Ritual clinical-grade formulas. Explore verified reviews, top serums, and value sets starting from $25 with direct checkout savings.",
+        price: "$25.00",
+        coupon: "PEPTIDE30",
+        affiliateUrl: "https://example.com/affiliate/peptide-ritual",
+        clicks: 29,
+        pros: [
+          "Multi-chain peptide complex boosts natural collagen production",
+          "Noticeable reduction in fine lines within 14 days of application",
+          "Airless vacuum pump guarantees maximum bio-potency"
+        ],
+        cons: [
+          "Requires consistent twice-daily usage for optimal results"
+        ],
+        fullContent: `
+          <p>Peptide Ritual combines pharmaceutical-grade biomimetic peptides with deep soothing hydration. It absorbs swiftly into dermal layers, conferring a dewy, revitalized texture.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Exclusive Savings on Coupons Here</h4>
+          <p>Redeem code PEPTIDE30 at checkout to unlock an instant 30% reduction with free tracked shipping.</p>
+        `
+      },
+      {
+        id: "art-3",
+        title: "Carplaymmb Review 2026: Untether Your Dashboard for Less",
+        slug: "carplaymmb-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.9,
+        category: "Electronics and Technology",
+        brand: "Carplaymmb",
+        headerLogoType: "image-carplay",
+        headerLogoText: "Carplaymmb Dashboard",
+        excerpt: "Upgrade your dash with Carplaymmb wireless CarPlay adapters starting at $14.98. Explore setup perks, performance specs, and pricing insights.",
+        price: "$14.98",
+        coupon: "CARPLAY50",
+        affiliateUrl: "https://example.com/affiliate/carplaymmb",
+        clicks: 87,
+        pros: [
+          "Instant automatic connection within 5 seconds of ignition",
+          "Next-gen 2026 microchip eliminates overheating and screen stutter",
+          "Compatible with over 800 vehicle models featuring factory wired CarPlay"
+        ],
+        cons: [
+          "Vehicle must already have OEM factory wired Apple CarPlay"
+        ],
+        fullContent: `
+          <p>The Carplaymmb 2026 adapter eliminates tangled cords on your dashboard. When you step into your vehicle, your phone connects automatically to GPS maps, phone calls, and Spotify.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Wireless Latency & Audio Quality</h4>
+          <p>Armed with 5.8GHz dual-band Wi-Fi and Bluetooth 5.3, there is zero audio fidelity loss compared to a standard wired connection.</p>
+        `
+      },
+      {
+        id: "art-4",
+        title: "Halloo France Review 2026: Wellness Essentials & Best Deals",
+        slug: "halloo-france-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.7,
+        category: "Drinks",
+        brand: "HALLO france",
+        headerLogoType: "badge-text",
+        headerLogoText: "HALLO france",
+        excerpt: "Discover Halloo France wellness solutions starting at $25.00. Explore top-selling balance, health essentials, and current promotions on store.",
+        price: "$25.00",
+        coupon: "HALLOO15",
+        affiliateUrl: "https://example.com/affiliate/halloo-france",
+        clicks: 19,
+        pros: [
+          "Organic botanicals harvested sustainably in Provence, France",
+          "Natural electrolyte hydration formula keeps energy consistent",
+          "Refreshing crisp taste without artificial sugar or dyes"
+        ],
+        cons: [
+          "Recyclable slim aluminum cans should be kept in a cool pantry"
+        ],
+        fullContent: `
+          <p>Halloo France offers invigorating hydration tailored for active professionals. Infused with natural electrolytes, it sustains daytime stamina without blood glucose spikes.</p>
+        `
+      },
+      {
+        id: "art-5",
+        title: "Track Speed Review 2026: Top Racing Training Gear & Verified Discounts",
+        slug: "track-speed-review-2026",
