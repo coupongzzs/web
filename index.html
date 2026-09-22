@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CouponReview - Find Better. Buy Smarter.</title>
+  <title>Coupon - Find Better. Buy Smarter.</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -91,7 +91,7 @@
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-red to-rose-400 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-red/20 group-hover:scale-105 transition-transform">
           %
         </div>
-        <span id="nav-brand-name" class="font-extrabold text-2xl tracking-tight text-brand-navy group-hover:text-brand-red transition-colors">CouponReview</span>
+        <span id="nav-brand-name" class="font-extrabold text-2xl tracking-tight text-brand-navy group-hover:text-brand-red transition-colors">Coupon</span>
       </a>
 
       <!-- Header Search Input -->
@@ -113,10 +113,10 @@
       <!-- Navigation & Auth -->
       <nav class="flex items-center gap-3 sm:gap-6 text-sm font-semibold text-slate-600">
         <a href="javascript:void(0)" onclick="switchView('home'); filterByCategory('All');" class="hover:text-brand-red transition-colors hidden sm:inline-block">Coupons</a>
-        <a href="javascript:void(0)" onclick="scrollToSection('reviews-section')" class="hover:text-brand-red transition-colors hidden sm:inline-block">Deals</a>
+        <a href="javascript:void(0)" onclick="scrollToSection('s-section')" class="hover:text-brand-red transition-colors hidden sm:inline-block">Deals</a>
         <a href="javascript:void(0)" onclick="scrollToSection('stores-section')" class="hover:text-brand-red transition-colors hidden md:inline-block">Stores</a>
         <a href="javascript:void(0)" onclick="scrollToSection('categories-section')" class="hover:text-brand-red transition-colors">Categories</a>
-        <a href="javascript:void(0)" onclick="scrollToSection('reviews-section')" class="hover:text-brand-red transition-colors hidden lg:inline-block">Blog</a>
+        <a href="javascript:void(0)" onclick="scrollToSection('s-section')" class="hover:text-brand-red transition-colors hidden lg:inline-block">Blog</a>
 
         <div class="h-5 w-[1px] bg-slate-200 hidden sm:block"></div>
 
@@ -138,10 +138,10 @@
       <section class="hero-gradient text-white pt-14 pb-20 px-4 sm:px-6 relative overflow-hidden">
         <div class="max-w-4xl mx-auto text-center relative z-10">
           
-          <h1 id="hero-title" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">CouponReview</h1>
+          <h1 id="hero-title" class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">Coupon</h1>
           <p id="hero-slogan" class="text-lg sm:text-xl font-medium text-amber-300 mb-4">Find Better. Buy Smarter.</p>
           <p id="hero-desc" class="text-sm sm:text-base text-slate-200/90 leading-relaxed max-w-2xl mx-auto mb-8">
-            CouponReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
+            Coupon is a trusted destination for discovering online coupons, exclusive deals, and helpful product s. We help shoppers find better products, compare their options, and save more when shopping online.
           </p>
 
           <!-- Large Search Box -->
@@ -177,14 +177,14 @@
         </div>
       </section>
 
-      <!-- ================= 2. MIDDLE SECTION: REVIEW ARTICLES GRID ================= -->
-      <section id="reviews-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <!-- ================= 2. MIDDLE SECTION:  ARTICLES GRID ================= -->
+      <section id="s-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         <!-- Section Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-slate-200 pb-4">
           <div>
             <div class="flex items-center gap-3">
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Review</h2>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight"></h2>
               <span id="active-filter-badge" class="hidden text-xs bg-brand-navy text-white px-3 py-1 rounded-full items-center gap-2">
                 <span>Filtering: <b id="active-filter-name">All</b></span>
                 <button onclick="resetCategoryFilter()" class="hover:text-brand-red"><i class="fa-solid fa-xmark"></i></button>
@@ -202,7 +202,7 @@
         </div>
 
         <!-- Articles Grid Container -->
-        <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div id="s-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <!-- Dynamically populated via renderArticles() -->
         </div>
 
@@ -248,7 +248,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-8">
           <div>
             <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Categories</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select a category below to filter and sort all review articles above.</p>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Select a category below to filter and sort all  articles above.</p>
           </div>
           <button onclick="resetCategoryFilter()" class="text-xs font-bold text-slate-500 hover:text-brand-navy">
             Clear Filter
@@ -411,7 +411,7 @@
               <h3 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-link text-brand-red"></i> Affiliate Link Importer & Content Synthesizer
               </h3>
-              <p class="text-xs text-slate-500">Paste your affiliate link (Amazon, Shopee, CJ, ShareASale, etc.). Gemini AI will generate an SEO headline, pros & cons, coupon code, and honest review.</p>
+              <p class="text-xs text-slate-500">Paste your affiliate link (Amazon, Shopee, CJ, ShareASale, etc.). Gemini AI will generate an SEO headline, pros & cons, coupon code, and honest .</p>
             </div>
 
             <form id="affiliate-generator-form" onsubmit="handleGenerateArticle(event)" class="space-y-6">
@@ -491,12 +491,12 @@
             </form>
           </div>
 
-          <!-- Generated Article Editor & Preview -->
+          <!-- Generated Article Editor & P -->
           <div id="ai-result-card" class="hidden bg-white rounded-2xl p-6 sm:p-8 border-2 border-brand-blue/30 shadow-md">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
-                <h3 class="text-base font-extrabold text-slate-900">Review & Publish Article</h3>
+                <h3 class="text-base font-extrabold text-slate-900"> & Publish Article</h3>
               </div>
               <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">AI Output Ready</span>
             </div>
@@ -533,7 +533,7 @@
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Detailed Review Content</label>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Detailed  Content</label>
                 <textarea id="draft-content" rows="6" class="w-full px-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-700" required></textarea>
               </div>
 
@@ -553,7 +553,7 @@
                   Discard
                 </button>
                 <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
-                  <i class="fa-solid fa-cloud-arrow-up"></i> Publish to Middle Review Grid
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Publish to Middle  Grid
                 </button>
               </div>
             </form>
@@ -566,7 +566,7 @@
           <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
             <div>
               <h3 class="text-lg font-extrabold text-slate-900">Articles Inventory</h3>
-              <p class="text-xs text-slate-500">Edit, remove or inspect published affiliate reviews on the homepage.</p>
+              <p class="text-xs text-slate-500">Edit, remove or inspect published affiliate s on the homepage.</p>
             </div>
             <button onclick="restoreDefaultArticles()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors">
               <i class="fa-solid fa-rotate-left mr-1"></i> Reset to Default Articles
@@ -616,7 +616,7 @@
             <span id="modal-category" class="text-xs bg-white/20 backdrop-blur-md px-2 py-0.5 rounded font-medium">Beauty</span>
             <span id="modal-date" class="text-xs text-slate-300">September 17, 2026</span>
           </div>
-          <h2 id="modal-title" class="text-xl sm:text-2xl font-black leading-tight">Review Title</h2>
+          <h2 id="modal-title" class="text-xl sm:text-2xl font-black leading-tight"> Title</h2>
         </div>
       </div>
 
@@ -645,7 +645,7 @@
           </div>
         </div>
 
-        <!-- Full Review Article Text -->
+        <!-- Full  Article Text -->
         <div>
           <h4 class="text-xs font-extrabold uppercase text-slate-400 tracking-wider mb-2">In-Depth Verdict</h4>
           <div id="modal-content" class="text-sm text-slate-700 leading-relaxed space-y-3">
@@ -757,12 +757,12 @@
             <div class="w-7 h-7 rounded-lg bg-brand-red flex items-center justify-center text-white font-bold text-sm">
               %
             </div>
-            <span id="footer-brand-name" class="font-extrabold text-xl text-white">CouponReview</span>
+            <span id="footer-brand-name" class="font-extrabold text-xl text-white">Coupon</span>
           </div>
           <div class="text-amber-400 font-semibold text-xs">Top Hub of US Online Coupons</div>
-          <div class="font-bold text-white text-xs">CouponReview — Find Better. Buy Smarter.</div>
+          <div class="font-bold text-white text-xs">Coupon — Find Better. Buy Smarter.</div>
           <p id="footer-desc" class="text-slate-400 leading-relaxed max-w-sm">
-            CouponReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping.
+            Coupon is a trusted destination for discovering online coupons, exclusive deals, and helpful product s. We help shoppers find better products, compare their options, and save more when shopping.
           </p>
         </div>
 
@@ -770,10 +770,10 @@
         <div>
           <h4 class="font-bold text-white uppercase tracking-wider mb-3">Explore</h4>
           <ul class="space-y-2 text-slate-400">
-            <li><a href="javascript:void(0)" onclick="scrollToSection('reviews-section')" class="hover:text-white transition-colors">All Coupons</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('s-section')" class="hover:text-white transition-colors">All Coupons</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('stores-section')" class="hover:text-white transition-colors">Stores</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToSection('categories-section')" class="hover:text-white transition-colors">Categories</a></li>
-            <li><a href="javascript:void(0)" onclick="scrollToSection('reviews-section')" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="javascript:void(0)" onclick="scrollToSection('s-section')" class="hover:text-white transition-colors">Blog</a></li>
             <li><a href="javascript:void(0)" class="hover:text-white transition-colors">Authors</a></li>
           </ul>
         </div>
@@ -810,7 +810,7 @@
       </div>
 
       <div class="pt-8 text-center text-slate-500 text-[11px]">
-        <span id="footer-copyright-text">© 2026 couponreview.com. All rights reserved.</span>
+        <span id="footer-copyright-text">© 2026 coupon.com. All rights reserved.</span>
       </div>
 
     </div>
@@ -855,14 +855,14 @@
 
     // Default Homepage Settings
     const DEFAULT_HOMEPAGE_SETTINGS = {
-      brandName: "CouponReview",
+      brandName: "Coupon",
       heroSlogan: "Find Better. Buy Smarter.",
-      heroDesc: "CouponReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
+      heroDesc: "Coupon is a trusted destination for discovering online coupons, exclusive deals, and helpful product s. We help shoppers find better products, compare their options, and save more when shopping online.",
       statOffers: 304,
       statStores: 110,
       statCategories: 34,
-      footerAbout: "CouponReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping.",
-      footerCopy: "© 2026 couponreview.com. All rights reserved."
+      footerAbout: "Coupon is a trusted destination for discovering online coupons, exclusive deals, and helpful product s. We help shoppers find better products, compare their options, and save more when shopping.",
+      footerCopy: "© 2026 coupon.com. All rights reserved."
     };
 
     // 6 Default Articles (from design image)
@@ -872,8 +872,8 @@
         brand: "Femme Nativa",
         category: "Beauty and fragrance",
         date: "September 17, 2026",
-        title: "Rachael Attard Review 2026: Best Products + Exclusive Discount Deal",
-        excerpt: "Discover the Rachael Attard line starting at just $14.99. Explore our in-depth review of top formulas, brand insights, and current online promo discounts.",
+        title: "Rachael Attard  2026: Best Products + Exclusive Discount Deal",
+        excerpt: "Discover the Rachael Attard line starting at just $14.99. Explore our in-depth  of top formulas, brand insights, and current online promo discounts.",
         content: "Femme Nativa's collaboration with the Rachael Attard fitness and wellness collection has caught significant attention in 2026. Formulated for active women who demand clean ingredients and high potency, their body oils and recovery tonics deliver visible results within 2 weeks of consistent usage. When paired with our verified coupon code, it stands out as one of the best value-for-money self-care investments this season.",
         readTime: "4 min read",
         price: "$14.99 (Reg. $29.99)",
@@ -889,8 +889,8 @@
         brand: "Peptide Ritual",
         category: "Beauty and fragrance",
         date: "September 17, 2026",
-        title: "Peptide Ritual Review 2026: Clinical Skincare & Top Deals Tested",
-        excerpt: "Discover Peptide Ritual's clinical-grade formulas. Explore verified reviews, top serums, and value sets starting from $25 with direct checkout discounts.",
+        title: "Peptide Ritual  2026: Clinical Skincare & Top Deals Tested",
+        excerpt: "Discover Peptide Ritual's clinical-grade formulas. Explore verified s, top serums, and value sets starting from $25 with direct checkout discounts.",
         content: "Peptide Ritual focuses on anti-aging peptides and barrier restoration. In our 30-day laboratory trial, the Intensive Firming Matrix exhibited a 34% boost in dermal moisture retention. While high-end peptide formulations typically surpass $80, Peptide Ritual keeps entry pricing highly competitive, especially with instant promo codes applied at checkout.",
         readTime: "5 min read",
         price: "$25.00 (Reg. $45.00)",
@@ -906,7 +906,7 @@
         brand: "Carplaymmb",
         category: "Electronics and Technology",
         date: "September 17, 2026",
-        title: "Carplaymmb Review 2026: Untether Your Dashboard for Less",
+        title: "Carplaymmb  2026: Untether Your Dashboard for Less",
         excerpt: "Upgrade your dash with Carplaymmb wireless CarPlay adapters starting at $14.70. Explore setup perks, performance specs, and pricing coupons.",
         content: "Tired of plugging in your smartphone every time you enter your car? The Carplaymmb 2026 wireless adapter converts wired Apple CarPlay and Android Auto into zero-latency wireless connectivity. Boot time averages under 9 seconds, making navigation and audio streaming seamless without draining your battery unnecessarily.",
         readTime: "4 min read",
@@ -923,13 +923,13 @@
         brand: "Halloo France",
         category: "Adult 18 and over",
         date: "September 17, 2026",
-        title: "Halloo France Review 2026: Wellness Essentials & Best Deals",
+        title: "Halloo France  2026: Wellness Essentials & Best Deals",
         excerpt: "Discover Halloo France wellness solutions starting at $25.00. Explore top-selling hygiene, health essentials, and current promotions on site.",
         content: "Halloo France delivers premium botanical personal care crafted in the south of France. Focusing on organic hydration and hypoallergenic formulas, this line caters to those seeking luxury hotel grade bathroom essentials without the customary markups.",
         readTime: "4 min read",
         price: "$25.00 (Reg. $49.00)",
         coupon: "FRANCE25",
-        affiliateUrl: "https://www.google.com/search?q=Halloo+France+review",
+        affiliateUrl: "https://www.google.com/search?q=Halloo+France+",
         clicks: 219,
         imageUrl: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=700&auto=format&fit=crop&q=80",
         pros: ["Organic certified ingredients", "Eco-friendly recyclable packaging", "Subtle Parisian herbal scent"],
@@ -940,7 +940,7 @@
         brand: "Track Speed",
         category: "Equipment furniture",
         date: "September 17, 2026",
-        title: "Track Speed Review 2026: Top Racing Training Gear & Verified Discounts",
+        title: "Track Speed  2026: Top Racing Training Gear & Verified Discounts",
         excerpt: "Discover Track Speed performance gear, training programs, and driving experiences. Check save pricing down from $25.00 with codes.",
         content: "Engineered for telemetry tracking and simulator racers, Track Speed's ergonomic rigs and pedal stabilizers bring professional motorsport precision into home setups. Sturdy cold-rolled steel prevents frame deflection even under high-torque direct drive steering wheels.",
         readTime: "4 min read",
@@ -957,8 +957,8 @@
         brand: "Dudimali",
         category: "Decorations",
         date: "September 17, 2026",
-        title: "Dudimali Review 2026: Best Products + Exclusive Discount Code",
-        excerpt: "Discover Dudimali home accents and lifestyle deals starting at just $14.99. Read our honest review on quality, verified ratings, and checkout perks.",
+        title: "Dudimali  2026: Best Products + Exclusive Discount Code",
+        excerpt: "Discover Dudimali home accents and lifestyle deals starting at just $14.99. Read our honest  on quality, verified ratings, and checkout perks.",
         content: "Dudimali modern minimalist furniture and ambient lighting fixtures transform living rooms with Scandi-inspired comfort. Crafted with sustainably harvested oak and warm-temperature LED elements, their pieces offer long-lasting home aesthetics on a budget.",
         readTime: "4 min read",
         price: "$14.99 (Reg. $32.00)",
@@ -1028,7 +1028,7 @@
     function saveHomepageSettings(e) {
       e.preventDefault();
       homepageSettings = {
-        brandName: document.getElementById("edit-brand-name").value.trim() || "CouponReview",
+        brandName: document.getElementById("edit-brand-name").value.trim() || "Coupon",
         heroSlogan: document.getElementById("edit-hero-slogan").value.trim() || "Find Better. Buy Smarter.",
         heroDesc: document.getElementById("edit-hero-desc").value.trim(),
         statOffers: parseInt(document.getElementById("edit-stat-offers").value) || 304,
@@ -1071,7 +1071,7 @@
     }
 
     function renderArticles() {
-      const grid = document.getElementById("reviews-grid");
+      const grid = document.getElementById("s-grid");
       const noFound = document.getElementById("no-articles-found");
       const countLabel = document.getElementById("article-count-label");
 
@@ -1196,7 +1196,7 @@
       }
 
       renderArticles();
-      scrollToSection("reviews-section");
+      scrollToSection("s-section");
       showToast(`Showing articles sorted by: ${categoryName}`, "info");
     }
 
@@ -1214,7 +1214,7 @@
       document.getElementById("header-search-input").value = storeName;
       document.getElementById("hero-search-input").value = storeName;
       renderArticles();
-      scrollToSection("reviews-section");
+      scrollToSection("s-section");
     }
 
     function handleSearch(val) {
@@ -1359,7 +1359,7 @@
         resultCard.classList.remove("hidden");
         resultCard.scrollIntoView({ behavior: 'smooth' });
 
-        showToast("Article successfully drafted by AI! Review below.", "success");
+        showToast("Article successfully drafted by AI!  below.", "success");
       } catch (err) {
         console.error(err);
         showToast("Gemini API error: " + err.message + ". Fallback generator activated.", "error");
@@ -1386,8 +1386,8 @@
 
     async function callGeminiAPI(apiKey, data) {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-      const prompt = `You are a professional affiliate marketing copywriter and product tester for CouponReview.
-Generate an engaging, honest, high-converting product review for the following product:
+      const prompt = `You are a professional affiliate marketing copywriter and product tester for Coupon.
+Generate an engaging, honest, high-converting product  for the following product:
 - Product/Brand: ${data.name}
 - Category: ${data.category}
 - Promo Price: ${data.price}
@@ -1396,7 +1396,7 @@ Generate an engaging, honest, high-converting product review for the following p
 
 Return ONLY a raw JSON object with this exact structure (no markdown fences, no code blocks):
 {
-  "title": "${data.name} Review 2026: Tested & Verified Discount Deal",
+  "title": "${data.name}  2026: Tested & Verified Discount Deal",
   "excerpt": "A concise 2-sentence summary highlighting key features, starting price, and value proposition.",
   "content": "A detailed 2-3 paragraph breakdown explaining testing results, performance, build quality, and why shoppers should use this discount code now.",
   "pros": ["Point 1", "Point 2", "Point 3"],
@@ -1428,7 +1428,7 @@ Return ONLY a raw JSON object with this exact structure (no markdown fences, no 
 
     function generateSimulatedArticle(data) {
       return {
-        title: `${data.name} Review 2026: Hands-On Test, Specs & Verified Discount Code`,
+        title: `${data.name}  2026: Hands-On Test, Specs & Verified Discount Code`,
         excerpt: `Discover our thorough evaluation of ${data.name}. Starting at just ${data.price}, explore performance metrics, durability ratings, and exclusive coupon codes.`,
         content: `Our editorial team rigorously tested ${data.name} across 14 distinct performance benchmarks. In practical daily usage, it significantly outperformed competitor products in the ${data.category} segment while maintaining an accessible price point.\n\nCrafted with attention to detail and user ergonomics, this item delivers reliable functionality right out of the box. By applying the coupon code '${data.coupon}', shoppers unlock guaranteed maximum savings today.`,
         pros: [
