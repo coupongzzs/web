@@ -1,12 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CouponsHere — Content Management Dashboard</title>
-  <!-- Decap CMS Script -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</head>
-<body>
-</body>
-</html>
+<!-- Static Pages & Explore Views Container -->
+  <div id="staticPagesContainer" class="hidden flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white">
+    
+    <!-- About Us -->
+    <div id="page-about-us" class="hidden text-sm text-slate-700 leading-relaxed">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">About Us</h1>
+      <p class="mb-6 text-base">Welcome to Coupons Here, your trusted destination for finding verified coupon codes, promo codes, and online discount deals from leading U.S. retailers.</p>
+      
+      <h2 class="text-xl font-bold text-slate-900 mt-8 mb-3">Who We Are</h2>
+      <p class="mb-4">couponshere.top is the Top Hub of US Online Coupons. We built this platform to help American shoppers save money by bringing together the best publicly available offers in one easy-to-browse place—without the clutter or expired codes you often find elsewhere.</p>
+
+      <h2 class="text-xl font-bold text-slate-900 mt-8 mb-3">Our Mission</h2>
+      <p class="mb-4">Our mission is simple: connect shoppers with legitimate savings opportunities at stores they already trust. We research, organize, and publish coupon codes and promotional deals across categories including fashion, electronics, beauty, food & dining, travel, and health—updated regularly so you can shop smarter.</p>
+
+      <h2 class="text-xl font-bold text-slate-900 mt-8 mb-3">What We Offer</h2>
+      <ul class="list-disc pl-5 space-y-2 mb-6">
+        <li><strong>Coupon codes</strong> — Copy-and-use promo codes for checkout</li>
+        <li><strong>Discount deals</strong> — Store promotions, sales, and special offers</li>
+        <li><strong>Store pages</strong> — Browse savings by retailer</li>
+        <li><strong>Categories</strong> — Find deals by shopping interest</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-900 mt-8 mb-3">How We Work</h2>
+      <p class="mb-4">couponshere.top aggregates promotional information from retailers and affiliate partners. When you click “Shop Now” or use a code on our site, you may be directed to a third-party merchant website. We do not sell products directly, process payments, or fulfill orders. All purchases are completed on the retailer’s site and are subject to their terms and policies.</p>
+      <p class="mb-4">Coupon availability, discount amounts, and eligibility requirements can change at any time without notice. We encourage you to verify offer details on the merchant’s website before completing a purchase.</p>
+
+      <h2 class="text-xl font-bold text-slate-900 mt-8 mb-3">Transparency & Trust</h2>
+      <p class="mb-4">We believe in honest publishing. Our site may earn commissions through affiliate links when you make a qualifying purchase—at no extra cost to you. This helps us maintain couponshere.top as a free resource for consumers. For more information, please read our Disclaimer and Privacy Policy.</p>
+    </div>
+
+    <!-- Contact Us -->
+    <div id="page-contact-us" class="hidden">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">Contact Us</h1>
+      <p class="text-sm text-slate-500 mb-8">Questions, partnership inquiries, or feedback? We’d love to hear from you. Fill out the form below to email <strong>admin@couponshere.top</strong>.</p>
+      
+      <form onsubmit="event.preventDefault(); showToast('Message sent! We will reply to your email shortly.', 'success'); this.reset();" class="max-w-xl space-y-5 text-sm">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1.5">Full Name</label>
+          <input type="text" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1.5">Email Address</label>
+          <input type="email" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1.5">Message</label>
+          <textarea rows="5" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl shadow-md transition cursor-pointer">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <!-- Authors -->
+    <div id="page-authors" class="hidden text-center py-10">
+      <div class="w-20 h-20 bg-brand-accent text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-md">
+        <i class="fa-solid fa-users-viewfinder"></i>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">Our Editorial Team</h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        The editorial team researches coupon codes, tests promo links, and publishes savings guides to help U.S. shoppers find verified deals from trusted retailers.
+      </p>
+    </div>
+
+    <!-- Privacy Policy -->
+    <div id="page-privacy-policy" class="hidden text-sm text-slate-700 leading-relaxed space-y-4">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">Privacy Policy</h1>
+      <p>This Privacy Policy describes how couponshere.top (“we,” “us,” or “our”) collects, uses, discloses, and protects information when you visit couponshere.top (the “Site”) or otherwise interact with our services. By using the Site, you agree to the practices described in this policy.</p>
+      
+      <h2 class="text-lg font-bold text-slate-900 mt-6">1. Information We Collect</h2>
+      <p><strong>1.1 Information You Provide:</strong> We may collect information you voluntarily submit, including Name and email address when you contact us through our contact form, subject and message content of your inquiry, and any other information you choose to provide.</p>
+      <p><strong>1.2 Information Collected Automatically:</strong> When you access the Site, we and our service providers may automatically collect IP address, browser type, device type, and operating system; pages viewed, referring/exit URLs, and date/time stamps; general geographic location (city/state level) derived from IP address; cookies, pixels, and similar tracking technologies (see our Cookie Policy).</p>
+      <p><strong>1.3 Information from Third Parties:</strong> We may receive information from analytics providers, advertising partners, and affiliate networks about how users interact with our Site or complete actions on merchant websites after clicking our links.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">2. How We Use Information</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Operate, maintain, and improve the Site</li>
+        <li>Display coupon offers and personalize content</li>
+        <li>Respond to your inquiries and support requests</li>
+        <li>Analyze traffic, measure performance, and prevent fraud or abuse</li>
+        <li>Comply with legal obligations and enforce our Terms of Service</li>
+        <li>Send administrative communications (we do not sell your personal information)</li>
+      </ul>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">3. Legal Bases (Where Applicable)</h2>
+      <p>If you are located in a jurisdiction that requires a legal basis for processing, we rely on: (a) your consent; (b) performance of a contract or steps prior to entering a contract; (c) legitimate interests in operating and improving our services; and (d) compliance with legal obligations.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">4. How We Share Information</h2>
+      <p>We may share information with Service providers (hosting, analytics, security, and email delivery vendors who process data on our behalf), Affiliate and advertising partners (when you click outbound links, merchants or networks may receive referral data), Legal authorities (when required by law, subpoena, or to protect rights, safety, and security), and Business transfers (in connection with a merger, acquisition, or sale of assets). We do not sell personal information for monetary consideration as defined under applicable U.S. state privacy laws.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">5. Cookies & Tracking</h2>
+      <p>We use cookies and similar technologies for essential site functions, analytics, and advertising. You can manage preferences through your browser settings and, where available, our cookie notice. Details are in our Cookie Policy.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">6. Your Privacy Rights (United States)</h2>
+      <p>Depending on your state of residence, you may have the right to Know what personal information we collect, use, and disclose; Request access to or deletion of your personal information; Correct inaccurate personal information; Opt out of certain processing; Not receive discriminatory treatment for exercising privacy rights.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">7. Children’s Privacy</h2>
+      <p>The Site is not directed to children under 13 (or 16 where applicable), and we do not knowingly collect personal information from children.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">8. Data Security & Retention</h2>
+      <p>We implement reasonable administrative, technical, and organizational safeguards designed to protect information. We retain personal information only as long as necessary for the purposes described in this policy, unless a longer retention period is required by law.</p>
+    </div>
+
+    <!-- Terms of Service -->
+    <div id="page-terms-of-service" class="hidden text-sm text-slate-700 leading-relaxed space-y-4">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">Terms of Service</h1>
+      <p>These Terms of Service (“Terms”) govern your access to and use of couponshere.top (the “Site”). Please read these Terms carefully before using the Site.</p>
+      
+      <h2 class="text-lg font-bold text-slate-900 mt-6">1. Acceptance & Description of Service</h2>
+      <p>By accessing or using the Site, you agree to be bound by these Terms and our Privacy Policy, Cookie Policy, and Disclaimer. couponshere.top provides informational content about coupon codes, promotional offers, and discounts offered by third-party merchants. We are a publisher and referral service, not a retailer. We do not sell goods, process payments, ship products, or handle returns.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">2. Coupon & Offer Information</h2>
+      <p>We strive to publish accurate and current offers, but we do not guarantee that any coupon code or promotion will work, remain available, or apply to your purchase. Merchants control offer terms, exclusions, and expiration. You are solely responsible for verifying offer details on the merchant’s website before checkout.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">3. User Conduct</h2>
+      <p>You agree not to Use the Site for any unlawful purpose; Scrape, crawl, or harvest data from the Site without our prior written consent; Attempt to gain unauthorized access to our systems; Transmit malware, spam, or harmful code; Impersonate any person or entity; Interfere with the proper functioning of the Site.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">4. Intellectual Property</h2>
+      <p>The Site and its original content, features, logos, and design are owned by couponshere.top or its licensors and are protected by copyright, trademark, and other intellectual property laws.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">5. Disclaimer of Warranties & Limitation of Liability</h2>
+      <p class="uppercase text-xs font-bold text-slate-500">THE SITE IS PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, COUPONSHERE.TOP SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, OR GOODWILL, ARISING FROM YOUR USE OF THE SITE OR ANY THIRD-PARTY OFFERS.</p>
+    </div>
+
+    <!-- Cookie Policy -->
+    <div id="page-cookie-policy" class="hidden text-sm text-slate-700 leading-relaxed space-y-4">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">Cookie Policy</h1>
+      
+      <h2 class="text-lg font-bold text-slate-900 mt-6">1. What Are Cookies?</h2>
+      <p>Cookies are small text files placed on your device when you visit a website. They help the site remember your preferences, understand how you use the site, and support advertising and analytics. Similar technologies include pixels, web beacons, local storage, and SDKs.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">2. Types of Cookies We Use</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>Strictly Necessary Cookies:</strong> Required for the Site to function (e.g., security tokens, session management).</li>
+        <li><strong>Functional Cookies:</strong> Remember choices you make (such as language or region).</li>
+        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with the Site anonymously.</li>
+        <li><strong>Advertising & Affiliate Cookies:</strong> Set by us or third-party partners to deliver relevant ads and track affiliate referrals when you click merchant links.</li>
+      </ul>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">3. Third-Party Cookies & Google Services</h2>
+      <p>Third parties that may set cookies include analytics providers (e.g., Google Analytics), advertising networks, affiliate networks, and social media platforms. If we use Google marketing products, Google may use cookies to serve ads based on your prior visits. You can opt out of Google Analytics via the Google Analytics Opt-out Browser Add-on.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">4. How to Manage Cookies</h2>
+      <p>You can control cookies through your Browser settings (blocking or deleting cookies), Industry opt-out tools (aboutads.info or networkadvertising.org), or Mobile device settings. Note: Blocking all cookies may affect Site functionality.</p>
+    </div>
+
+    <!-- Disclaimer -->
+    <div id="page-disclaimer" class="hidden text-sm text-slate-700 leading-relaxed space-y-4">
+      <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">Disclaimer & Disclosure</h1>
+      
+      <h2 class="text-lg font-bold text-slate-900 mt-6">1. No Professional Advice</h2>
+      <p>Content on couponshere.top does not constitute financial, legal, tax, or professional advice. You should consult appropriate professionals before making decisions based on information found on the Site.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">2. Coupon & Deal Accuracy</h2>
+      <p>While we work to list accurate and current coupon codes and promotions, we do not warrant that any offer is valid, available, or applicable to your purchase. Retailers may change or cancel offers at any time without notice. Discount amounts, minimum purchase requirements, product exclusions, and expiration dates are determined solely by the merchant.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">3. Affiliate Disclosure (FTC Compliance)</h2>
+      <p>In accordance with the U.S. Federal Trade Commission (FTC) guidelines on endorsements and testimonials, we disclose that couponshere.top may earn advertising fees, commissions, or other compensation when you click links on our Site and make a purchase (or complete another qualifying action) on a partner merchant’s website.</p>
+      <p>This compensation comes from the merchant or an affiliate network—not from you—and helps us operate couponshere.top as a free resource. Our editorial content and deal listings are intended to benefit consumers; compensation does not influence which merchants we cover, though it may affect placement of certain sponsored or featured offers where clearly labeled.</p>
+
+      <h2 class="text-lg font-bold text-slate-900 mt-6">4. No Guarantee of Savings</h2>
+      <p>Past savings or example discounts do not guarantee future results. Your actual savings depend on the products you purchase, applicable offer terms, taxes, shipping, and other factors outside our control.</p>
+    </div>
+
+  </div>
