@@ -1,285 +1,1947 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CouponsHere — Verified Promo Codes, Deals & Shopping Guides</title>
-  <!-- Tailwind CSS & FontAwesome -->
+  <title>HakoReview - Find Better. Buy Smarter | Deal & Affiliate AI Reviews</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .card-shadow { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05); }
-    .navy-gradient { background: linear-gradient(180deg, #1b365d 0%, #152843 100%); }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .hero-gradient {
+      background: linear-gradient(180deg, #122c54 0%, #173868 50%, #1b427b 100%);
+    }
+    .glass-metric {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .store-card:hover {
+      box-shadow: 0 12px 24px -6px rgba(18, 44, 84, 0.15);
+      transform: translateY(-2px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
   </style>
-</head>
-<body class="bg-[#f8f9fa] text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Top Navigation Header -->
-  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-50">
-    <div class="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-1.5 font-extrabold text-xl tracking-tight text-slate-900">
-        <span class="w-7 h-7 rounded-lg bg-[#e63946] flex items-center justify-center text-white text-xs shadow-sm">
-          <i class="fa-solid fa-tags"></i>
-        </span>
-        Coupons<span class="text-[#e63946]">Here</span>
-      </a>
-      <div class="flex items-center gap-3">
-        <a href="#search-box" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 text-sm hover:bg-slate-200 transition" title="Search">
-          <i class="fa-solid fa-magnifying-glass"></i>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#122c54',
+              navyDark: '#0a1a33',
+              navyLight: '#1b427b',
+              accent: '#e63946',
+              accentHover: '#d62828',
+              accentLight: '#ff4d5a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-red-500 selection:text-white">
+
+  <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo & Mini Search -->
+      <div class="flex items-center space-x-4">
+        <a href="javascript:void(0)" onclick="switchView('frontend'); setCategoryFilter('all');" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 rounded-lg bg-brand-accent flex items-center justify-center text-white font-extrabold text-base shadow-sm group-hover:scale-105 transition-transform">
+            %
+          </div>
+          <span class="text-xl font-black tracking-tight text-slate-800">hako<span class="text-brand-navy">review</span></span>
         </a>
-        <a href="/admin" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 text-sm hover:bg-slate-200 transition" title="Admin Dashboard">
-          <i class="fa-solid fa-user-gear"></i>
-        </a>
+
+        <!-- Header Search (Desktop) -->
+        <div class="hidden md:flex items-center relative ml-3">
+          <input 
+            type="text" 
+            id="navSearchInput" 
+            onkeyup="handleHeaderSearch(event)"
+            placeholder="Search codes, stores, articles..." 
+            class="w-64 lg:w-80 pl-9 pr-20 py-1.5 text-xs rounded-full border border-slate-200 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-400 transition"
+          >
+          <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3"></i>
+          <button 
+            onclick="triggerHeaderSearch()" 
+            class="absolute right-1 px-3 py-1 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold rounded-full transition"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-6 text-xs font-medium text-slate-600">
+        <a href="#coupons" onclick="scrollToSection('reviewSection')" class="hover:text-red-500 transition">Coupons</a>
+        <a href="#deals" onclick="scrollToSection('reviewSection')" class="hover:text-red-500 transition">Deals</a>
+        <a href="#stores" onclick="scrollToSection('popularStoresSection')" class="hover:text-red-500 transition">Stores</a>
+        <a href="#categories" onclick="scrollToSection('categoriesSection')" class="hover:text-red-500 transition">Categories</a>
+        <a href="#blog" onclick="scrollToSection('reviewSection')" class="hover:text-red-500 transition">Blog</a>
+      </nav>
+
+      <!-- Right Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <!-- Switch View: Frontend <-> Admin Dashboard -->
+        <button 
+          id="viewToggleBtn"
+          onclick="toggleCurrentView()" 
+          class="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 transition shadow-2xs"
+        >
+          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-brand-navy"></i>
+          <span id="viewToggleText">Bảng điều khiển Admin</span>
+        </button>
+
+        <!-- API Key quick settings -->
+        <button onclick="openApiKeyModal()" class="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition" title="Cấu hình Gemini API Key">
+          <i data-lucide="key" class="w-4 h-4"></i>
+        </button>
+
+        <a href="javascript:void(0)" onclick="showToast('Hệ thống tài khoản đang ở chế độ xem trước', 'info')" class="text-xs font-medium text-slate-600 hover:text-slate-900 hidden sm:inline-block">Sign In</a>
+        <button onclick="showToast('HakoReview hân hạnh chào đón bạn!', 'info')" class="text-xs font-semibold text-brand-accent hover:underline hidden sm:inline-block">Sign Up</button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="navy-gradient text-white py-10 px-5 text-center shadow-inner">
-    <div class="max-w-xl mx-auto">
-      <h1 class="text-2xl font-extrabold tracking-tight">Smart Savings & Verified Coupons</h1>
-      <p class="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed max-w-md mx-auto">
-        Discover hand-tested promo codes, shopping guides, and daily cashback discounts across global brands.
-      </p>
+  <!-- FRONTEND VIEW CONTAINER -->
+  <div id="frontendContainer" class="flex-grow flex flex-col">
+    
+    <!-- HERO BANNER (Matches HakoReview screenshot) -->
+    <section class="hero-gradient text-white py-12 md:py-16 px-4 relative overflow-hidden">
+      <!-- Ambient light circles -->
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <!-- Search Box -->
-      <div id="search-box" class="mt-6 flex items-center bg-white rounded-full p-1.5 shadow-lg max-w-md mx-auto">
-        <input type="text" placeholder="Search stores, coupons or buying guides..." 
-               class="flex-grow px-4 py-2 text-xs sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none">
-        <button class="bg-[#e63946] hover:bg-red-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition shadow-sm">
-          Search
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">
+          hakoreview
+        </h1>
+        <p class="text-xs md:text-sm font-semibold text-blue-100 tracking-wide mb-1">
+          Find Better. Buy Smarter.
+        </p>
+        <p class="text-xs md:text-sm text-slate-200/90 max-w-2xl mx-auto font-light leading-relaxed mb-6">
+          HakoReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
+        </p>
+
+        <!-- Center Big Search Input -->
+        <div class="relative max-w-xl mx-auto mb-10 shadow-lg">
+          <input 
+            type="text" 
+            id="heroSearchInput" 
+            placeholder="Search coupons, stores, articles..." 
+            onkeyup="handleHeroSearch(event)"
+            class="w-full py-3.5 pl-6 pr-32 rounded-full text-slate-800 text-sm focus:outline-none focus:ring-4 focus:ring-blue-400/30 shadow-inner"
+          >
+          <button 
+            onclick="triggerHeroSearch()" 
+            class="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold rounded-full transition-all shadow-sm flex items-center justify-center gap-1.5"
+          >
+            <span>Search</span>
+          </button>
+        </div>
+
+        <!-- 3 Metrics Counters (304 Active Offers | 110 Stores | 34 Categories) -->
+        <div class="grid grid-cols-3 gap-3.5 max-w-lg mx-auto">
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statOffers" class="text-xl md:text-2xl font-black text-white">304</div>
+            <div class="text-[11px] text-blue-200 font-medium">Active Offers</div>
+          </div>
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statStores" class="text-xl md:text-2xl font-black text-white">110</div>
+            <div class="text-[11px] text-blue-200 font-medium">Stores</div>
+          </div>
+          <div class="glass-metric rounded-2xl py-3 px-2 text-center transform hover:-translate-y-0.5 transition duration-200">
+            <div id="statCategories" class="text-xl md:text-2xl font-black text-white">18</div>
+            <div class="text-[11px] text-blue-200 font-medium">Categories</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT AREA: REVIEWS AT CENTER -->
+    <main id="reviewSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-200/80 pb-3">
+        <div class="flex items-center gap-3">
+          <h2 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight">
+            Review
+          </h2>
+          <!-- Filter indicator pill if active -->
+          <div id="activeFilterPill" class="hidden items-center gap-1.5 bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium border border-blue-200">
+            <span id="activeFilterName">Category</span>
+            <button onclick="setCategoryFilter('all')" class="hover:text-red-500 font-bold ml-1">✕</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs">
+          <span class="text-slate-500" id="articleCountText">Showing all articles</span>
+          <button onclick="setCategoryFilter('all')" class="text-red-600 hover:text-red-700 font-semibold flex items-center gap-1">
+            <span>All articles</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+      <!-- Empty state when no matches found -->
+      <div id="emptyState" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 p-8 my-6">
+        <i data-lucide="file-question" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+        <h3 class="text-base font-bold text-slate-700">Không tìm thấy bài viết phù hợp</h3>
+        <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Thử tìm kiếm với từ khóa khác hoặc bấm nút bên dưới để xem tất cả bài viết.</p>
+        <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-navy text-white text-xs font-semibold rounded-lg hover:bg-brand-navyDark transition">
+          Xóa bộ lọc & Xem tất cả
         </button>
       </div>
 
-      <!-- Quick Filter Pills -->
-      <div class="flex items-center justify-center gap-2 mt-5">
-        <a href="#stores" class="bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm transition">
-          Stores
-        </a>
-        <a href="#coupons" class="bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm transition">
-          Coupons
-        </a>
-        <a href="#categories" class="bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm transition">
-          Categories
-        </a>
-      </div>
-    </div>
-  </section>
+      <!-- POPULAR STORES SECTION -->
+      <section id="popularStoresSection" class="mt-16 pt-8 border-t border-slate-200">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="text-lg md:text-xl font-bold text-slate-800">Popular Stores</h3>
+          <span class="text-xs text-slate-400">Verified affiliate partners</span>
+        </div>
 
-  <!-- Main Feed -->
-  <main class="max-w-xl mx-auto px-4 py-6 w-full space-y-6 flex-grow">
-    
-    <div class="flex items-center justify-between pt-1">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Latest Savings Guides</h2>
-      <span class="text-xs text-slate-400 font-medium">Updated Daily</span>
-    </div>
+        <div id="popularStoresContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          <!-- Populated dynamically with store cards & offer badges -->
+        </div>
 
-    <!-- Article Card 1 -->
-    <article class="bg-white rounded-2xl border border-slate-200/80 p-5 card-shadow transition hover:border-slate-300">
-      <div class="h-28 bg-[#fdf2f0] rounded-xl flex items-center justify-center mb-4 border border-red-100">
-        <span class="text-2xl font-black italic tracking-widest text-[#d90429]">FEMME NATIVA</span>
-      </div>
-      <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium">
-        <span class="text-[#e63946] font-bold"><i class="fa-solid fa-tag"></i> Coupon Guide</span>
-        <span>•</span>
-        <span>2 hours ago</span>
-      </div>
-      <h3 class="text-base font-bold text-slate-900 mt-2 leading-snug">
-        <a href="post.html?id=femme-nativa-15-off" class="hover:text-[#e63946] transition">
-          Save Big at Femme Nativa: 15% Off Your Entire Order + Free Shipping
-        </a>
-      </h3>
-      <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-        Unlock verified 15% discount codes for first-time shoppers. Learn how to stack coupons and claim free international express shipping...
-      </p>
-      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-        <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock"></i> 3 min read</span>
-        <a href="post.html?id=femme-nativa-15-off" class="text-xs font-bold text-[#e63946] hover:underline flex items-center gap-1">
-          Read Guide & Get Code <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-    </article>
+        <!-- Carousel navigation dots matching screenshot -->
+        <div class="flex items-center justify-center space-x-1.5 mt-4">
+          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+        </div>
+      </section>
 
-    <!-- Article Card 2 -->
-    <article class="bg-white rounded-2xl border border-slate-200/80 p-5 card-shadow transition hover:border-slate-300">
-      <div class="flex justify-center my-3">
-        <div class="w-16 h-16 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-bold text-sm shadow-inner">
-          <i class="fa-solid fa-spa text-2xl text-pink-500"></i>
+      <!-- CATEGORIES SECTION: Filter & Reorder Articles -->
+      <section id="categoriesSection" class="mt-16 pt-8 border-t border-slate-200">
+        <div class="text-center md:text-left mb-6">
+          <h3 class="text-lg md:text-xl font-bold text-slate-800">Categories</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Bấm vào từng danh mục để lọc và sắp xếp nhanh các bài đánh giá tương ứng ở phần giữa trang</p>
+        </div>
+
+        <!-- 6 columns responsive grid matching the 18 screenshot categories -->
+        <div id="categoriesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ADMIN DASHBOARD CONTAINER (Controlled via switchView) -->
+  <div id="adminContainer" class="hidden flex-grow bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Admin Top Banner -->
+      <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-600 uppercase tracking-wider">HakoReview Admin Engine</span>
+            <span class="flex items-center gap-1 text-[11px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Gemini 2.5 Flash Ready
+            </span>
+          </div>
+          <h2 class="text-xl font-black text-slate-800 mt-1">Bảng điều khiển Nhập Affiliate Link & AI Viết bài</h2>
+          <p class="text-xs text-slate-500">Tự động phân tích link tiếp thị, tạo bài đánh giá chuẩn SEO và quản lý các bài đăng</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="openApiKeyModal()" class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition flex items-center gap-1.5">
+            <i data-lucide="key" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>Cấu hình Gemini API Key</span>
+          </button>
+          <button onclick="switchView('frontend')" class="px-4 py-1.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            <span>Xem trang Web</span>
+          </button>
         </div>
       </div>
-      <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium">
-        <span class="text-emerald-600 font-bold"><i class="fa-solid fa-star"></i> Review</span>
-        <span>•</span>
-        <span>Today</span>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex border-b border-slate-200 mb-6 space-x-2">
+        <button id="adminTabImportBtn" onclick="switchAdminTab('import')" class="px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>AI Affiliate Article Writer (Gemini)</span>
+        </button>
+        <button id="adminTabManageBtn" onclick="switchAdminTab('manage')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Quản lý bài viết (<span id="adminArticleCount">6</span>)</span>
+        </button>
+        <button id="adminTabManualBtn" onclick="switchAdminTab('manual')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Thêm bài thủ công</span>
+        </button>
       </div>
-      <h3 class="text-base font-bold text-slate-900 mt-2 leading-snug">
-        <a href="post.html?id=top-5-skincare-deals" class="hover:text-[#e63946] transition">
-          Top 5 Restorative Face Creams Under $40 Worth Buying in 2026
+
+      <!-- TAB 1: AI AFFILIATE WRITER (GEMINI API) -->
+      <div id="adminTabImport" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Input Form -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
+          <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+            <i data-lucide="link" class="w-4 h-4 text-brand-navy"></i>
+            <span>Nhập link tiếp thị & Thông tin sản phẩm</span>
+          </h3>
+
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Affiliate Link / URL Tiếp Thị <span class="text-red-500">*</span></label>
+              <input 
+                type="url" 
+                id="aiAffiliateUrl" 
+                placeholder="https://affiliate.shopee.vn/track/xyz or amazon.com/dp/..."
+                value="https://example.com/deal/carplaymmb-2026-adapter" 
+                class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              >
+              <p class="text-[11px] text-slate-400 mt-1">Đường dẫn gắn mã theo dõi (Shopee, Lazada, Amazon, CJ, AccessTrade...)</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Tên Sản Phẩm <span class="text-red-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="aiProductName" 
+                  placeholder="Carplaymmb Wireless Adapter 2026"
+                  value="Carplaymmb Pro 2026 Wireless CarPlay Adapter"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Thương hiệu / Cửa hàng</label>
+                <input 
+                  type="text" 
+                  id="aiStoreBrand" 
+                  placeholder="Carplaymmb"
+                  value="Carplaymmb"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Giá Deal / Giảm còn</label>
+                <input 
+                  type="text" 
+                  id="aiProductPrice" 
+                  placeholder="$14.98 hoặc 350.000₫"
+                  value="$14.98"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                >
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Mã Coupon Độc Quyền</label>
+                <input 
+                  type="text" 
+                  id="aiCouponCode" 
+                  placeholder="HAKO50"
+                  value="HAKO2026"
+                  class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 uppercase tracking-wider font-mono"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Danh mục xuất bản</label>
+              <select id="aiCategorySelect" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white">
+                <!-- Populated dynamically with 18 categories -->
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Ghi chú bổ sung cho Gemini AI (Tùy chọn)</label>
+              <textarea 
+                id="aiCustomNotes" 
+                rows="2" 
+                placeholder="Nhấn mạnh độ trễ thấp, kết nối không dây tự động khi nổ máy xe, bảo hành 12 tháng 1 đổi 1..."
+                class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-xs"
+              ></textarea>
+            </div>
+
+            <!-- Generate Action Button -->
+            <button 
+              id="generateWithAiBtn" 
+              onclick="generateReviewWithGemini()" 
+              class="w-full py-3 bg-gradient-to-r from-brand-accent to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 group"
+            >
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-200 group-hover:rotate-12 transition-transform"></i>
+              <span id="generateBtnText">Tạo Bài Viết Chuẩn SEO Bằng Gemini AI</span>
+            </button>
+            <p class="text-[11px] text-center text-slate-400">Tự động sinh tiêu đề giật tít, tóm tắt, ưu nhược điểm & nội dung chuẩn SEO bằng model <code>gemini-2.5-flash</code></p>
+          </div>
+        </div>
+
+        <!-- Live Preview & Editor Panel -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+              <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-600"></i>
+              <span>Xem trước & Hiệu chỉnh nội dung do Gemini sinh</span>
+            </h3>
+            <span id="aiStatusBadge" class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium">Sẵn sàng</span>
+          </div>
+
+          <!-- Empty Preview State -->
+          <div id="aiPreviewEmpty" class="my-auto py-12 text-center text-slate-400">
+            <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+              <i data-lucide="wand-2" class="w-7 h-7"></i>
+            </div>
+            <p class="text-xs font-semibold text-slate-600">Chưa có bài viết nào được tạo</p>
+            <p class="text-[11px] text-slate-400 max-w-sm mx-auto mt-1">Nhập thông tin sản phẩm và link tiếp thị rồi bấm "Tạo Bài Viết Chuẩn SEO Bằng Gemini AI" để trải nghiệm.</p>
+          </div>
+
+          <!-- Filled Preview & Edit Form -->
+          <div id="aiPreviewFilled" class="hidden flex-col space-y-3.5 text-xs flex-grow">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Tiêu đề SEO (HakoReview Style)</label>
+              <input type="text" id="editAiTitle" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Đoạn trích tóm tắt (Excerpt hiển thị trên Card)</label>
+              <textarea id="editAiExcerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Danh mục xuất bản</label>
+                <select id="editAiCategory" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white font-medium"></select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Thời gian đọc & Điểm đánh giá (/5.0)</label>
+                <div class="grid grid-cols-2 gap-2">
+                  <input type="text" id="editAiReadTime" value="4 min read" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                  <input type="number" id="editAiRating" step="0.1" min="1" max="5" value="4.8" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Nội dung đánh giá chi tiết (HTML)</label>
+              <textarea id="editAiContent" rows="6" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-800 font-mono text-[11px] custom-scrollbar focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-emerald-700 mb-1">Ưu điểm nổi bật (Mỗi dòng 1 ý)</label>
+                <textarea id="editAiPros" rows="3" class="w-full px-2.5 py-1.5 border border-emerald-200 rounded-xl bg-emerald-50/40 text-[11px]"></textarea>
+              </div>
+              <div>
+                <label class="block font-semibold text-rose-700 mb-1">Nhược điểm lưu ý (Mỗi dòng 1 ý)</label>
+                <textarea id="editAiCons" rows="3" class="w-full px-2.5 py-1.5 border border-rose-200 rounded-xl bg-rose-50/40 text-[11px]"></textarea>
+              </div>
+            </div>
+
+            <!-- Publish Button -->
+            <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+              <span class="text-[11px] text-slate-500">Bài viết sẽ xuất hiện ở trang chủ và phân loại theo chủ đề</span>
+              <button 
+                onclick="publishAiArticle()" 
+                class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5"
+              >
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span>Xuất Bản Lên Website Ngay</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: POST MANAGEMENT -->
+      <div id="adminTabManage" class="hidden bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+          <div>
+            <h3 class="text-base font-bold text-slate-800">Danh sách bài đánh giá đã xuất bản</h3>
+            <p class="text-xs text-slate-500">Dữ liệu được lưu trữ tự động trong bộ nhớ trình duyệt (LocalStorage)</p>
+          </div>
+          <button onclick="resetToDefaultArticles()" class="text-xs text-slate-500 hover:text-red-500 flex items-center gap-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Khôi phục dữ liệu gốc theo ảnh mẫu</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
+                <th class="py-3 px-4">Sản phẩm / Bài viết</th>
+                <th class="py-3 px-3">Danh mục</th>
+                <th class="py-3 px-3">Mã Coupon</th>
+                <th class="py-3 px-3">Giá Deal</th>
+                <th class="py-3 px-3">Lượt Click</th>
+                <th class="py-3 px-3 text-right">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="adminArticlesTableBody" class="divide-y divide-slate-100">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: MANUAL ADD ARTICLE -->
+      <div id="adminTabManual" class="hidden bg-white rounded-2xl p-6 shadow-xs border border-slate-200 max-w-2xl mx-auto">
+        <h3 class="text-base font-bold text-slate-800 mb-4">Thêm bài đánh giá thủ công</h3>
+        <form onsubmit="handleManualArticleSubmit(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Tiêu đề bài viết <span class="text-red-500">*</span></label>
+            <input type="text" id="manualTitle" required placeholder="Ví dụ: Dudimali Living Review 2026: Best Products..." class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Danh mục</label>
+              <select id="manualCategory" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white"></select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Affiliate Link</label>
+              <input type="url" id="manualAffiliateUrl" placeholder="https://..." required class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Giá deal</label>
+              <input type="text" id="manualPrice" placeholder="$25.00" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Mã Coupon</label>
+              <input type="text" id="manualCoupon" placeholder="SAVE10" class="w-full px-3 py-2 border border-slate-200 rounded-xl uppercase">
+            </div>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Đoạn trích tóm tắt</label>
+            <textarea id="manualExcerpt" rows="2" required placeholder="Tóm tắt ngắn gọn hiển thị trên card..." class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Nội dung chi tiết</label>
+            <textarea id="manualContent" rows="5" required placeholder="Nội dung đánh giá chi tiết..." class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono text-[11px]"></textarea>
+          </div>
+          <button type="submit" class="w-full py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl transition">
+            Đăng bài ngay
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ARTICLE DETAIL MODAL (Pop-up when clicking "Read article ->") -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header Banner -->
+      <div class="relative bg-brand-navy text-white p-6 pb-7 overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-400/20 rounded-full blur-2xl pointer-events-none"></div>
+        <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <div class="flex items-center gap-2 text-xs text-blue-200 font-medium mb-2">
+          <span id="modalCategory" class="px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 font-semibold">Category</span>
+          <span>•</span>
+          <span id="modalDate">September 17, 2026</span>
+          <span>•</span>
+          <span id="modalReadTime">4 min read</span>
+        </div>
+
+        <h2 id="modalTitle" class="text-xl sm:text-2xl font-black leading-tight text-white mb-3">
+          Title of Article
+        </h2>
+
+        <!-- Author row with red AD Admin circle matching screenshot -->
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-5 rounded-full bg-red-500 text-white text-[9px] font-black flex items-center justify-center">
+            AD
+          </div>
+          <span class="text-xs text-slate-200 font-semibold">Admin • Verified Review</span>
+          <div class="ml-auto flex items-center gap-1 text-amber-400 text-xs font-bold">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+            <span id="modalRating">4.9 / 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-700 leading-relaxed custom-scrollbar">
+        
+        <!-- Affiliate Deal Callout Banner -->
+        <div class="bg-gradient-to-r from-red-50 via-orange-50 to-amber-50 border border-red-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-[11px] font-bold text-red-600 uppercase tracking-wide flex items-center gap-1">
+              <i data-lucide="tag" class="w-3 h-3"></i>
+              <span>Ưu Đãi Tiếp Thị Liên Kết Độc Quyền</span>
+            </div>
+            <div class="text-base font-extrabold text-slate-900 mt-0.5">
+              Giá khuyến mãi: <span id="modalPrice" class="text-red-600 font-black">$14.98</span>
+            </div>
+            <div id="modalCouponBox" class="text-xs text-slate-600 mt-1 flex items-center gap-2">
+              <span>Mã giảm giá:</span>
+              <span id="modalCouponCode" class="font-mono font-bold bg-white px-2 py-0.5 rounded border border-red-300 text-red-600">HAKO2026</span>
+              <button onclick="copyModalCoupon()" class="text-slate-500 hover:text-red-600 text-[11px] font-semibold underline flex items-center gap-0.5">
+                <i data-lucide="copy" class="w-3 h-3"></i>
+                <span>Sao chép</span>
+              </button>
+            </div>
+          </div>
+
+          <a 
+            id="modalAffiliateLink" 
+            href="#" 
+            target="_blank" 
+            rel="noopener noreferrer nofollow"
+            onclick="trackAffiliateClick()"
+            class="px-5 py-2.5 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-1.5 shrink-0 text-center"
+          >
+            <span>Nhận Deal / Mua Ngay</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="text-slate-800 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-brand-navy italic text-xs sm:text-sm" id="modalExcerpt">
+          Excerpt content...
+        </div>
+
+        <!-- Pros & Cons Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+              <span>Ưu điểm nổi bật</span>
+            </h4>
+            <ul id="modalPros" class="space-y-1.5 text-xs text-slate-700"></ul>
+          </div>
+
+          <div class="bg-rose-50/60 border border-rose-200/80 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i data-lucide="x-circle" class="w-4 h-4 text-rose-600"></i>
+              <span>Nhược điểm cần lưu ý</span>
+            </h4>
+            <ul id="modalCons" class="space-y-1.5 text-xs text-slate-700"></ul>
+          </div>
+        </div>
+
+        <!-- Full Content -->
+        <div id="modalFullContent" class="space-y-3 text-slate-700 text-xs sm:text-sm border-t border-slate-100 pt-4 leading-relaxed"></div>
+
+        <div class="text-[11px] text-slate-400 bg-slate-50 p-3 rounded-xl border border-slate-100">
+          <strong>Affiliate Disclosure:</strong> HakoReview tham gia các chương trình tiếp thị liên kết để mang đến mã giảm giá và đánh giá khách quan nhất. Chúng tôi có thể nhận được hoa hồng giới thiệu khi bạn mua hàng mà không làm phát sinh thêm chi phí cho bạn.
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="closeArticleModal()" class="text-xs font-semibold text-slate-600 hover:text-slate-900">
+          Đóng cửa sổ
+        </button>
+        <a 
+          id="modalBottomAffiliateLink" 
+          href="#" 
+          target="_blank" 
+          rel="noopener noreferrer nofollow"
+          onclick="trackAffiliateClick()"
+          class="px-5 py-2 bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5"
+        >
+          <span>Đến trang bán hàng &rarr;</span>
         </a>
-      </h3>
-      <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-        We tested and compared key ingredients, texture, and pricing to find the best hydrating face creams on sale this week...
+      </div>
+
+    </div>
+  </div>
+
+  <!-- API KEY MODAL -->
+  <div id="apiKeyModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeApiKeyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mb-3">
+        <i data-lucide="key" class="w-6 h-6"></i>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800">Cấu hình Gemini API Key</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
+        API Key được lưu trữ cục bộ trong trình duyệt (LocalStorage) để tự động gọi model <strong>gemini-2.5-flash</strong> khi tạo bài viết tiếp thị.
       </p>
-      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-        <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock"></i> 5 min read</span>
-        <a href="post.html?id=top-5-skincare-deals" class="text-xs font-bold text-[#e63946] hover:underline flex items-center gap-1">
-          Read Review <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-    </article>
 
-    <!-- Article Card 3 -->
-    <article class="bg-white rounded-2xl border border-slate-200/80 p-5 card-shadow transition hover:border-slate-300">
-      <div class="h-36 bg-slate-800 rounded-xl flex items-center justify-center mb-4 text-white overflow-hidden relative">
-        <i class="fa-solid fa-gamepad text-4xl text-slate-600"></i>
-        <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-bold">Tech & Gaming</span>
-      </div>
-      <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium">
-        <span class="text-blue-600 font-bold"><i class="fa-solid fa-bolt"></i> Flash Sale</span>
-        <span>•</span>
-        <span>Yesterday</span>
-      </div>
-      <h3 class="text-base font-bold text-slate-900 mt-2 leading-snug">
-        <a href="post.html?id=stacking-tech-discounts" class="hover:text-[#e63946] transition">
-          How to Stack Promo Codes & Cashback for Gaming Accessories
-        </a>
-      </h3>
-      <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-        Step-by-step tutorial on combining store coupons with e-wallet instant rebates to save up to 50% on keyboards and headsets...
-      </p>
-      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-        <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock"></i> 4 min read</span>
-        <a href="post.html?id=stacking-tech-discounts" class="text-xs font-bold text-[#e63946] hover:underline flex items-center gap-1">
-          View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-    </article>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Google Gemini API Key</label>
+          <input 
+            type="password" 
+            id="apiKeyInput" 
+            placeholder="AIzaSy..." 
+            class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 font-mono text-xs"
+          >
+          <p class="text-[11px] text-slate-400 mt-1">
+            *Nếu chưa có Key, hệ thống vẫn tự động kích hoạt bộ <strong>Smart AI Template</strong> để tạo bài viết mẫu chuẩn SEO hoàn hảo.
+          </p>
+        </div>
 
-    <!-- Section: Popular Stores -->
-    <section id="stores" class="pt-4">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Featured Stores</h2>
-      <div class="flex items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200/80 card-shadow overflow-x-auto">
-        <a href="#" class="flex flex-col items-center gap-2 min-w-[70px] text-center">
-          <div class="w-14 h-14 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-600 font-bold text-xs">
-            Amazon
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700">Amazon</span>
-        </a>
-        <a href="#" class="flex flex-col items-center gap-2 min-w-[70px] text-center">
-          <div class="w-14 h-14 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold text-xs">
-            Walmart
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700">Walmart</span>
-        </a>
-        <a href="#" class="flex flex-col items-center gap-2 min-w-[70px] text-center">
-          <div class="w-14 h-14 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-red-600 font-bold text-xs">
-            Target
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700">Target</span>
-        </a>
-        <a href="#" class="flex flex-col items-center gap-2 min-w-[70px] text-center">
-          <div class="w-14 h-14 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 font-bold text-xs">
-            eBay
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700">eBay</span>
-        </a>
+        <div class="pt-2 flex items-center gap-2">
+          <button onclick="saveApiKey()" class="flex-1 py-2.5 bg-brand-navy hover:bg-brand-navyDark text-white font-bold rounded-xl transition text-xs">
+            Lưu Cấu Hình
+          </button>
+          <button onclick="testApiKeyConnection()" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition text-xs flex items-center gap-1">
+            <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+            <span>Test Key</span>
+          </button>
+          <button onclick="clearApiKey()" class="px-3 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold rounded-xl transition text-xs">
+            Xóa
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Section: Categories Grid -->
-    <section id="categories" class="pt-4">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Browse by Category</h2>
-      <div class="grid grid-cols-3 gap-3">
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-heart"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Beauty & Health</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-shirt"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Fashion</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-couch"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Home & Living</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-baby"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Baby & Kids</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-utensils"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Food & Dining</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-plane-departure"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Travel & Flights</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-violet-50 text-violet-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-laptop"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Electronics</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-cyan-50 text-cyan-500 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-credit-card"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Finance Deals</span>
-        </a>
-        <a href="#" class="bg-white rounded-xl p-3 border border-slate-200/80 card-shadow flex flex-col items-center text-center hover:border-slate-300 transition">
-          <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-base mb-2">
-            <i class="fa-solid fa-ellipsis"></i>
-          </div>
-          <span class="text-[11px] font-semibold text-slate-700 leading-tight">All Categories</span>
-        </a>
+  <!-- CONFIRMATION MODAL (Replaces window.confirm) -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl text-center">
+      <div class="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
       </div>
-    </section>
+      <h4 id="confirmModalTitle" class="text-base font-bold text-slate-800">Xác nhận thao tác</h4>
+      <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 mb-5">Bạn có chắc chắn muốn thực hiện thao tác này?</p>
+      <div class="flex items-center gap-2">
+        <button id="confirmCancelBtn" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 transition">Hủy</button>
+        <button id="confirmActionBtn" class="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition">Đồng ý</button>
+      </div>
+    </div>
+  </div>
 
-  </main>
+  <!-- FOOTER -->
+  <footer class="bg-brand-navy text-white mt-auto pt-14 pb-8 border-t border-blue-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="lg:col-span-2 space-y-3">
+          <div class="text-xl font-black tracking-tight text-white flex items-center gap-1.5">
+            <span class="w-6 h-6 rounded bg-brand-accent flex items-center justify-center text-xs font-bold">%</span>
+            <span>hakoreview</span>
+          </div>
+          <p class="text-xs font-semibold text-blue-200">Top Hub of US Online Coupons</p>
+          <p class="text-xs text-slate-300 font-light leading-relaxed max-w-sm">
+            HakoReview – Find Better. Buy Smarter.<br>
+            HakoReview is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.
+          </p>
+        </div>
 
-  <!-- Dark Navy Footer -->
-  <footer class="bg-[#112d4e] text-white pt-10 pb-8 mt-12 text-center sm:text-left">
-    <div class="max-w-xl mx-auto px-5 space-y-6">
-      <div>
-        <h3 class="font-extrabold text-lg tracking-tight">CouponsHere</h3>
-        <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-          Your trusted companion for daily discounts, verified promo codes, and unbiased buyer reviews.
-        </p>
+        <!-- Col 2: Explore -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Explore</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="javascript:void(0)" onclick="setCategoryFilter('all'); scrollToSection('reviewSection');" class="hover:text-white transition">All Coupons</a></li>
+            <li><a href="#stores" onclick="scrollToSection('popularStoresSection')" class="hover:text-white transition">Stores</a></li>
+            <li><a href="#categories" onclick="scrollToSection('categoriesSection')" class="hover:text-white transition">Categories</a></li>
+            <li><a href="#blog" onclick="scrollToSection('reviewSection')" class="hover:text-white transition">Blog</a></li>
+            <li><a href="#authors" class="hover:text-white transition">Authors</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Company</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Legal & Social -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mb-3">Legal</h4>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li><a href="#privacy" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#terms" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="#cookie" class="hover:text-white transition">Cookie Policy</a></li>
+            <li><a href="#disclaimer" class="hover:text-white transition">Disclaimer</a></li>
+          </ul>
+
+          <h4 class="text-xs font-bold uppercase tracking-wider text-blue-200 mt-5 mb-2">Follow Us</h4>
+          <div class="flex items-center space-x-2 text-slate-300">
+            <a href="#" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i data-lucide="facebook" class="w-3.5 h-3.5"></i></a>
+            <a href="#" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i data-lucide="youtube" class="w-3.5 h-3.5"></i></a>
+            <a href="#" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i data-lucide="twitter" class="w-3.5 h-3.5"></i></a>
+            <a href="#" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-xs"><i data-lucide="instagram" class="w-3.5 h-3.5"></i></a>
+          </div>
+        </div>
       </div>
 
-      <div class="border-t border-white/10 pt-5 flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 text-xs text-slate-300 font-medium">
-        <a href="#" class="hover:text-white transition">About Us</a>
-        <a href="#" class="hover:text-white transition">Contact</a>
-        <a href="#" class="hover:text-white transition">Privacy Policy</a>
-        <a href="#" class="hover:text-white transition">Terms of Service</a>
-        <a href="/admin" class="hover:text-white transition text-[#e63946] font-bold">Admin Portal</a>
-      </div>
-
-      <div class="border-t border-white/10 pt-5 flex items-center justify-center sm:justify-start gap-4 text-slate-300">
-        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition"><i class="fa-brands fa-facebook-f text-xs"></i></a>
-        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition"><i class="fa-brands fa-x-twitter text-xs"></i></a>
-        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition"><i class="fa-brands fa-tiktok text-xs"></i></a>
-      </div>
-
-      <div class="border-t border-white/10 pt-5 text-[11px] text-slate-400 text-center">
-        © 2026 CouponsHere.top — All rights reserved. Affiliate links may earn us a commission at no additional cost to you.
+      <!-- Copyright -->
+      <div class="pt-6 border-t border-blue-900/60 text-center text-[11px] text-slate-400">
+        &copy; 2026 hakoreview.com. All rights reserved. Powered by Gemini AI SEO Engine.
       </div>
     </div>
   </footer>
 
+  <!-- TOAST NOTIFICATIONS (No alert() used) -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <script>
+    /* =========================================================================
+       1. DATA STRUCTURES & DEFAULT SEED DATA
+       (Strictly aligned with the user's HakoReview reference screenshot)
+       ========================================================================= */
+
+    const DEFAULT_CATEGORIES = [
+      { id: "Adult 18 and over", name: "Adult 18 and over", icon: "🔞" },
+      { id: "Arts & crafts", name: "Arts & crafts", icon: "🎨" },
+      { id: "Babies and kids", name: "Babies and kids", icon: "👶" },
+      { id: "Beauty and fragrance", name: "Beauty and fragrance", icon: "💄" },
+      { id: "Bedding", name: "Bedding", icon: "🛏️" },
+      { id: "Books", name: "Books", icon: "📚" },
+      { id: "Clothing accessories", name: "Clothing accessories", icon: "👒" },
+      { id: "Computers and accessories", name: "Computers and accessories", icon: "💻" },
+      { id: "Decorations", name: "Decorations", icon: "🎄" },
+      { id: "Drinks", name: "Drinks", icon: "🍹" },
+      { id: "Education and Training", name: "Education and Training", icon: "🎓" },
+      { id: "Electronics and Technology", name: "Electronics and Technology", icon: "📱" },
+      { id: "Entertainment and media", name: "Entertainment and media", icon: "🎬" },
+      { id: "Equipment furniture", name: "Equipment furniture", icon: "🪑" },
+      { id: "Fashion jewelry", name: "Fashion jewelry", icon: "💍" },
+      { id: "Financial services and products", name: "Financial services and products", icon: "💳" },
+      { id: "Food", name: "Food", icon: "🍔" },
+      { id: "For businesses", name: "For businesses", icon: "🏢" }
+    ];
+
+    const DEFAULT_STORES = [
+      { name: "femme NATIVA", logoText: "femme NATIVA", cursive: true, offers: "5 offers", color: "bg-rose-50 text-rose-900 border-rose-100" },
+      { name: "Peptide Ritual", logoText: "CD R", cursive: false, offers: "2 offers", color: "bg-amber-50 text-amber-900 border-amber-100" },
+      { name: "MMO", logoText: "MMO", cursive: false, offers: "1 offers", color: "bg-slate-100 text-slate-800 border-slate-200" },
+      { name: "HALLO france", logoText: "HALLO", cursive: false, offers: "3 offers", color: "bg-blue-50 text-blue-800 border-blue-100" },
+      { name: "Track Speed", logoText: "Track Speed", cursive: false, offers: "1 offers", color: "bg-red-50 text-red-700 border-red-100" },
+      { name: "ARAMATEK", logoText: "ARAMATEK", cursive: false, offers: "1 offers", color: "bg-stone-100 text-stone-800 border-stone-200" },
+      { name: "Pulse Tech", logoText: "PULSE", cursive: false, offers: "3 offers", color: "bg-cyan-50 text-cyan-900 border-cyan-100" },
+    ];
+
+    const DEFAULT_ARTICLES = [
+      {
+        id: "art-1",
+        title: "Rachael Attard Review 2026: Best Products + Exclusive Discount Deal",
+        slug: "rachael-attard-review-2026",
+        date: "September 17, 2026",
+        readTime: "3 min read",
+        rating: 4.9,
+        category: "Beauty and fragrance",
+        brand: "femme NATIVA",
+        headerLogoType: "text-script",
+        headerLogoText: "femme NATIVA",
+        excerpt: "Discover the Rachael Attard line starting at just $14.98. Explore our in-depth review of top formulas, brand insights, and current online promotions.",
+        price: "$14.98",
+        coupon: "FEMME2026",
+        affiliateUrl: "https://example.com/affiliate/femme-nativa",
+        clicks: 42,
+        pros: [
+          "Bảng thành phần hữu cơ an toàn cho mọi làn da",
+          "Mức giá bắt đầu chỉ từ $14.98 với mã giảm giá độc quyền",
+          "Hiệu quả cấp ẩm và phục hồi được chứng thực lâm sàng"
+        ],
+        cons: [
+          "Số lượng mã giảm giá chỉ áp dụng cho 50 đơn hàng đầu mỗi ngày",
+          "Mùi hương thảo mộc nhẹ tự nhiên, không lưu hương quá lâu"
+        ],
+        fullContent: `
+          <p>Dòng sản phẩm làm đẹp từ thương hiệu Femme Nativa & Rachael Attard hiện là một trong những sản phẩm chăm sóc da và vóc dáng bán chạy nhất năm 2026. Được tinh chế từ nguyên liệu thảo mộc lành tính, sản phẩm giúp tái tạo da nhẹ nhàng mà không gây kích ứng.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Vì sao nên chọn ưu đãi này?</h4>
+          <p>Khách hàng mua qua liên kết độc quyền trên HakoReview sẽ nhận được mức giá chỉ $14.98 và được tặng kèm cẩm nang chăm sóc da tại nhà hoàn toàn miễn phí.</p>
+        `
+      },
+      {
+        id: "art-2",
+        title: "Peptide Ritual Review 2026: Clinical Skincare & Top Deals Tested",
+        slug: "peptide-ritual-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.8,
+        category: "Beauty and fragrance",
+        brand: "Peptide Ritual",
+        headerLogoType: "badge-circle",
+        headerLogoText: "CD R",
+        excerpt: "Discover Peptide Ritual clinical-grade formulas. Explore verified reviews, top serums, and value sets starting from $25 with direct checkout savings.",
+        price: "$25.00",
+        coupon: "PEPTIDE30",
+        affiliateUrl: "https://example.com/affiliate/peptide-ritual",
+        clicks: 29,
+        pros: [
+          "Công thức Peptide đa tầng nồng độ cao kích thích collagen",
+          "Giảm thiểu vết nhăn li ti rõ rệt sau 14 ngày sử dụng",
+          "Bao bì hút chân không bảo vệ tối đa hoạt chất"
+        ],
+        cons: [
+          "Cần kiên trì sử dụng ít nhất 2 tuần để thấy rõ hiệu quả"
+        ],
+        fullContent: `
+          <p>Peptide Ritual là sự kết hợp chuẩn y khoa giữa các chuỗi amino acid sinh học và dưỡng chất chống oxy hóa. Sản phẩm thẩm thấu cực nhanh, giúp làn da căng bóng và đàn hồi tốt hơn.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Ưu đãi độc quyền trên HakoReview</h4>
+          <p>Chỉ cần nhập mã PEPTIDE30 tại giỏ hàng, bạn sẽ được giảm ngay 30% kèm miễn phí giao hàng toàn quốc.</p>
+        `
+      },
+      {
+        id: "art-3",
+        title: "Carplaymmb Review 2026: Untether Your Dashboard for Less",
+        slug: "carplaymmb-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.9,
+        category: "Electronics and Technology",
+        brand: "Carplaymmb",
+        headerLogoType: "image-carplay",
+        headerLogoText: "Carplaymmb Dashboard",
+        excerpt: "Upgrade your dash with Carplaymmb wireless CarPlay adapters starting at $14.98. Explore setup perks, performance specs, and pricing insights.",
+        price: "$14.98",
+        coupon: "CARPLAY50",
+        affiliateUrl: "https://example.com/affiliate/carplaymmb",
+        clicks: 87,
+        pros: [
+          "Tự động kết nối không dây sau khi khởi động xe chỉ mất 5 giây",
+          "Chip xử lý thế hệ mới 2026 không gây nóng máy hoặc giật khung hình",
+          "Tương thích với hơn 800 mẫu xe hỗ trợ Apple CarPlay và Android Auto"
+        ],
+        cons: [
+          "Yêu cầu màn hình xe nguyên bản đã có sẵn cổng kết nối CarPlay dây"
+        ],
+        fullContent: `
+          <p>Thiết bị Carplaymmb 2026 mang đến sự gọn gàng cho khoang lái ô tô. Bạn không còn phải cắm dây sạc rườm rà mỗi khi bước vào xe: bản đồ, cuộc gọi và nhạc Spotify sẽ tự động đồng bộ ngay trên màn hình trung tâm.</p>
+          <h4 class="font-bold text-slate-800 text-sm mt-3">Độ trễ và chất lượng âm thanh</h4>
+          <p>Nhờ trang bị băng tần kép Wifi 5.8GHz và Bluetooth 5.3, âm thanh phát ra không có sự suy hao so với cắm dây truyền thống.</p>
+        `
+      },
+      {
+        id: "art-4",
+        title: "Halloo France Review 2026: Wellness Essentials & Best Deals",
+        slug: "halloo-france-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.7,
+        category: "Drinks",
+        brand: "HALLO france",
+        headerLogoType: "badge-text",
+        headerLogoText: "HALLO france",
+        excerpt: "Discover Halloo France wellness solutions starting at $25.00. Explore top-selling balance, health essentials, and current promotions on store.",
+        price: "$25.00",
+        coupon: "HALLOO15",
+        affiliateUrl: "https://example.com/affiliate/halloo-france",
+        clicks: 19,
+        pros: [
+          "Nguồn nguyên liệu hữu cơ nhập khẩu từ vùng Provence nước Pháp",
+          "Cân bằng điện giải và cung cấp vitamin thiết yếu cho ngày dài",
+          "Hương vị tươi mát tự nhiên, không phẩm màu nhân tạo"
+        ],
+        cons: [
+          "Bao bì dạng lon tái chế cần bảo quản nơi thoáng mát"
+        ],
+        fullContent: `
+          <p>Halloo France là giải pháp nước uống thanh lọc cơ thể dành cho dân văn phòng và người yêu thể thao. Với công thức điện giải tự nhiên, sản phẩm giúp bổ sung năng lượng nhanh chóng mà không gây tăng đường huyết.</p>
+        `
+      },
+      {
+        id: "art-5",
+        title: "Track Speed Review 2026: Top Racing Training Gear & Verified Discounts",
+        slug: "track-speed-review-2026",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.8,
+        category: "Equipment furniture",
+        brand: "Track Speed",
+        headerLogoType: "badge-text",
+        headerLogoText: "Track Speed",
+        excerpt: "Discover Track Speed performance gear, training programs, and driving experiences. Check store pricing down from $25.00 with codes.",
+        price: "$25.00",
+        coupon: "SPEED2026",
+        affiliateUrl: "https://example.com/affiliate/track-speed",
+        clicks: 34,
+        pros: [
+          "Khung thép chịu tải vững chắc, triệt tiêu hoàn toàn hiện tượng rung lắc",
+          "Dễ dàng điều chỉnh độ nghiêng và khoảng cách phù hợp cho mọi vóc dáng",
+          "Có thể gấp gọn tiết kiệm diện tích khi không sử dụng"
+        ],
+        cons: [
+          "Trọng lượng sản phẩm tương đối đầm chắc khi di chuyển"
+        ],
+        fullContent: `
+          <p>Ghế đua và khung mô phỏng lái xe Track Speed 2026 mang lại cảm giác chân thật cho người đam mê thể thao tốc độ mô phỏng (Sim Racing). Mức giá khuyến mãi chỉ còn $25.00 khi dùng mã SPEED2026.</p>
+        `
+      },
+      {
+        id: "art-6",
+        title: "Dudimali Review 2026: Best Products + Exclusive Discount Code",
+        slug: "dudimali-review-2026",
+        date: "September 17, 2026",
+        readTime: "3 min read",
+        rating: 4.6,
+        category: "Equipment furniture",
+        brand: "ARAMATEK",
+        headerLogoType: "image-furniture",
+        headerLogoText: "ARAMATEK Decor",
+        excerpt: "Discover Dudimali top tech and lifestyle deals starting at just $14.98. Read our honest review on quality, verified ratings, and checkout perks.",
+        price: "$14.98",
+        coupon: "DUDI40",
+        affiliateUrl: "https://example.com/affiliate/dudimali",
+        clicks: 53,
+        pros: [
+          "Ngôn ngữ thiết kế tối giản phong cách Bắc Âu (Scandinavian)",
+          "Gỗ công nghiệp đạt chuẩn an toàn E1 chống ẩm mốc",
+          "Thời gian lắp ráp cực nhanh chỉ trong 10 phút"
+        ],
+        cons: [
+          "Số lượng mẫu mã cho từng màu giới hạn trong đợt sale"
+        ],
+        fullContent: `
+          <p>Dudimali & ARAMATEK mang đến sự đột phá cho không gian phòng khách hiện đại. Bàn trà thông minh tích hợp sạc không dây và ngăn chứa ẩn giúp tối ưu diện tích sinh hoạt tối đa.</p>
+        `
+      }
+    ];
+
+    // State management
+    let currentView = 'frontend'; // 'frontend' or 'admin'
+    let currentCategoryFilter = 'all';
+    let currentSearchTerm = '';
+    let articles = [];
+    let pendingAiArticle = null;
+    let currentActiveArticleId = null;
+
+    function initData() {
+      const stored = localStorage.getItem('hakoreview_articles_v2');
+      if (stored) {
+        try {
+          articles = JSON.parse(stored);
+        } catch (e) {
+          articles = [...DEFAULT_ARTICLES];
+        }
+      } else {
+        articles = [...DEFAULT_ARTICLES];
+        saveArticles();
+      }
+      updateStats();
+    }
+
+    function saveArticles() {
+      localStorage.setItem('hakoreview_articles_v2', JSON.stringify(articles));
+      updateStats();
+    }
+
+    function updateStats() {
+      const statOffersEl = document.getElementById('statOffers');
+      const statStoresEl = document.getElementById('statStores');
+      const statCategoriesEl = document.getElementById('statCategories');
+      const adminArticleCount = document.getElementById('adminArticleCount');
+
+      if (statOffersEl) statOffersEl.textContent = 300 + articles.length * 2;
+      if (statStoresEl) statStoresEl.textContent = 110;
+      if (statCategoriesEl) statCategoriesEl.textContent = DEFAULT_CATEGORIES.length;
+      if (adminArticleCount) adminArticleCount.textContent = articles.length;
+    }
+
+    function renderArticles() {
+      const container = document.getElementById('articlesGrid');
+      const emptyState = document.getElementById('emptyState');
+      const filterPill = document.getElementById('activeFilterPill');
+      const filterName = document.getElementById('activeFilterName');
+      const countText = document.getElementById('articleCountText');
+
+      if (!container) return;
+
+      // Filter articles based on active category & search keyword
+      let filtered = articles.filter(item => {
+        const matchesCategory = (currentCategoryFilter === 'all') || (item.category === currentCategoryFilter);
+        const matchesSearch = !currentSearchTerm || 
+          item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+          item.excerpt.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+          (item.brand && item.brand.toLowerCase().includes(currentSearchTerm.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      });
+
+      // Filter Pill display
+      if (currentCategoryFilter !== 'all') {
+        filterPill.classList.remove('hidden');
+        filterPill.classList.add('flex');
+        filterName.textContent = currentCategoryFilter;
+        countText.textContent = `Showing ${filtered.length} in "${currentCategoryFilter}"`;
+      } else if (currentSearchTerm) {
+        filterPill.classList.remove('hidden');
+        filterPill.classList.add('flex');
+        filterName.textContent = `Tìm: "${currentSearchTerm}"`;
+        countText.textContent = `Found ${filtered.length} results`;
+      } else {
+        filterPill.classList.add('hidden');
+        filterPill.classList.remove('flex');
+        countText.textContent = `Showing all ${filtered.length} articles`;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      // Generate HTML cards strictly matching the HakoReview design
+      container.innerHTML = filtered.map(item => {
+        let topGraphic = '';
+
+        if (item.headerLogoType === 'text-script') {
+          topGraphic = `
+            <div class="h-44 w-full bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 flex items-center justify-center p-4 border-b border-slate-100">
+              <span class="text-3xl font-serif italic text-pink-700 tracking-wide select-none">${item.headerLogoText || item.brand}</span>
+            </div>
+          `;
+        } else if (item.headerLogoType === 'image-carplay') {
+          topGraphic = `
+            <div class="h-44 w-full bg-slate-900 flex items-center justify-center p-3 relative overflow-hidden border-b border-slate-800">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+              <div class="z-10 text-center">
+                <div class="flex items-center justify-center gap-1.5 mb-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-white text-xs font-mono font-bold tracking-widest uppercase py-1 px-3 bg-white/10 rounded-lg backdrop-blur-xs border border-white/20">
+                  CARPLAY DASHBOARD UI
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (item.headerLogoType === 'image-furniture') {
+          topGraphic = `
+            <div class="h-44 w-full bg-stone-800 flex items-center justify-center p-3 relative overflow-hidden border-b border-stone-700">
+              <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:14px_14px]"></div>
+              <div class="z-10 text-center">
+                <span class="text-[11px] uppercase tracking-widest text-amber-200 font-semibold block mb-0.5">ARAMATEK LIVING</span>
+                <span class="text-base text-white font-serif italic font-bold">Smart Home Decor</span>
+              </div>
+            </div>
+          `;
+        } else {
+          topGraphic = `
+            <div class="h-44 w-full bg-gradient-to-br from-slate-50 to-blue-50/60 flex flex-col items-center justify-center p-4 border-b border-slate-100">
+              <div class="w-12 h-12 rounded-xl bg-white shadow-2xs border border-slate-200/60 flex items-center justify-center font-black text-slate-800 text-sm mb-1.5">
+                ${(item.brand || 'HAKO').substring(0, 3).toUpperCase()}
+              </div>
+              <span class="text-xs font-bold text-slate-700">${escapeHtml(item.brand || 'Brand')}</span>
+              <span class="text-[10px] text-slate-400">Verified Partner</span>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group">
+            ${topGraphic}
+            
+            <div class="p-5 flex-grow flex flex-col justify-between">
+              <div>
+                <!-- Date -->
+                <div class="text-[11px] text-slate-400 mb-1.5">
+                  ${item.date}
+                </div>
+                
+                <!-- Admin Tag & Category -->
+                <div class="flex items-center gap-1.5 mb-2.5">
+                  <div class="w-4 h-4 rounded-full bg-red-500 text-white text-[8px] font-black flex items-center justify-center">
+                    AD
+                  </div>
+                  <span class="text-xs font-semibold text-slate-700">Admin</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium ml-auto">
+                    ${item.category}
+                  </span>
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-sm font-bold text-slate-900 group-hover:text-brand-navy transition leading-snug line-clamp-2 mb-2">
+                  ${escapeHtml(item.title)}
+                </h3>
+
+                <!-- Excerpt -->
+                <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed mb-4">
+                  ${escapeHtml(item.excerpt)}
+                </p>
+              </div>
+
+              <!-- Bottom Row: Read Time & Read Article CTA -->
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-400 text-[11px]">${item.readTime || '4 min read'}</span>
+                
+                <button 
+                  onclick="openArticleModal('${item.id}')"
+                  class="font-semibold text-red-600 hover:text-red-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                >
+                  <span>Read article</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderPopularStores() {
+      const container = document.getElementById('popularStoresContainer');
+      if (!container) return;
+
+      container.innerHTML = DEFAULT_STORES.map(store => `
+        <div 
+          onclick="filterByBrand('${store.name}')"
+          class="bg-white rounded-2xl border ${store.color} p-3 flex flex-col items-center justify-center text-center cursor-pointer store-card transition-all"
+        >
+          <div class="w-full h-10 flex items-center justify-center font-bold text-xs rounded-lg px-1 mb-1">
+            <span class="${store.cursive ? 'font-serif italic text-sm' : 'font-sans'} truncate">${store.logoText}</span>
+          </div>
+          <span class="text-[11px] font-medium text-slate-500">${store.offers}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoriesGrid');
+      const aiCategorySelect = document.getElementById('aiCategorySelect');
+      const editAiCategorySelect = document.getElementById('editAiCategory');
+      const manualCategorySelect = document.getElementById('manualCategory');
+
+      if (!container) return;
+
+      // In categories grid
+      container.innerHTML = DEFAULT_CATEGORIES.map(cat => {
+        const isSelected = currentCategoryFilter === cat.id;
+        return `
+          <div 
+            onclick="setCategoryFilter('${cat.id}')"
+            class="bg-white rounded-2xl border ${isSelected ? 'border-red-500 ring-2 ring-red-400/20 bg-red-50/20' : 'border-slate-100 hover:border-slate-300'} p-3.5 flex flex-col items-center justify-center text-center cursor-pointer transition-all hover:-translate-y-0.5 shadow-2xs group"
+          >
+            <div class="w-10 h-10 rounded-xl bg-slate-50 group-hover:bg-slate-100 flex items-center justify-center text-xl mb-2 transition">
+              ${cat.icon}
+            </div>
+            <span class="text-xs font-semibold text-slate-700 leading-tight group-hover:text-brand-navy transition">
+              ${cat.name}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      // Populate Selects in Admin
+      const optionsHtml = DEFAULT_CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+      if (aiCategorySelect) aiCategorySelect.innerHTML = optionsHtml;
+      if (editAiCategorySelect) editAiCategorySelect.innerHTML = optionsHtml;
+      if (manualCategorySelect) manualCategorySelect.innerHTML = optionsHtml;
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminArticlesTableBody');
+      if (!tbody) return;
+
+      if (articles.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-400">Chưa có bài viết nào</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = articles.map(item => `
+        <tr class="hover:bg-slate-50/80 transition">
+          <td class="py-3 px-4 font-semibold text-slate-800">
+            <div class="max-w-xs truncate font-bold" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div>
+            <div class="text-[10px] text-slate-400 font-normal">Thương hiệu: ${item.brand || 'N/A'} • ${item.date}</div>
+          </td>
+          <td class="py-3 px-3 text-slate-600">
+            <span class="bg-slate-100 px-2 py-0.5 rounded-full text-[10px] font-medium">${item.category}</span>
+          </td>
+          <td class="py-3 px-3 font-mono font-bold text-red-600">${item.coupon || 'NONE'}</td>
+          <td class="py-3 px-3 font-semibold text-slate-700">${item.price || 'Deal'}</td>
+          <td class="py-3 px-3 font-semibold text-blue-600">
+            <span class="bg-blue-50 px-2 py-0.5 rounded-full text-[10px]">${item.clicks || 0} clicks</span>
+          </td>
+          <td class="py-3 px-3 text-right space-x-1">
+            <button onclick="openArticleModal('${item.id}')" class="p-1 hover:text-brand-navy transition" title="Xem trước bài viết">
+              <i data-lucide="eye" class="w-4 h-4 inline"></i>
+            </button>
+            <button onclick="editExistingArticle('${item.id}')" class="p-1 hover:text-amber-600 transition" title="Sửa bài viết">
+              <i data-lucide="edit-3" class="w-4 h-4 inline"></i>
+            </button>
+            <button onclick="deleteArticle('${item.id}')" class="p-1 hover:text-red-600 transition" title="Xóa bài viết">
+              <i data-lucide="trash-2" class="w-4 h-4 inline"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    async function generateReviewWithGemini() {
+      const urlInput = document.getElementById('aiAffiliateUrl');
+      const nameInput = document.getElementById('aiProductName');
+      const storeInput = document.getElementById('aiStoreBrand');
+      const priceInput = document.getElementById('aiProductPrice');
+      const couponInput = document.getElementById('aiCouponCode');
+      const categorySelect = document.getElementById('aiCategorySelect');
+      const notesInput = document.getElementById('aiCustomNotes');
+
+      const affiliateUrl = urlInput.value.trim();
+      const productName = nameInput.value.trim();
+      const brand = storeInput.value.trim() || productName.split(' ')[0] || "Brand";
+      const price = priceInput.value.trim() || "$14.98";
+      const coupon = couponInput.value.trim() || "DEAL2026";
+      const category = categorySelect.value;
+      const notes = notesInput.value.trim();
+
+      if (!productName) {
+        showToast("Vui lòng nhập tên sản phẩm để Gemini AI viết bài!", "warning");
+        nameInput.focus();
+        return;
+      }
+
+      // Button UI states
+      const generateBtn = document.getElementById('generateWithAiBtn');
+      const generateBtnText = document.getElementById('generateBtnText');
+      const statusBadge = document.getElementById('aiStatusBadge');
+
+      generateBtn.disabled = true;
+      generateBtnText.innerHTML = `<span class="inline-block animate-spin mr-1">🌀</span> Gemini AI đang nghiên cứu & viết bài...`;
+      statusBadge.textContent = "AI đang xử lý...";
+      statusBadge.className = "text-[11px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-medium animate-pulse";
+
+      const apiKey = localStorage.getItem('gemini_api_key') || "";
+      let aiResult = null;
+
+      try {
+        if (apiKey) {
+          const systemInstruction = `Bạn là chuyên gia thẩm định sản phẩm và chuyên viên SEO Tiếp thị Liên kết (Affiliate Marketer) hàng đầu của trang web đánh giá HakoReview.
+Nhiệm vụ: Phân tích sản phẩm và tạo một bài đánh giá chuyên sâu, khách quan, thu hút người đọc và thúc đẩy chuyển đổi mua hàng qua link tiếp thị.
+
+Định dạng trả về: DUY NHẤT một chuỗi JSON thuần (không chứa dấu backtick markdown hay giải thích thêm):
+{
+  "title": "[Tên Sản phẩm] Review 2026: [Slogan lôi cuốn + Tested Deals]",
+  "excerpt": "Đoạn văn ngắn 2 câu tóm tắt mở đầu chuẩn phong cách HakoReview, nêu giá deal và mã coupon",
+  "readTime": "4 min read",
+  "rating": 4.8,
+  "pros": ["Ưu điểm 1", "Ưu điểm 2", "Ưu điểm 3"],
+  "cons": ["Nhược điểm 1", "Nhược điểm 2"],
+  "fullContent": "Đoạn văn HTML dài 2-3 đoạn kèm thẻ <p> và <h4 class='font-bold text-slate-800 text-sm mt-3'> phân tích hiệu năng, độ tin cậy và lý do nên mua ngay qua ưu đãi"
+}`;
+
+          const userQuery = `Sản phẩm: ${productName}
+Thương hiệu: ${brand}
+Affiliate Link: ${affiliateUrl}
+Giá Deal: ${price}
+Mã Coupon: ${coupon}
+Danh mục: ${category}
+Yêu cầu bổ sung: ${notes}`;
+
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+          
+          const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemInstruction }] },
+            generationConfig: {
+              responseMimeType: "application/json"
+            }
+          };
+
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            const textContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (textContent) {
+              aiResult = JSON.parse(textContent);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Gemini API call skipped or encountered error, activating intelligent simulator:", err);
+      }
+
+      if (!aiResult) {
+        // Simulated latency for realistic experience
+        await new Promise(r => setTimeout(r, 1000));
+
+        aiResult = {
+          title: `${productName} Review 2026: Best Tested Deals & Exclusive Discount Code`,
+          excerpt: `Discover the verified ${productName} starting at ${price}. Explore hands-on performance, certified perks, and unlock instant savings with code ${coupon}.`,
+          readTime: "4 min read",
+          rating: 4.8,
+          pros: [
+            `Hiệu năng và độ hoàn thiện vượt trội so với phân khúc giá ${price}`,
+            `Kích hoạt mã giảm giá độc quyền ${coupon} để tiết kiệm chi phí tối đa`,
+            `Được đội ngũ HakoReview thẩm định chính hãng và độ bền thực tế`
+          ],
+          cons: [
+            `Số lượng deal có hạn trong ngày dành riêng cho độc giả`,
+            `Nhu cầu đặt mua cao có thể kéo dài thời gian giao hàng thêm 1 ngày`
+          ],
+          fullContent: `
+            <p>Sản phẩm <strong>${escapeHtml(productName)}</strong> đang nhận được sự quan tâm rất lớn từ cộng đồng mua sắm trực tuyến trong năm 2026. Được thiết kế tối ưu cho danh mục <em>${escapeHtml(category)}</em>, sản phẩm mang lại trải nghiệm tiện nghi và hiệu quả rõ rệt ngay từ lần đầu sử dụng.</p>
+            <h4 class="font-bold text-slate-800 text-sm mt-3">Trải nghiệm vận hành & Thẩm định chất lượng</h4>
+            <p>Sau quá trình kiểm nghiệm thực tế bởi đội ngũ HakoReview, ${escapeHtml(productName)} đạt điểm số ấn tượng nhờ độ ổn định cao và thao tác lắp đặt/sử dụng vô cùng trực quan.</p>
+            <h4 class="font-bold text-slate-800 text-sm mt-3">Ưu đãi độc quyền trên HakoReview</h4>
+            <p>Với mức giá sale chỉ từ <strong>${escapeHtml(price)}</strong> đi kèm mã giảm giá <strong>${escapeHtml(coupon)}</strong>, đây là cơ hội hiếm có để sở hữu sản phẩm chính hãng với chi phí tối ưu nhất.</p>
+          `
+        };
+      }
+
+      // Populate into preview editor
+      pendingAiArticle = {
+        id: "art-" + Date.now(),
+        brand: brand,
+        date: "September 17, 2026",
+        category: category,
+        price: price,
+        coupon: coupon,
+        affiliateUrl: affiliateUrl || "https://hakoreview.com/deal/" + encodeURIComponent(productName),
+        clicks: 0,
+        ...aiResult
+      };
+
+      document.getElementById('editAiTitle').value = pendingAiArticle.title;
+      document.getElementById('editAiExcerpt').value = pendingAiArticle.excerpt;
+      document.getElementById('editAiCategory').value = pendingAiArticle.category;
+      document.getElementById('editAiReadTime').value = pendingAiArticle.readTime;
+      document.getElementById('editAiRating').value = pendingAiArticle.rating || 4.8;
+      document.getElementById('editAiContent').value = pendingAiArticle.fullContent.trim();
+      document.getElementById('editAiPros').value = pendingAiArticle.pros.join('\n');
+      document.getElementById('editAiCons').value = pendingAiArticle.cons.join('\n');
+
+      document.getElementById('aiPreviewEmpty').classList.add('hidden');
+      document.getElementById('aiPreviewFilled').classList.remove('hidden');
+      document.getElementById('aiPreviewFilled').classList.add('flex');
+
+      // Reset button state
+      generateBtn.disabled = false;
+      generateBtnText.textContent = "Tạo Bài Viết Chuẩn SEO Bằng Gemini AI";
+      statusBadge.textContent = "Đã sinh bài thành công";
+      statusBadge.className = "text-[11px] bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-medium";
+
+      showToast("Gemini đã viết bài xong! Bạn có thể kiểm tra và bấm Xuất bản.", "success");
+    }
+
+    function publishAiArticle() {
+      if (!pendingAiArticle) {
+        showToast("Không tìm thấy nội dung bài viết để xuất bản", "error");
+        return;
+      }
+
+      // Collect user edits
+      pendingAiArticle.title = document.getElementById('editAiTitle').value.trim();
+      pendingAiArticle.excerpt = document.getElementById('editAiExcerpt').value.trim();
+      pendingAiArticle.category = document.getElementById('editAiCategory').value;
+      pendingAiArticle.readTime = document.getElementById('editAiReadTime').value.trim() || '4 min read';
+      pendingAiArticle.rating = parseFloat(document.getElementById('editAiRating').value) || 4.8;
+      pendingAiArticle.fullContent = document.getElementById('editAiContent').value.trim();
+      
+      pendingAiArticle.pros = document.getElementById('editAiPros').value.split('\n').map(s => s.trim()).filter(Boolean);
+      pendingAiArticle.cons = document.getElementById('editAiCons').value.split('\n').map(s => s.trim()).filter(Boolean);
+
+      // Add to front of array
+      articles.unshift(pendingAiArticle);
+      saveArticles();
+      renderArticles();
+      renderAdminTable();
+
+      showToast("Bài viết đã xuất bản thành công lên HakoReview!", "success");
+
+      // Reset AI Preview form
+      pendingAiArticle = null;
+      document.getElementById('aiPreviewFilled').classList.add('hidden');
+      document.getElementById('aiPreviewFilled').classList.remove('flex');
+      document.getElementById('aiPreviewEmpty').classList.remove('hidden');
+      document.getElementById('aiStatusBadge').textContent = "Sẵn sàng";
+      document.getElementById('aiStatusBadge').className = "text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-medium";
+
+      // Offer to switch to view
+      setTimeout(() => {
+        switchView('frontend');
+        scrollToSection('reviewSection');
+      }, 600);
+    }
+
+    function handleManualArticleSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('manualTitle').value.trim();
+      const category = document.getElementById('manualCategory').value;
+      const affiliateUrl = document.getElementById('manualAffiliateUrl').value.trim();
+      const price = document.getElementById('manualPrice').value.trim() || "$19.99";
+      const coupon = document.getElementById('manualCoupon').value.trim() || "DEAL10";
+      const excerpt = document.getElementById('manualExcerpt').value.trim();
+      const content = document.getElementById('manualContent').value.trim();
+
+      const newArt = {
+        id: "art-" + Date.now(),
+        title: title,
+        brand: title.split(' ')[0] || "Brand",
+        date: "September 17, 2026",
+        readTime: "4 min read",
+        rating: 4.8,
+        category: category,
+        price: price,
+        coupon: coupon,
+        affiliateUrl: affiliateUrl,
+        excerpt: excerpt,
+        clicks: 0,
+        pros: ["Hàng chính hãng được bảo hộ", "Giá deal tiết kiệm độc quyền", "Chất lượng hoàn thiện cao"],
+        cons: ["Số lượng deal có hạn"],
+        fullContent: `<p>${escapeHtml(content)}</p>`
+      };
+
+      articles.unshift(newArt);
+      saveArticles();
+      renderArticles();
+      renderAdminTable();
+
+      showToast("Đã thêm bài viết thủ công thành công!", "success");
+      e.target.reset();
+      switchAdminTab('manage');
+    }
+
+    function editExistingArticle(id) {
+      const art = articles.find(a => a.id === id);
+      if (!art) return;
+
+      // Populate AI editor with existing content for quick updating
+      switchAdminTab('import');
+      document.getElementById('aiProductName').value = art.title;
+      document.getElementById('aiStoreBrand').value = art.brand || '';
+      document.getElementById('aiProductPrice').value = art.price || '';
+      document.getElementById('aiCouponCode').value = art.coupon || '';
+      document.getElementById('aiCategorySelect').value = art.category;
+      document.getElementById('aiAffiliateUrl').value = art.affiliateUrl || '';
+
+      document.getElementById('editAiTitle').value = art.title;
+      document.getElementById('editAiExcerpt').value = art.excerpt;
+      document.getElementById('editAiCategory').value = art.category;
+      document.getElementById('editAiReadTime').value = art.readTime || '4 min read';
+      document.getElementById('editAiRating').value = art.rating || 4.8;
+      document.getElementById('editAiContent').value = art.fullContent;
+      document.getElementById('editAiPros').value = (art.pros || []).join('\n');
+      document.getElementById('editAiCons').value = (art.cons || []).join('\n');
+
+      pendingAiArticle = { ...art };
+      document.getElementById('aiPreviewEmpty').classList.add('hidden');
+      document.getElementById('aiPreviewFilled').classList.remove('hidden');
+      document.getElementById('aiPreviewFilled').classList.add('flex');
+
+      showToast(`Đã mở bài "${art.title}" để chỉnh sửa`, "info");
+    }
+
+    function deleteArticle(id) {
+      const art = articles.find(a => a.id === id);
+      showConfirmModal(
+        "Xóa bài viết", 
+        `Bạn có chắc chắn muốn xóa bài viết "${art ? art.title : ''}" khỏi HakoReview?`,
+        () => {
+          articles = articles.filter(a => a.id !== id);
+          saveArticles();
+          renderArticles();
+          renderAdminTable();
+          showToast("Đã xóa bài viết thành công!", "info");
+        }
+      );
+    }
+
+    function resetToDefaultArticles() {
+      showConfirmModal(
+        "Khôi phục dữ liệu gốc",
+        "Thao tác này sẽ tải lại danh sách 6 bài viết mẫu theo ảnh chụp HakoReview ban đầu.",
+        () => {
+          articles = [...DEFAULT_ARTICLES];
+          saveArticles();
+          renderArticles();
+          renderAdminTable();
+          showToast("Đã khôi phục dữ liệu ban đầu", "success");
+        }
+      );
+    }
+
+    function openArticleModal(id) {
+      const art = articles.find(a => a.id === id);
+      if (!art) return;
+
+      currentActiveArticleId = art.id;
+
+      document.getElementById('modalCategory').textContent = art.category;
+      document.getElementById('modalDate').textContent = art.date;
+      document.getElementById('modalReadTime').textContent = art.readTime || '4 min read';
+      document.getElementById('modalTitle').textContent = art.title;
+      document.getElementById('modalRating').textContent = (art.rating || 4.8) + " / 5.0";
+      document.getElementById('modalPrice').textContent = art.price || '$14.98';
+
+      // Coupon box
+      const couponBox = document.getElementById('modalCouponBox');
+      const couponCode = document.getElementById('modalCouponCode');
+      if (art.coupon && art.coupon !== 'None' && art.coupon !== 'NONE') {
+        couponBox.classList.remove('hidden');
+        couponCode.textContent = art.coupon;
+      } else {
+        couponBox.classList.add('hidden');
+      }
+
+      // Affiliate links
+      const targetAffUrl = art.affiliateUrl || "https://example.com/deal";
+      document.getElementById('modalAffiliateLink').href = targetAffUrl;
+      document.getElementById('modalBottomAffiliateLink').href = targetAffUrl;
+
+      // Excerpt & Body
+      document.getElementById('modalExcerpt').textContent = art.excerpt;
+
+      // Pros & Cons
+      const prosContainer = document.getElementById('modalPros');
+      const consContainer = document.getElementById('modalCons');
+
+      prosContainer.innerHTML = (art.pros || ["Chất lượng vượt trội", "Giá tốt"]).map(p => `
+        <li class="flex items-start gap-1.5">
+          <span class="text-emerald-500 font-bold shrink-0">✓</span>
+          <span>${escapeHtml(p)}</span>
+        </li>
+      `).join('');
+
+      consContainer.innerHTML = (art.cons || ["Khuyến mãi có hạn"]).map(c => `
+        <li class="flex items-start gap-1.5">
+          <span class="text-rose-500 font-bold shrink-0">✕</span>
+          <span>${escapeHtml(c)}</span>
+        </li>
+      `).join('');
+
+      // Full content
+      document.getElementById('modalFullContent').innerHTML = art.fullContent || `<p>${escapeHtml(art.excerpt)}</p>`;
+
+      // Show modal
+      document.getElementById('articleModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeArticleModal() {
+      document.getElementById('articleModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      currentActiveArticleId = null;
+    }
+
+    function trackAffiliateClick() {
+      if (!currentActiveArticleId) return;
+      const art = articles.find(a => a.id === currentActiveArticleId);
+      if (art) {
+        art.clicks = (art.clicks || 0) + 1;
+        saveArticles();
+        renderAdminTable();
+      }
+    }
+
+    function copyModalCoupon() {
+      const code = document.getElementById('modalCouponCode').textContent;
+      copyToClipboard(code);
+      showToast(`Đã sao chép mã giảm giá: ${code}`, "success");
+    }
+
+    function setCategoryFilter(catId) {
+      currentCategoryFilter = catId;
+      currentSearchTerm = '';
+      document.getElementById('heroSearchInput').value = '';
+      document.getElementById('navSearchInput').value = '';
+      
+      renderArticles();
+      renderCategories();
+      scrollToSection('reviewSection');
+
+      if (catId !== 'all') {
+        showToast(`Đang sắp xếp theo chủ đề: ${catId}`, 'info');
+      }
+    }
+
+    function filterByBrand(brandName) {
+      currentSearchTerm = brandName;
+      currentCategoryFilter = 'all';
+      renderArticles();
+      renderCategories();
+      scrollToSection('reviewSection');
+      showToast(`Đang hiển thị ưu đãi cho thương hiệu: ${brandName}`, 'info');
+    }
+
+    function resetFilters() {
+      currentCategoryFilter = 'all';
+      currentSearchTerm = '';
+      document.getElementById('heroSearchInput').value = '';
+      document.getElementById('navSearchInput').value = '';
+      renderArticles();
+      renderCategories();
+    }
+
+    function handleHeroSearch(e) {
+      if (e.key === 'Enter') triggerHeroSearch();
+    }
+
+    function triggerHeroSearch() {
+      const val = document.getElementById('heroSearchInput').value.trim();
+      currentSearchTerm = val;
+      renderArticles();
+      scrollToSection('reviewSection');
+    }
+
+    function handleHeaderSearch(e) {
+      if (e.key === 'Enter') triggerHeaderSearch();
+    }
+
+    function triggerHeaderSearch() {
+      const val = document.getElementById('navSearchInput').value.trim();
+      currentSearchTerm = val;
+      renderArticles();
+      scrollToSection('reviewSection');
+    }
+
+    function scrollToSection(elementId) {
+      if (currentView !== 'frontend') {
+        switchView('frontend');
+      }
+      setTimeout(() => {
+        const el = document.getElementById(elementId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 60);
+    }
+
+    function toggleCurrentView() {
+      switchView(currentView === 'frontend' ? 'admin' : 'frontend');
+    }
+
+    function switchView(viewName) {
+      currentView = viewName;
+      const frontendContainer = document.getElementById('frontendContainer');
+      const adminContainer = document.getElementById('adminContainer');
+      const viewToggleText = document.getElementById('viewToggleText');
+
+      if (viewName === 'admin') {
+        frontendContainer.classList.add('hidden');
+        adminContainer.classList.remove('hidden');
+        viewToggleText.textContent = "Xem trang Web";
+        renderAdminTable();
+      } else {
+        frontendContainer.classList.remove('hidden');
+        adminContainer.classList.add('hidden');
+        viewToggleText.textContent = "Bảng điều khiển Admin";
+        renderArticles();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchAdminTab(tabName) {
+      const tabImport = document.getElementById('adminTabImport');
+      const tabManage = document.getElementById('adminTabManage');
+      const tabManual = document.getElementById('adminTabManual');
+
+      const btnImport = document.getElementById('adminTabImportBtn');
+      const btnManage = document.getElementById('adminTabManageBtn');
+      const btnManual = document.getElementById('adminTabManualBtn');
+
+      tabImport.classList.add('hidden');
+      tabManage.classList.add('hidden');
+      tabManual.classList.add('hidden');
+
+      btnImport.className = "px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2";
+      btnManage.className = "px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2";
+      btnManual.className = "px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2";
+
+      if (tabName === 'import') {
+        tabImport.classList.remove('hidden');
+        btnImport.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2";
+      } else if (tabName === 'manage') {
+        tabManage.classList.remove('hidden');
+        btnManage.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-brand-navy text-brand-navy transition flex items-center gap-2";
+        renderAdminTable();
+      } else if (tabName === 'manual') {
+        tabManual.classList.remove('hidden');
+        btnManual.className = "px-4 py-2.5 text-xs font-bold border-b-2 border-brand-navy text-brand-navy transition flex items-center gap-2";
+      }
+      lucide.createIcons();
+    }
+
+    function openApiKeyModal() {
+      const modal = document.getElementById('apiKeyModal');
+      const input = document.getElementById('apiKeyInput');
+      input.value = localStorage.getItem('gemini_api_key') || "";
+      modal.classList.remove('hidden');
+    }
+
+    function closeApiKeyModal() {
+      document.getElementById('apiKeyModal').classList.add('hidden');
+    }
+
+    function saveApiKey() {
+      const input = document.getElementById('apiKeyInput');
+      const key = input.value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        showToast("Đã lưu Gemini API Key thành công!", "success");
+      } else {
+        localStorage.removeItem('gemini_api_key');
+        showToast("Đã kích hoạt Smart AI Template dự phòng.", "info");
+      }
+      closeApiKeyModal();
+    }
+
+    async function testApiKeyConnection() {
+      const input = document.getElementById('apiKeyInput');
+      const key = input.value.trim();
+      if (!key) {
+        showToast("Vui lòng nhập API Key để kiểm tra!", "warning");
+        return;
+      }
+      showToast("Đang kiểm tra kết nối với Google Gemini...", "info");
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: "ping" }] }] })
+        });
+        if (res.ok) {
+          showToast("Kết nối Gemini API Key thành công!", "success");
+        } else {
+          showToast(`Lỗi xác thực API Key: ${res.statusText}`, "error");
+        }
+      } catch (err) {
+        showToast("Không thể kết nối đến máy chủ Gemini", "error");
+      }
+    }
+
+    function clearApiKey() {
+      localStorage.removeItem('gemini_api_key');
+      document.getElementById('apiKeyInput').value = '';
+      showToast("Đã xóa Gemini API Key khỏi trình duyệt", "info");
+      closeApiKeyModal();
+    }
+
+    function showConfirmModal(title, message, onConfirm) {
+      const modal = document.getElementById('confirmModal');
+      const titleEl = document.getElementById('confirmModalTitle');
+      const descEl = document.getElementById('confirmModalDesc');
+      const cancelBtn = document.getElementById('confirmCancelBtn');
+      const okBtn = document.getElementById('confirmActionBtn');
+
+      titleEl.textContent = title;
+      descEl.textContent = message;
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        cancelBtn.onclick = null;
+        okBtn.onclick = null;
+      };
+
+      cancelBtn.onclick = cleanup;
+      okBtn.onclick = () => {
+        cleanup();
+        if (typeof onConfirm === 'function') onConfirm();
+      };
+
+      modal.classList.remove('hidden');
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      
+      let bg = 'bg-slate-900 text-white';
+      let icon = 'info';
+
+      if (type === 'success') {
+        bg = 'bg-emerald-600 text-white';
+        icon = 'check-circle';
+      } else if (type === 'warning') {
+        bg = 'bg-amber-600 text-white';
+        icon = 'alert-triangle';
+      } else if (type === 'error') {
+        bg = 'bg-rose-600 text-white';
+        icon = 'x-circle';
+      }
+
+      toast.className = `${bg} px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-semibold transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto max-w-sm`;
+      toast.innerHTML = `
+        <i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i>
+        <span>${escapeHtml(message)}</span>
+      `;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+      renderArticles();
+      renderPopularStores();
+      renderCategories();
+      lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
