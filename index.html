@@ -140,6 +140,8 @@
         <a href="javascript:void(0)" onclick="navigateTo('categories')" class="hover:text-brand-accent transition">Categories</a>
         <a href="javascript:void(0)" onclick="navigateTo('blogs')" class="hover:text-brand-accent transition">Blog</a>
       </nav>
+    </div>
+  </header>
 
   <!-- Public Frontend View -->
   <div id="frontendContainer" class="flex-grow flex flex-col">
@@ -1193,7 +1195,6 @@
       } 
       else if (route === 'admin') {
         const storedUser = localStorage.getItem('ch_auth_username') || 'admin';
-        const storedPass = localStorage.getItem('ch_auth_password') || 'admin';
         const sessionActive = sessionStorage.getItem('ch_admin_session');
         
         if (sessionActive === 'true') {
@@ -1268,12 +1269,10 @@
       const totalStores = DEFAULT_STORES.length;
       const totalCategories = DEFAULT_CATEGORIES.length;
 
-      // Update public UI
       if(document.getElementById('statOffers')) document.getElementById('statOffers').textContent = totalArticles;
       if(document.getElementById('statStores')) document.getElementById('statStores').textContent = totalStores;
       if(document.getElementById('statCategories')) document.getElementById('statCategories').textContent = totalCategories;
 
-      // Update admin UI
       if(document.getElementById('custStatOffers')) document.getElementById('custStatOffers').value = totalArticles;
       if(document.getElementById('custStatStores')) document.getElementById('custStatStores').value = totalStores;
       if(document.getElementById('custStatCategories')) document.getElementById('custStatCategories').value = totalCategories;
