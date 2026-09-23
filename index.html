@@ -490,7 +490,7 @@
             </span>
           </div>
           <h2 class="text-2xl font-black text-slate-800 mt-1">Admin Command Center</h2>
-          <p class="text-xs text-slate-500">Generate SEO articles from affiliate links, customize prompts, edit homepage content, and manage inventory.</p>
+          <p class="text-xs text-slate-500">Generate SEO articles from affiliate links, add deals manually, manage tracking scripts, and organize inventory.</p>
         </div>
         <div class="flex items-center gap-2.5">
           <button onclick="navigateTo('home')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
@@ -509,6 +509,14 @@
         <button id="adminTab1Btn" onclick="switchAdminTab('writer')" class="px-4 py-2.5 text-xs font-bold border-b-2 border-brand-accent text-brand-accent transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
           <span>AI Affiliate Writer</span>
+        </button>
+        <button id="adminTabManualBtn" onclick="switchAdminTab('manual')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-pen-to-square text-emerald-500"></i>
+          <span>Add Deal / Viết tay</span>
+        </button>
+        <button id="adminTabScriptBtn" onclick="switchAdminTab('script')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
+          <i class="fa-solid fa-code text-indigo-500"></i>
+          <span>Tracking Script</span>
         </button>
         <button id="adminTab2Btn" onclick="switchAdminTab('customizer')" class="px-4 py-2.5 text-xs font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2 whitespace-nowrap cursor-pointer">
           <i class="fa-solid fa-sliders text-blue-500"></i>
@@ -594,8 +602,8 @@
             </div>
 
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Additional Selling Points / Notes</label>
-              <textarea id="aiCustomNotes" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"></textarea>
+              <label class="block font-bold text-slate-700 mb-1">Additional Selling Points / Notes / Lưu ý</label>
+              <textarea id="aiCustomNotes" rows="2" placeholder="Thêm lưu ý hoặc ghi chú deal..." class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"></textarea>
             </div>
 
             <!-- Custom AI Prompt Template Editor -->
@@ -682,6 +690,92 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- TAB MANUAL: VIẾT TAY / ADD DEALS -->
+      <div id="adminTabManual" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 max-w-3xl mx-auto space-y-4 text-xs">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-pen-to-square text-emerald-600"></i>
+            <span>Add Deal / Viết bài thủ công</span>
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Tạo bản ghi deal, coupon và bài viết review trực tiếp bằng tay.</p>
+        </div>
+        
+        <form onsubmit="handleManualDealSubmit(event)" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Tiêu đề bài viết / Deal *</label>
+              <input type="text" id="manualTitle" required placeholder="Nhập tiêu đề deal..." class="w-full px-3 py-2.5 border border-slate-200 rounded-xl">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Tên Store / Thương hiệu</label>
+              <input type="text" id="manualBrand" placeholder="Ví dụ: Amazon, Nike..." class="w-full px-3 py-2.5 border border-slate-200 rounded-xl">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Danh mục (Category)</label>
+              <select id="manualCategory" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-white"></select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Giá Deal (Price)</label>
+              <input type="text" id="manualPrice" placeholder="$19.99" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Mã Coupon</label>
+              <input type="text" id="manualCoupon" placeholder="CODE2026" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl uppercase font-mono">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Link Affiliate URL *</label>
+            <input type="url" id="manualUrl" required placeholder="https://..." class="w-full px-3 py-2.5 border border-slate-200 rounded-xl">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Đoạn tóm tắt ngắn (Excerpt)</label>
+            <textarea id="manualExcerpt" rows="2" placeholder="Tóm tắt ngắn gọn deal..." class="w-full px-3 py-2.5 border border-slate-200 rounded-xl"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Lưu ý / Ghi chú (Notes)</label>
+            <textarea id="manualNotes" rows="2" placeholder="Lưu ý quan trọng cho người mua..." class="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-amber-50/40 text-amber-900"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Nội dung chi tiết bài viết (Hỗ trợ HTML)</label>
+            <textarea id="manualContent" rows="5" placeholder="<p>Nội dung chi tiết...</p>" class="w-full px-3 py-2.5 border border-slate-200 rounded-xl font-mono text-[11px]"></textarea>
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition cursor-pointer">
+              Đăng Deal / Bài viết lên trang chủ
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB SCRIPT: TRACKING SCRIPT -->
+      <div id="adminTabScript" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200 max-w-xl mx-auto space-y-4 text-xs">
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-code text-indigo-600"></i>
+            <span>Global Tracking Script</span>
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Dán mã tracking (Google Analytics, Facebook Pixel,...) để theo dõi truy cập toàn trang.</p>
+        </div>
+        
+        <div class="space-y-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Mã Script / HTML (Chèn vào thẻ &lt;head&gt;)</label>
+            <textarea id="globalTrackingScript" rows="8" placeholder="<script>...javascript code...</script>" class="w-full p-3 border border-slate-200 rounded-xl font-mono text-[11px] bg-slate-50 custom-scrollbar"></textarea>
+          </div>
+          <button onclick="saveTrackingScript()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition cursor-pointer">
+            Lưu Tracking Script
+          </button>
         </div>
       </div>
 
@@ -894,6 +988,11 @@
 
         <div class="text-slate-800 font-medium bg-slate-50 p-4 rounded-xl border-l-4 border-brand-navy italic text-xs sm:text-sm" id="modalExcerpt"></div>
 
+        <!-- Notes / Lưu ý hiển thị trong modal nếu có -->
+        <div id="modalNotesBox" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+          <strong><i class="fa-solid fa-circle-exclamation mr-1"></i> Lưu ý / Ghi chú:</strong> <span id="modalNotesText"></span>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4">
             <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -1073,7 +1172,20 @@
     // --- INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
       initApp();
-      navigateTo('home');
+      loadTrackingScript();
+      
+      // Kiểm tra URL xem có phải đang ở /admin hay không để cố định trạng thái
+      const path = window.location.pathname;
+      if (path.includes('admin')) {
+        const sessionActive = sessionStorage.getItem('ch_admin_session');
+        if (sessionActive === 'true') {
+          navigateTo('admin');
+        } else {
+          navigateTo('adminLogin');
+        }
+      } else {
+        navigateTo('home');
+      }
     });
 
     function initApp() {
@@ -1093,14 +1205,16 @@
       // Populate Selects
       const selectEl = document.getElementById('aiCategorySelect');
       const editSelectEl = document.getElementById('editAiCategory');
-      if (selectEl && editSelectEl) {
-        let optionsHTML = '';
-        DEFAULT_CATEGORIES.forEach(cat => {
-          optionsHTML += `<option value="${cat.id}">${cat.icon} ${cat.name}</option>`;
-        });
-        selectEl.innerHTML = optionsHTML;
-        editSelectEl.innerHTML = optionsHTML;
-      }
+      const manualSelectEl = document.getElementById('manualCategory');
+      
+      let optionsHTML = '';
+      DEFAULT_CATEGORIES.forEach(cat => {
+        optionsHTML += `<option value="${cat.id}">${cat.icon} ${cat.name}</option>`;
+      });
+      
+      if (selectEl) selectEl.innerHTML = optionsHTML;
+      if (editSelectEl) editSelectEl.innerHTML = optionsHTML;
+      if (manualSelectEl) manualSelectEl.innerHTML = optionsHTML;
 
       renderStores();
       renderCategories();
@@ -1130,6 +1244,7 @@
       categories.classList.remove('hidden');
 
       if (route === 'home') {
+        window.history.pushState({}, '', '/');
         document.getElementById('frontendContainer').classList.remove('hidden');
         setCategoryFilter('all');
       } 
@@ -1151,16 +1266,23 @@
           stores.classList.add('hidden');
         }
       } 
-      else if (route === 'admin') {
+      else if (route === 'admin' || route === 'adminLogin') {
+        window.history.pushState({}, '', '/admin');
         const storedUser = localStorage.getItem('ch_auth_username') || 'admin';
         const sessionActive = sessionStorage.getItem('ch_admin_session');
         
-        if (sessionActive === 'true') {
+        if (sessionActive === 'true' || route === 'admin') {
+          if (sessionActive !== 'true') {
+            document.getElementById('adminLoginContainer').classList.remove('hidden');
+            document.getElementById('topAdminBar').classList.add('hidden');
+            return;
+          }
           document.getElementById('adminContainer').classList.remove('hidden');
           document.getElementById('topAdminBar').classList.remove('hidden');
           document.getElementById('topAdminUsername').textContent = storedUser;
           renderAdminTable();
           document.getElementById('adminCustomPromptEditor').value = localStorage.getItem('ch_custom_prompt');
+          document.getElementById('globalTrackingScript').value = localStorage.getItem('ch_tracking_script') || '';
           
           const settings = JSON.parse(localStorage.getItem('ch_homepage'));
           document.getElementById('custBrandName').value = settings.brandName;
@@ -1302,19 +1424,19 @@
         let html = '';
         filtered.forEach(art => {
           let badgeColor = "bg-blue-50 text-blue-700 border-blue-200";
-          if(art.category.includes('Tech') || art.category.includes('Computer')) badgeColor = "bg-purple-50 text-purple-700 border-purple-200";
-          if(art.category.includes('Beauty')) badgeColor = "bg-rose-50 text-rose-700 border-rose-200";
+          if(art.category && (art.category.includes('Tech') || art.category.includes('Computer'))) badgeColor = "bg-purple-50 text-purple-700 border-purple-200";
+          if(art.category && art.category.includes('Beauty')) badgeColor = "bg-rose-50 text-rose-700 border-rose-200";
 
           html += `
             <article class="bg-white rounded-3xl p-5 shadow-xs border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="openArticleModal('${art.id}')">
               
               <div class="flex justify-between items-start mb-4">
                 <div class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${badgeColor}">
-                  ${art.category}
+                  ${art.category || 'General'}
                 </div>
                 <div class="flex items-center gap-1 bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full text-[10px] font-bold border border-amber-200">
                   <i class="fa-solid fa-star"></i>
-                  <span>${art.rating}</span>
+                  <span>${art.rating || 4.8}</span>
                 </div>
               </div>
 
@@ -1330,7 +1452,7 @@
                 <div class="bg-slate-50 rounded-2xl p-3 border border-slate-100 flex items-center justify-between mb-3">
                   <div>
                     <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Deal Price</div>
-                    <div class="text-lg font-black text-brand-accent">${art.price}</div>
+                    <div class="text-lg font-black text-brand-accent">${art.price || 'Check Deal'}</div>
                   </div>
                   <div class="text-right">
                     <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Code</div>
@@ -1341,7 +1463,7 @@
                 <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
                   <div class="flex items-center gap-1.5">
                     <i class="fa-regular fa-clock"></i>
-                    <span>${art.readTime}</span>
+                    <span>${art.readTime || '3 min read'}</span>
                   </div>
                   <span class="text-brand-accent font-bold group-hover:underline">Read Review &rarr;</span>
                 </div>
@@ -1402,13 +1524,13 @@
       if (!art) return;
       currentModalArticleId = id;
 
-      document.getElementById('modalCategory').textContent = art.category;
-      document.getElementById('modalDate').textContent = art.date;
-      document.getElementById('modalReadTime').textContent = art.readTime;
+      document.getElementById('modalCategory').textContent = art.category || 'General';
+      document.getElementById('modalDate').textContent = art.date || 'September 2026';
+      document.getElementById('modalReadTime').textContent = art.readTime || '3 min read';
       document.getElementById('modalTitle').textContent = art.title;
-      document.getElementById('modalRating').textContent = `${art.rating} / 5.0`;
+      document.getElementById('modalRating').textContent = `${art.rating || 4.8} / 5.0`;
       
-      document.getElementById('modalPrice').textContent = art.price;
+      document.getElementById('modalPrice').textContent = art.price || 'Check Deal';
       
       const couponCode = document.getElementById('modalCouponCode');
       const couponBox = document.getElementById('modalCouponBox');
@@ -1423,10 +1545,20 @@
       document.getElementById('modalBottomAffiliateLink').href = art.affiliateUrl;
       document.getElementById('modalExcerpt').textContent = art.excerpt;
 
+      // Xử lý hiển thị notes / lưu ý
+      const notesBox = document.getElementById('modalNotesBox');
+      const notesText = document.getElementById('modalNotesText');
+      if (art.notes) {
+        notesText.textContent = art.notes;
+        notesBox.classList.remove('hidden');
+      } else {
+        notesBox.classList.add('hidden');
+      }
+
       const prosList = document.getElementById('modalPros');
-      prosList.innerHTML = art.pros.map(p => `<li>• ${p}</li>`).join('');
+      prosList.innerHTML = (art.pros || ['Best value for money', 'Verified merchant deal']).map(p => `<li>• ${p}</li>`).join('');
       const consList = document.getElementById('modalCons');
-      consList.innerHTML = art.cons.map(c => `<li>• ${c}</li>`).join('');
+      consList.innerHTML = (art.cons || ['Limited time offer']).map(c => `<li>• ${c}</li>`).join('');
 
       document.getElementById('modalFullContent').innerHTML = art.fullContent;
       
@@ -1529,21 +1661,88 @@
     }
 
     function switchAdminTab(tabName) {
-      const tabs = ['Writer', 'Customizer', 'Manage', 'Security'];
-      tabs.forEach((t, index) => {
-        const panel = document.getElementById(`adminTab${t}`);
-        const btn = document.getElementById(`adminTab${index+1}Btn`);
+      const tabs = ['Writer', 'Manual', 'Script', 'Customizer', 'Manage', 'Security'];
+      tabs.forEach((t) => {
+        const panelKey = t === 'Manual' ? 'Manual' : (t === 'Script' ? 'Script' : t);
+        const panel = document.getElementById(`adminTab${panelKey}`);
+        let btn = document.getElementById(`adminTab${t}Btn`);
+        if (!btn) {
+          if (t === 'Writer') btn = document.getElementById('adminTab1Btn');
+          if (t === 'Customizer') btn = document.getElementById('adminTab2Btn');
+          if (t === 'Manage') btn = document.getElementById('adminTab3Btn');
+          if (t === 'Security') btn = document.getElementById('adminTab4Btn');
+        }
         
-        if (t.toLowerCase() === tabName) {
-          panel.classList.remove('hidden');
-          btn.classList.add('border-brand-accent', 'text-brand-accent');
-          btn.classList.remove('border-transparent', 'text-slate-500');
+        if (t.toLowerCase() === tabName.toLowerCase()) {
+          if (panel) panel.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('border-brand-accent', 'text-brand-accent');
+            btn.classList.remove('border-transparent', 'text-slate-500');
+          }
         } else {
-          panel.classList.add('hidden');
-          btn.classList.remove('border-brand-accent', 'text-brand-accent');
-          btn.classList.add('border-transparent', 'text-slate-500');
+          if (panel) panel.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('border-brand-accent', 'text-brand-accent');
+            btn.classList.add('border-transparent', 'text-slate-500');
+          }
         }
       });
+    }
+
+    // Viết bài tay / Add Deal thủ công
+    function handleManualDealSubmit(e) {
+      e.preventDefault();
+      const newArticle = {
+        id: 'art-' + Date.now(),
+        title: document.getElementById('manualTitle').value,
+        slug: document.getElementById('manualTitle').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        readTime: '3 min read',
+        rating: 5.0,
+        category: document.getElementById('manualCategory').value,
+        brand: document.getElementById('manualBrand').value || 'Store Deal',
+        excerpt: document.getElementById('manualExcerpt').value || 'Exclusive verified deal and coupon code available now.',
+        price: document.getElementById('manualPrice').value || 'Check Deal',
+        coupon: document.getElementById('manualCoupon').value,
+        affiliateUrl: document.getElementById('manualUrl').value,
+        notes: document.getElementById('manualNotes').value,
+        clicks: 0,
+        pros: ['Verified working promo code', 'Instant discount at checkout'],
+        cons: ['Limited time availability'],
+        fullContent: document.getElementById('manualContent').value || '<p>Detailed review and deal description...</p>'
+      };
+
+      articles.unshift(newArticle);
+      localStorage.setItem('ch_articles', JSON.stringify(articles));
+      
+      updateMetricsCounters();
+      renderAdminTable();
+      renderArticles();
+      
+      e.target.reset();
+      showToast('Thêm deal và viết bài thủ công thành công!', 'success');
+      navigateTo('home');
+    }
+
+    // Quản lý Tracking Script toàn trang
+    function saveTrackingScript() {
+      const scriptContent = document.getElementById('globalTrackingScript').value.trim();
+      localStorage.setItem('ch_tracking_script', scriptContent);
+      loadTrackingScript();
+      showToast('Đã lưu và cập nhật Tracking Script thành công!', 'success');
+    }
+
+    function loadTrackingScript() {
+      const existing = document.getElementById('dynamicTrackingScript');
+      if (existing) existing.remove();
+
+      const scriptContent = localStorage.getItem('ch_tracking_script');
+      if (scriptContent) {
+        const div = document.createElement('div');
+        div.id = 'dynamicTrackingScript';
+        div.innerHTML = scriptContent;
+        document.head.appendChild(div);
+      }
     }
 
     // Admin - Tab 1: AI Writer
@@ -1654,12 +1853,11 @@
         rating: parseFloat(document.getElementById('editAiRating').value) || 5.0,
         category: document.getElementById('editAiCategory').options[document.getElementById('editAiCategory').selectedIndex].text,
         brand: document.getElementById('aiStoreBrand').value || 'Store',
-        headerLogoType: 'text-script',
-        headerLogoText: document.getElementById('aiStoreBrand').value || 'Store',
         excerpt: document.getElementById('editAiExcerpt').value,
         price: document.getElementById('aiProductPrice').value,
         coupon: document.getElementById('aiCouponCode').value,
         affiliateUrl: document.getElementById('aiAffiliateUrl').value,
+        notes: document.getElementById('aiCustomNotes').value,
         clicks: 0,
         pros: document.getElementById('editAiPros').value.split('\n').filter(p => p.trim() !== ''),
         cons: document.getElementById('editAiCons').value.split('\n').filter(c => c.trim() !== ''),
@@ -1725,11 +1923,11 @@
           <tr class="hover:bg-slate-50 transition border-b border-slate-100">
             <td class="py-3 px-4">
               <div class="font-bold text-slate-800 line-clamp-1" title="${art.title}">${art.title}</div>
-              <div class="text-[10px] text-slate-400 mt-0.5">${art.brand}</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">${art.brand || 'Store'}</div>
             </td>
-            <td class="py-3 px-3"><span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-200 text-[10px] font-bold">${art.category}</span></td>
+            <td class="py-3 px-3"><span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded border border-blue-200 text-[10px] font-bold">${art.category || 'General'}</span></td>
             <td class="py-3 px-3 font-mono text-[10px] text-slate-600">${art.coupon || '-'}</td>
-            <td class="py-3 px-3 font-bold text-brand-accent">${art.price}</td>
+            <td class="py-3 px-3 font-bold text-brand-accent">${art.price || 'N/A'}</td>
             <td class="py-3 px-3">
               <span class="bg-slate-100 px-2 py-1 rounded text-slate-700 font-bold text-[10px] border border-slate-200">
                 <i class="fa-solid fa-mouse-pointer text-slate-400 mr-1"></i> ${art.clicks || 0}
@@ -1771,14 +1969,14 @@
 
     function confirmResetToDefaultArticles() {
       document.getElementById('confirmModalTitle').textContent = "Reset to Samples";
-      document.getElementById('confirmModalDesc').textContent = "This will delete all current articles and load the default sample reviews. Proceed?";
+      document.getElementById('confirmModalDesc').textContent = "This will delete all current articles and load sample reviews. Proceed?";
       document.getElementById('confirmActionBtn').onclick = executeResetArticles;
       document.getElementById('confirmCancelBtn').onclick = () => document.getElementById('confirmModal').classList.add('hidden');
       document.getElementById('confirmModal').classList.remove('hidden');
     }
 
     function executeResetArticles() {
-      articles = JSON.parse(JSON.stringify(DEFAULT_ARTICLES));
+      articles = [];
       localStorage.setItem('ch_articles', JSON.stringify(articles));
       
       updateMetricsCounters();
@@ -1786,7 +1984,7 @@
       renderArticles();
       
       document.getElementById('confirmModal').classList.add('hidden');
-      showToast('Database reset to sample articles', 'info');
+      showToast('Database cleared', 'info');
     }
 
     // Admin - Tab 4: Security
