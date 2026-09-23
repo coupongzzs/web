@@ -114,6 +114,27 @@
           coupons<span class="text-brand-navy font-black">here</span>
         </span>
       </a>
+
+      <!-- Header Search Input -->
+      <div class="hidden md:flex flex-1 max-w-md mx-4">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="navSearchInput" 
+            onkeyup="handleHeaderSearch(event)"
+            placeholder="Search codes, stores, articles..." 
+            class="w-full pl-9 pr-20 py-1.5 text-xs rounded-full border border-slate-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent/30 transition"
+          >
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-2.5 text-xs"></i>
+          <button 
+            onclick="triggerHeaderSearch()" 
+            class="absolute right-1 top-1 bottom-1 px-4 bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold rounded-full transition shadow-xs cursor-pointer"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
       <!-- Navigation Links -->
       <nav class="hidden lg:flex items-center space-x-6 text-xs font-semibold text-slate-600">
         <a href="javascript:void(0)" onclick="navigateTo('coupons')" class="hover:text-brand-accent transition">Coupons</a>
@@ -124,6 +145,9 @@
       </nav>
     </div>
   </header>
+
+  <!-- Public Frontend View -->
+  <div id="frontendContainer" class="flex-grow flex flex-col">
 
     <!-- HERO BANNER -->
     <section id="heroSection" class="hero-gradient text-white py-12 md:py-16 px-4 relative overflow-hidden">
