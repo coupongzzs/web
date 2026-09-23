@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coupons Here - Find Better. Buy Smarter</title>
+  <title>Coupons Here - Find Better. Buy Smarter | Deal & Affiliate Reviews</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -88,7 +88,7 @@
         <span>Authenticated as <strong id="topAdminUsername">admin</strong> (Administrator)</span>
       </div>
       <div class="flex items-center gap-4">
-        <button onclick="switchView('admin')" class="hover:text-amber-300 font-semibold flex items-center gap-1.5 transition cursor-pointer">
+        <button onclick="navigateTo('admin')" class="hover:text-amber-300 font-semibold flex items-center gap-1.5 transition cursor-pointer">
           <i class="fa-solid fa-gauge-high"></i> <span>Admin Dashboard</span>
         </button>
         <button onclick="handleAdminLogout()" class="hover:text-red-400 font-semibold flex items-center gap-1.5 transition cursor-pointer">
@@ -526,61 +526,164 @@
 
       <!-- TAB 1: AI WRITER -->
       <div id="adminTabWriter" class="space-y-6">
-        <!-- THÊM ĐOẠN NÀY VÀO TRONG TAB 1 (adminTabWriter) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-  <!-- Cột cào link -->
-  <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 space-y-4 text-xs">
-    <h3 class="text-sm font-extrabold text-slate-800 border-b border-slate-100 pb-3">
-      <i class="fa-solid fa-wand-magic-sparkles text-brand-accent mr-1.5"></i> Cào link Affiliate bằng Gemini API
-    </h3>
-    <div>
-      <label class="block font-bold text-slate-700 mb-1">Link Affiliate URL *</label>
-      <input type="url" id="aiAffiliateUrl" placeholder="https://..." class="w-full px-3 py-2 border border-slate-200 rounded-xl">
-    </div>
-    <div class="grid grid-cols-2 gap-3">
-      <div>
-        <label class="block font-bold text-slate-700 mb-1">Tên sản phẩm *</label>
-        <input type="text" id="aiProductName" placeholder="Tên sản phẩm" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
-      </div>
-      <div>
-        <label class="block font-bold text-slate-700 mb-1">Mã giảm giá (Coupon)</label>
-        <input type="text" id="aiCouponCode" placeholder="COUPON2026" class="w-full px-3 py-2 border border-slate-200 rounded-xl uppercase font-mono">
-      </div>
-    </div>
-    <button onclick="generateReviewWithGemini()" id="generateWithAiBtn" class="w-full py-3 bg-brand-accent text-white font-bold rounded-xl shadow-md hover:bg-brand-accentHover transition cursor-pointer">
-      <span id="generateBtnText">Cào dữ liệu & Tạo bài viết hoàn chỉnh</span>
-    </button>
-  </div>
+        <!-- Gemini API Key card -->
+        <div class="bg-gradient-to-r from-slate-900 to-brand-navy rounded-2xl p-5 text-white shadow-xs border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+              <i class="fa-solid fa-key"></i>
+              <span>Google Gemini API Key</span>
+            </div>
+            <p class="text-xs text-slate-300 mt-1">Required to generate real-time AI articles with <code class="bg-white/10 px-1.5 py-0.5 rounded text-amber-200">gemini-2.5-flash</code>. Saved locally.</p>
+          </div>
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <input type="password" id="adminApiKeyInput" placeholder="AIzaSy..." class="px-3.5 py-2 bg-white/10 border border-white/20 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400/50 w-full md:w-64 font-mono">
+            <button onclick="saveAdminApiKey()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition whitespace-nowrap cursor-pointer">
+              Save Key
+            </button>
+          </div>
+        </div>
 
-  <!-- Cột Preview nội dung -->
-  <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col text-xs">
-    <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
-      <h3 class="text-sm font-extrabold text-slate-800">Khung Preview & Chỉnh sửa</h3>
-      <span id="aiStatusBadge" class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold text-[11px]">Sẵn sàng</span>
-    </div>
-    <div id="aiPreviewEmpty" class="my-auto py-12 text-center text-slate-400">
-      <i class="fa-solid fa-file-circle-question text-3xl mb-2"></i>
-      <p class="font-bold text-slate-600">Chưa có bài viết nào được cào</p>
-    </div>
-    <div id="aiPreviewFilled" class="hidden flex-col space-y-3 flex-grow">
-      <div>
-        <label class="block font-bold text-slate-700 mb-1">Tiêu đề SEO</label>
-        <input type="text" id="editAiTitle" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-bold">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Generator Input Column -->
+          <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 space-y-4 text-xs">
+            <div class="border-b border-slate-100 pb-3">
+              <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-link text-brand-accent"></i>
+                <span>Import Affiliate Link & Product Details</span>
+              </h3>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Affiliate Destination URL <span class="text-red-500">*</span></label>
+              <input type="url" id="aiAffiliateUrl" placeholder="https://..." class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Product Name <span class="text-red-500">*</span></label>
+                <input type="text" id="aiProductName" placeholder="Product name" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Brand / Store</label>
+                <input type="text" id="aiStoreBrand" placeholder="Store name" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Deal Price</label>
+                <input type="text" id="aiProductPrice" placeholder="$19.99" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Coupon Promo Code</label>
+                <input type="text" id="aiCouponCode" placeholder="DISCOUNT2026" class="w-full px-3 py-2 border border-slate-200 rounded-xl uppercase font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Target Category</label>
+                <select id="aiCategorySelect" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Image URL (Optional)</label>
+                <input type="url" id="aiImageUrl" placeholder="https://..." class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Additional Selling Points / Notes</label>
+              <textarea id="aiCustomNotes" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"></textarea>
+            </div>
+
+            <!-- Custom AI Prompt Template Editor -->
+            <div class="pt-3 border-t border-slate-100">
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="font-bold text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-code text-indigo-500"></i>
+                  <span>Custom AI System Prompt</span>
+                </label>
+                <button type="button" onclick="resetPromptToDefault()" class="text-[10px] text-brand-accent hover:underline font-bold cursor-pointer">
+                  Reset Prompt
+                </button>
+              </div>
+              <textarea id="adminCustomPromptEditor" rows="6" class="w-full px-3 py-2 border border-indigo-100 bg-indigo-50/30 rounded-xl text-[11px] font-mono text-slate-800 custom-scrollbar focus:outline-none focus:ring-2 focus:ring-indigo-400/20"></textarea>
+            </div>
+
+            <button id="generateWithAiBtn" onclick="generateReviewWithGemini()" class="w-full py-3 bg-gradient-to-r from-brand-accent to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 group cursor-pointer">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-200 group-hover:rotate-12 transition-transform"></i>
+              <span id="generateBtnText">Generate SEO Review with Gemini</span>
+            </button>
+          </div>
+
+          <!-- Live Preview & Editor Column -->
+          <div class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col text-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+              <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-file-circle-check text-emerald-600"></i>
+                <span>Generated Content Review & Edit</span>
+              </h3>
+              <span id="aiStatusBadge" class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">Ready</span>
+            </div>
+
+            <!-- Empty State -->
+            <div id="aiPreviewEmpty" class="my-auto py-12 text-center text-slate-400">
+              <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <p class="font-bold text-slate-600">No article drafted yet</p>
+            </div>
+
+            <!-- Filled Form -->
+            <div id="aiPreviewFilled" class="hidden flex-col space-y-3 flex-grow">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">SEO Title</label>
+                <input type="text" id="editAiTitle" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:border-blue-500">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Excerpt (Card display)</label>
+                <textarea id="editAiExcerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-blue-500"></textarea>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Category</label>
+                  <select id="editAiCategory" class="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white"></select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Read Time & Rating</label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" id="editAiReadTime" value="4 min read" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                    <input type="number" id="editAiRating" step="0.1" min="1" max="5" value="4.9" class="w-full px-2 py-2 border border-slate-200 rounded-xl">
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Full Detailed Review (HTML)</label>
+                <textarea id="editAiContent" rows="5" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-slate-800 font-mono text-[11px] custom-scrollbar focus:outline-none focus:border-blue-500"></textarea>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-emerald-700 mb-1"><i class="fa-solid fa-thumbs-up"></i> Pros (One per line)</label>
+                  <textarea id="editAiPros" rows="3" class="w-full px-2.5 py-1.5 border border-emerald-200 rounded-xl bg-emerald-50/40 text-[11px]"></textarea>
+                </div>
+                <div>
+                  <label class="block font-bold text-rose-700 mb-1"><i class="fa-solid fa-thumbs-down"></i> Cons (One per line)</label>
+                  <textarea id="editAiCons" rows="3" class="w-full px-2.5 py-1.5 border border-rose-200 rounded-xl bg-rose-50/40 text-[11px]"></textarea>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                <span class="text-[11px] text-slate-500">Will be featured on homepage</span>
+                <button onclick="publishAiArticle()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <span>Publish to Homepage</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label class="block font-bold text-slate-700 mb-1">Tóm tắt</label>
-        <textarea id="editAiExcerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl"></textarea>
-      </div>
-      <div>
-        <label class="block font-bold text-slate-700 mb-1">Nội dung chi tiết (HTML)</label>
-        <textarea id="editAiContent" rows="4" class="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono text-[11px]"></textarea>
-      </div>
-      <button onclick="publishAiArticle()" class="w-full py-2.5 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 cursor-pointer">
-        Đăng lên trang chủ
-      </button>
-    </div>
-  </div>
-</div>
 
       <!-- TAB 2: HOMEPAGE CUSTOMIZER -->
       <div id="adminTabCustomizer" class="hidden bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
@@ -895,6 +998,9 @@
           </div>
         </div>
       </div>
+
+      <div id="footerCopyrightDisplay" class="pt-6 border-t border-blue-900/60 text-center text-[11px] text-slate-400">
+        &copy; 2026 couponbest.io.vn. All rights reserved.
       </div>
     </div>
   </footer>
@@ -942,7 +1048,7 @@
       heroSlogan: "Find Better. Buy Smarter.",
       heroDesc: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
       footerAbout: "Coupons Here is a trusted destination for discovering online coupons, exclusive deals, and helpful product reviews. We help shoppers find better products, compare their options, and save more when shopping online.",
-      footerCopy: "© Couponshere.top. All rights reserved."
+      footerCopy: "© 2026 couponbest.io.vn. All rights reserved."
     };
 
     const DEFAULT_CUSTOM_PROMPT = `Act as an elite affiliate review specialist and SEO copywriter for Coupons Here. Analyze the product information below and craft an in-depth, honest, engaging, high-converting product review. Format Requirement: Return ONLY a raw JSON string (no backticks, no code blocks):
@@ -956,9 +1062,7 @@
   "fullContent": "<p>Opening paragraph highlighting why this product is popular in 2026...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Performance & Lab Testing</h4><p>Detailed evaluation paragraph...</p><h4 class='font-bold text-slate-800 text-sm mt-3'>Special Deal Insights</h4><p>Why readers should use this exclusive discount code today...</p>"
 }`;
 
-    const DEFAULT_ARTICLES = [
-     
-    ];
+    const DEFAULT_ARTICLES = [];
 
     // --- STATE MANAGEMENT ---
     let articles = [];
